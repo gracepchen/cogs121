@@ -14,7 +14,10 @@
 ### Paper Prototypes
 
 **Prototype 1**
-![Prototype 1](url)
+![Prototype 1 - Splash page for National Parks](https://imgur.com/HW45HaA) 
+![Prototype 1 - Click on a National Park](https://imgur.com/s8wJliG)
+![Prototype 1 - Hover over for trail description](https://imgur.com/m4XR1ZB)
+![Prototype 2 - State Parks](https://imgur.com/YaS6RnU) 
 
 **Prototype 2**
 ![Prototype 2 - Splash page](https://imgur.com/Bi9kjM3.png)
