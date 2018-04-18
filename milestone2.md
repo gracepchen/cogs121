@@ -9,7 +9,7 @@
 
 **Storyboard 2**
 
-![Storyboard 2](url)
+![Storyboard 2](https://i.imgur.com/ZnMmDad.png)
 
 ### Paper Prototypes
 
