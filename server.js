@@ -1,13 +1,34 @@
-const express = require('express');
-const handlebars = require('express3-handlebars');
+const express = require('express'); //import express library
+const app = express(); //instantiate express object
 
-const app = express();
+app.use(express.static('static'));
 
-app.use(express.static('static_files'));
+const tempDatabase = {
+  'Redwood': {trails: 'Damnation', pic: 'redwood.jpeg'},
+  'Sequoia': {trails: 'Hazelwood Nature Trail', pic: 'sequoia.jpeg'},
+  'Joshua Tree' : {trails: 'Arch Rock', pic: 'jtree.jpeg'}
+}
 
-//Routes for actual pages
-/*app.get('/', /* Function for displaying homepage);*/
+app.get('/parks', (req, res) => {
+  const allParks = Object.keys(tempDatabase);
+  console.log('allParks is: ', allParks);
+  res.send(allParks);
+});
 
-app.listen(3000, function() {
-    console.log('Server listening on port 3000');
+app.get('/parks/:parkid', (req, res) => {
+  const parkToLookUp = req.params.parkid;
+
+  const val = tempDatabase[parkToLookUp];
+  console.log(parkToLookUp, '->', val);
+  if (val) {
+    res.send(val);
+  }
+  else {
+    res.send({});
+  }
+
+});
+
+app.listen(3000, () => {
+  console.log('Listening on Port 3000');
 });

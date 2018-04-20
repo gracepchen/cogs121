@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Point Poppy</title>
+
+      <script src="jquery-3.2.1.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+      <script type="text/javascript">
+        // $(document).ready(() => {
+        //   $('#Redwood').click(() => {
+        //     const reqURL = 'parks/Redwood';
+        //     console.log('making ajax request');
+        //
+        //     $.ajax({
+        //       url:'parks/',
+        //       type: 'GET',
+        //       dataType: 'json',
+        //       success: (data) => {
+        //         console.log('ajax success');
+        //       }
+        //     });
+        //   });
+        //   $(document).ajaxError(() => { //catch-all
+        //     $('#status').html('Error: unknown ajaxError!');
+        //   });
+        // });
+      </script>
+
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="display-4">Point Poppy</h1>
+      <p class="lead">Explore California! Start by selecting a national park. </p>
+      <hr>
+    </div>
+
+
+    <!-- Buttons for national park -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6"> <!-- change to one-column (splash screen) later -->
+          [MAP PLACEHOLDER]
+          <img src="map.png" alt="">
+          <!-- Placeholder buttons...pretend to click place on map -->
+          <button type="button" class="btn btn-outline-success" id="Redwood">Redwood</button>
+          <button type="button" class="btn btn-outline-success" id="Sequoia">Sequoia</button>
+          <button type="button" class="btn btn-outline-success" id="Joshuatree">Joshua Tree</button>
+        </div>
+        <div class="col-sm-6">
+          INFO COLUMN
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Include jQuery, Popper.js. Bootstrap JS-->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>
