@@ -33,7 +33,7 @@ var map_stages = {
 /************** idk what this does yet but it looks important *************/
 
 // OLD COLHEIGHT THING
-// let colHeight = window.innerHeight - $("#navbarToggleExternalContent").height() - 
+// let colHeight = window.innerHeight - $("#navbarToggleExternalContent").height() -
 // $("#top_nav").height() -$("#bottom_nav").height() - 40;
 
 let colHeight = window.innerHeight;
@@ -73,12 +73,12 @@ resizeColumnHeight();
 var currentStage = map_stages.stage0;
 
 // these are containers for the content
-var map_col_1; 
+var map_col_1;
 var map_col_2;
 var map_col_3;
 
 // these will be appended to the map_col_X later
-var map_col1_ABD; 
+var map_col1_ABD;
 var map_col1_C;
 var map_col2_BCD;
 var map_col3_CD;
@@ -94,18 +94,18 @@ function map_page_setup() {
 		map_page.id = 'map_page';
 		document.getElementById('page_viewer').append(map_page);
 		mapStageFcns.stageA(); // start columns
-	} 
+	}
 
 	$(map_page).css("display", "block");
 };
 
-// ********* overarching master stages for columns  ********* 
+// ********* overarching master stages for columns  *********
 
 // COLUMN STAGES
 var mapStageFcns = {
 	stageA: function () {
 		currentStage = map_stages.stage0;
-		
+
 		if(map_col_1 == undefined) {
 			map_col_1 = generateColumns();
 			map_page.append(map_col_1.parentElement);
@@ -116,7 +116,7 @@ var mapStageFcns = {
 	},
 	stageB: function () {
 		currentStage = map_stages.stage1;
-		
+
 		if(map_col_2 == undefined) {
 			map_col_2 = generateColumns();
 			map_page.append(map_col_2.parentElement);
@@ -127,14 +127,14 @@ var mapStageFcns = {
 	},
 	stageC: function (){
 		currentStage = map_stages.stage2;
-		map_hide_col_1();	
-		
+		map_hide_col_1();
+
 		if(map_col_3 == undefined) {
 			map_col_3 = generateColumns();
 			map_page.append(map_col_3.parentElement);
 			map_populate_col_3();
 		}
-		
+
 		$(map_col_1).click(mapStageFcns.stageD);
 	},
 	stageD: function (){
@@ -150,7 +150,7 @@ var mapStageFcns = {
 
 
 
-// ********* ADD CONTENT TO EACH COLUMN  ********* 
+// ********* ADD CONTENT TO EACH COLUMN  *********
 
 
 // For StageA - put stuff in col 1, has map pic
@@ -190,7 +190,7 @@ function map_populate_col_2() {
 
 	if(map_col2_BCD == undefined) {
 		map_col2_BCD = document.createElement('div');
-		
+
 		var title = document.createElement("h3");
 		title.innerHTML = "STAGE B";
 		title.style.paddingTop="5%";
@@ -200,7 +200,7 @@ function map_populate_col_2() {
 		var button = document.createElement('button');
 		button.setAttribute("class", "searchbutton");
 		button.innerHTML = 'Add B +';
-		
+
 		// generate second column on button click
 		button.onclick = function () {
 			mapStageFcns.stageC();
@@ -220,7 +220,7 @@ function map_hide_col_1() {
 	if(map_col1_C == undefined) {
 		map_col1_C = document.createElement('div');
 		map_col1_C.className = 'row';
-		
+
 		var expandBtn = document.createElement('div');
 		expandBtn.innerHTML = '+';
 		$(expandBtn).css('top', '50%')
@@ -235,7 +235,7 @@ function map_hide_col_1() {
 // stage C - put stuff into column 3
 function map_populate_col_3() {
 	map_col_3.innerHTML = '';
-	
+
 	if(map_col3_CD == undefined) {
 		map_col3_CD = document.createElement('div');
 
@@ -246,23 +246,19 @@ function map_populate_col_3() {
 
 		var paragraph = document.createElement("p");
 		paragraph.innerHTML = "There are many variations of passages of Lorem" +
-		" Ipsum available, but the majority have suffered alteration in some "+ 
-		"form, by injected humour, or randomised words which don't look even " + 
-		"slightly believable. If you are going to use a passage of Lorem Ipsum, " + 
-		"you need to be sure there isn't anything embarrassing hidden in the " + 
+		" Ipsum available, but the majority have suffered alteration in some "+
+		"form, by injected humour, or randomised words which don't look even " +
+		"slightly believable. If you are going to use a passage of Lorem Ipsum, " +
+		"you need to be sure there isn't anything embarrassing hidden in the " +
 		"middle of text. All the Lorem Ipsum generators on the Internet tend to " +
-		"repeat predefined chunks as necessary, making this the first true " + 
-		"generator on the Internet. It uses a dictionary of over 200 Latin words, " + 
-		"combined with a handful of model sentence structures, to generate Lorem" + 
-		"Ipsum which looks reasonable. The generated Lorem Ipsum is therefore " + 
+		"repeat predefined chunks as necessary, making this the first true " +
+		"generator on the Internet. It uses a dictionary of over 200 Latin words, " +
+		"combined with a handful of model sentence structures, to generate Lorem" +
+		"Ipsum which looks reasonable. The generated Lorem Ipsum is therefore " +
 		"always free from repetition, injected humour, or non-characteristic words etc.";
 		paragraph.style.paddingTop="5%";
 		map_col3_CD.appendChild(paragraph);
 	}
-	
+
 	map_col_3.appendChild(map_col3_CD);
 }
-
-
-
-
