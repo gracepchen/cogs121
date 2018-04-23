@@ -1,0 +1,30 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.top-spacer {
+    margin-bottom: 50px;
+}
+.display-panel {
+    display: block;
+    height: 500px;
+    width: 100%;
+}
+
+.image-overlay {
+    background: rgba(0, 0, 0, 0.5); 
+}
+
+.centered-text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
