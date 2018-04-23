@@ -21,15 +21,11 @@ const tempDatabase = {
 };
 
 app.get('/', (req, res) => {
-<<<<<<< HEAD
     res.sendFile(__dirname + '/static/home-page.html');
 });
 
 app.get('/map-page', (req, res) => {
     res.sendFile(__dirname + '/static/index2.html');
-=======
-  res.sendFile(__dirname + '/static/pointPoppy.html');
->>>>>>> 01f25070c402f03d2d86654c9e2de613829a7be7
 });
 
 app.get('/parks', (req, res) => {
