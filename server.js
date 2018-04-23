@@ -9,7 +9,7 @@ const tempDatabase = {
   'Redwood': {trails: 'Damnation', pic: 'redwood.jpeg'},
   'Sequoia': {trails: 'Hazelwood Nature Trail', pic: 'sequoia.jpeg'},
   'Joshua Tree' : {trails: 'Arch Rock', pic: 'jtree.jpeg'}
-}
+};
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/static/pointPoppy.html');

@@ -3,9 +3,20 @@
 
 <head>
   <title>Point Poppy</title>
+
+  <script
+        src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+      <script type="text/javascript">
+        var $j = $.noConflict(true);
+      </script>
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
   <link href="styles/styles.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <script type="text/javascript" src="pointPoppy.js"></script>
+
 </head>
 
 <body>
@@ -19,30 +30,31 @@
         <div class="col-sm-8" id="map-holder">
           <h2>Map</h2>
           <div id="map"></div>
-          
+
           <br></br>
 
-          <button type="button" class="btn btn-outline-success" id="Redwood" onclick="changeName('Redwood')">Redwood</button>
-          <button type="button" class="btn btn-outline-success" id="Sequoia" onclick="changeName('Sequoia')">Sequoia</button>
-          <button type="button" class="btn btn-outline-success" id="Joshuatree" onclick="changeName('Joshuatree')">Joshua Tree</button>
-          <button type="button" class="btn btn-outline-success" id="Alcatraz" onclick="changeName('Alcatraz')">Alcatraz Island</button>
-          <button type="button" class="btn btn-outline-success" id="Cabrillo" onclick="changeName('Cabrillo')">Cabrillo</button>
-          <button type="button" class="btn btn-outline-success" id="CastleMountains" onclick="changeName('CastleMountains')">Castle Mountains</button>
-          <button type="button" class="btn btn-outline-success" id="ChannelIslands" onclick="changeName('ChannelIslands')">Channel Islands</button>
-          <button type="button" class="btn btn-outline-success" id="DeathValley" onclick="changeName('DeathValley')">Death Valley</button>
-          <button type="button" class="btn btn-outline-success" id="JoshuaTree" onclick="changeName('JoshuaTree')">Joshua Tree</button>
-          <button type="button" class="btn btn-outline-success" id="LassenVolcanic" onclick="changeName('LassenVolcanic')">Lassen Volcanic</button>
-          <button type="button" class="btn btn-outline-success" id="Mojave" onclick="changeName('Mojave')">Mojave National Preserve</button>
-          <button type="button" class="btn btn-outline-success" id="MuirWoods" onclick="changeName('MuirWoods')">Muir Woods</button>
-          <button type="button" class="btn btn-outline-success" id="Pinnacles" onclick="changeName('Pinnacles')">Pinnacles</button>
-          <button type="button" class="btn btn-outline-success" id="Redwood" onclick="changeName('Redwood')">Redwood</button>
-          <button type="button" class="btn btn-outline-success" id="SantaMonicaMountains" onclick="changeName('SantaMonicaMountains')">Santa Monica Mountains</button>
-          <button type="button" class="btn btn-outline-success" id="Sequoia" onclick="changeName('Sequoia')">Sequoia and Kings Canyon</button>
-          <button type="button" class="btn btn-outline-success" id="Yosemite" onclick="changeName('Yosemite')">Yosemite</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Redwood" onclick="changeName('Redwood')">Redwood</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Sequoia" onclick="changeName('Sequoia')">Sequoia</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Joshuatree" onclick="changeName('Joshuatree')">Joshua Tree</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Alcatraz" onclick="changeName('Alcatraz')">Alcatraz Island</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Cabrillo" onclick="changeName('Cabrillo')">Cabrillo</button>
+          <button type="button" class="btn btn-outline-success parkid" id="CastleMountains" onclick="changeName('CastleMountains')">Castle Mountains</button>
+          <button type="button" class="btn btn-outline-success parkid" id="ChannelIslands" onclick="changeName('ChannelIslands')">Channel Islands</button>
+          <button type="button" class="btn btn-outline-success parkid" id="DeathValley" onclick="changeName('DeathValley')">Death Valley</button>
+          <button type="button" class="btn btn-outline-success parkid" id="JoshuaTree" onclick="changeName('JoshuaTree')">Joshua Tree</button>
+          <button type="button" class="btn btn-outline-success parkid" id="LassenVolcanic" onclick="changeName('LassenVolcanic')">Lassen Volcanic</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Mojave" onclick="changeName('Mojave')">Mojave National Preserve</button>
+          <button type="button" class="btn btn-outline-success parkid" id="MuirWoods" onclick="changeName('MuirWoods')">Muir Woods</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Pinnacles" onclick="changeName('Pinnacles')">Pinnacles</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Redwood" onclick="changeName('Redwood')">Redwood</button>
+          <button type="button" class="btn btn-outline-success parkid" id="SantaMonicaMountains" onclick="changeName('SantaMonicaMountains')">Santa Monica Mountains</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Sequoia" onclick="changeName('Sequoia')">Sequoia and Kings Canyon</button>
+          <button type="button" class="btn btn-outline-success parkid" id="Yosemite" onclick="changeName('Yosemite')">Yosemite</button>
 
         </div>
         <div class="col-sm-4">
           <h2 id="parkName">Choose a park!</h2>
+          <div id="test"></div>
         </div>
       </div>
     </div>
