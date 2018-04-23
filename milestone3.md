@@ -3,15 +3,15 @@
 
 ### Skeleton Screenshots
 
-** Screen 1 (Homepage) **
+**Screen 1 (Homepage)**
 
 ![Screenshot1](https://i.imgur.com/ppHNlrt.jpg)
 
-** Screen 2 (Map Page) **
+**Screen 2 (Map Page)**
 
 ![Screenshot2](https://i.imgur.com/geXWc6J.png)
 
-** Comparison to Prototypes **
+**Comparison to Prototypes**
 
 Our skeleton shares many similarities with our paper prototypes. The overall
 map interface has a similar design to the prototypes, with the map screen
