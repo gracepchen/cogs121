@@ -6,17 +6,30 @@ const app = express(); //instantiate express object
 app.use(express.static(path.join(__dirname, 'static')));
 
 const tempDatabase = {
-  'Redwood': {trails: 'Damnation', pic: 'redwood.jpeg'},
-  'Sequoia': {trails: 'Hazelwood Nature Trail', pic: 'sequoia.jpeg'},
-  'Joshua Tree' : {trails: 'Arch Rock', pic: 'jtree.jpeg'}
+  'Redwood': {
+    trails: 'Damnation', 
+    pic: 'redwood.jpeg'
+  },
+  'Sequoia': {
+    trails: 'Hazelwood Nature Trail', 
+    pic: 'sequoia.jpeg'
+  },
+  'Joshua Tree': {
+    trails: 'Arch Rock', 
+    pic: 'jtree.jpeg'
+  }
 };
 
 app.get('/', (req, res) => {
+<<<<<<< HEAD
     res.sendFile(__dirname + '/static/home-page.html');
 });
 
 app.get('/map-page', (req, res) => {
     res.sendFile(__dirname + '/static/index2.html');
+=======
+  res.sendFile(__dirname + '/static/pointPoppy.html');
+>>>>>>> 01f25070c402f03d2d86654c9e2de613829a7be7
 });
 
 app.get('/parks', (req, res) => {
@@ -27,8 +40,8 @@ app.get('/parks', (req, res) => {
 
 app.get('/parks/:parkid', (req, res) => {
   const parkToLookUp = req.params.parkid;
-
   const val = tempDatabase[parkToLookUp];
+
   console.log(parkToLookUp, '->', val);
   if (val) {
     res.send(val);
