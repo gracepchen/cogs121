@@ -10,3 +10,8 @@ html, body{
 #map-holder{
     padding-bottom: 1em;
 }
+
+.btn-toolbar .btn {
+    margin-top: 5px;
+    margin-right: 5px;
+}
