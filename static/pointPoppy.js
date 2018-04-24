@@ -1,6 +1,8 @@
 $j(document).ready(() => {
   console.log('entered document ready');
-  $j('.parkid').click(() => {
+  $j('.parkid').click(function(event) {
+
+// alert(event.target.id);
     // 
     // console.log('making ajax request to: ' + $('#parkid'));
     // console.log($('#parkid'));
@@ -9,21 +11,20 @@ $j(document).ready(() => {
     $j('#parkName').text(document.getElementById("parkName").innerHTML);
 
     // get name of park
-    $j.ajax({
+   /* $j.ajax({
       url:'parks/',
       type: 'GET',
       dataType: 'json',
       success: (data) => {
         console.log('ajax success ' + data);
-        $('#test').html(data[0]);
+        $('#test').html(event.target.id);
       }
     });
+    */
 
     // get park info
-    
-    // change $Redwood to something that will select calling object
-    // or select correct park from array
-    const reqURL = 'parks/' + $('#Redwood').text();
+    var idText = $('#' + event.target.id).text();
+    const reqURL = 'parks/' + idText;
   
     $j.ajax({
       url: reqURL,
@@ -32,11 +33,9 @@ $j(document).ready(() => {
       success: (data) => {
         console.log(data.pic);
         console.log(data.trails);
-        $("#test3").attr("src", data.pic);
-        $("#test2").html(data.trails);
-        // $('#test2').innerHTML = "test";
-        // const parkPic = '<img src=\"' + data.pic + '\">';
-        // document.getElementById("test2").innerHTML = parkPic;
+        $("#trails").html(data.trails);
+        $("#parkPic").attr("src", data.pic);
+
       }
     });
 

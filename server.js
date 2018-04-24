@@ -17,6 +17,10 @@ const tempDatabase = {
   'Joshua Tree': {
     trails: 'Arch Rock', 
     pic: 'jtree.jpeg'
+  },
+  'Alcatraz Island': {
+    trails: 'Agave Trail',
+    pic: 'alcatraz.jpg'
   }
 };
 
