@@ -7,7 +7,11 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 const tempDatabase = {
   'Redwood': {
-    trails: 'Damnation', 
+    trails: [
+    'Damnation<br>', 
+    'Redwood Creek<br>',
+    'Stout Grove<br>'
+    ],
     pic: 'redwood.jpeg'
   },
   'Sequoia': {
