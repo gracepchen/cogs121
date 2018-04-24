@@ -8,16 +8,17 @@ a:hover {
 }
 
 .top-spacer {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 .display-panel {
     display: block;
     height: 500px;
     width: 100%;
+    opacity: 0.6;
 }
 
 .image-overlay {
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, .8); 
 }
 
 .centered-text {
