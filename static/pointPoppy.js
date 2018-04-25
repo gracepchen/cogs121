@@ -33,8 +33,11 @@ $j(document).ready(() => {
       success: (data) => {
         console.log(data.pic);
         console.log(data.trails);
+        $('#intro').html(data.intro);
         $("#trails").html(data.trails);
-        $("#parkPic").attr("src", data.pic);
+        // $("#parkPic").attr("src", data.pic);
+        $('#pics').html(data.pic);
+
 
       }
     });

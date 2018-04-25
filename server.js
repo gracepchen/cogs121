@@ -7,24 +7,48 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 const tempDatabase = {
   'Redwood': {
+    intro: 'Redwood National and State Parks are a string of protected forests, ' +
+    'beaches and grasslands along Northern California’s coast. Jedediah Smith ' +
+    'Redwoods State Park has trails through dense old-growth woods. Prairie Creek' +
+    ' Redwoods State Park is home to Fern Canyon, with its high, plant-covered walls. ' +
+    'Roosevelt elk frequent nearby Elk Prairie. Giant redwood clusters include ' + 
+    'Redwood National Park’s Lady Bird Johnson Grove.',
     trails: [
     'Damnation<br>', 
     'Redwood Creek<br>',
     'Stout Grove<br>'
     ],
-    pic: 'redwood.jpeg'
+    pic: '<img src="redwood.jpeg" width="60%">'
   },
   'Sequoia': {
     trails: 'Hazelwood Nature Trail', 
-    pic: 'sequoia.jpeg'
+    pic: '<img src="sequoia.jpeg" width="60%">'
   },
   'Joshua Tree': {
     trails: 'Arch Rock', 
-    pic: 'jtree.jpeg'
+    pic: [
+    '<img src="jtree.jpeg" width="60%">',
+    '<img src="joshua1.jpg" width="60%">'
+    ]
   },
   'Alcatraz Island': {
     trails: 'Agave Trail',
-    pic: 'alcatraz.jpg'
+    pic: '<img src="alcatraz.jpg" width="60%">'
+  },
+  'Yosemite': {
+    trails: [
+    'Half Dome<br>',
+    'Panorama<br>'
+    ],
+    pic: '<img src="yosemite.jpg" width="60%">'
+  },
+  'Death Valley': {
+    trails: [
+    'Badwater Basin<br>',
+    'Gower Gulch<br>',
+    'Golden Canyon'
+    ],
+    pic: '<img src="deathvalley.jpg" width="60%">'
   }
 };
 

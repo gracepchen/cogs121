@@ -9,9 +9,7 @@ var my_map = L.map('map').setView([37.641856, -120.605543], 6);
 }).addTo(my_map);
 
 
-
-
-var polygon = L.polygon([
+var redwood = L.polygon([
 	[41.081257, -123.961847],
 	[41.088244, -123.940732],
 	[41.108036, -123.938844],
@@ -32,4 +30,75 @@ var polygon = L.polygon([
 	[41.188805, -124.073071]
 	]).addTo(my_map);
 
-polygon.bindPopup("Redwood National Park");
+var sequoia = L.circle([36.4864, -118.5658], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 40000
+}).addTo(my_map);
+
+var joshua = L.circle([33.8734, -115.9010], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 30000
+}).addTo(my_map);
+
+var alcatraz = L.circle([37.8270, -122.4230], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 20000
+}).addTo(my_map);
+
+var cabrillo = L.circle([32.6735, -117.2425], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 10000
+}).addTo(my_map);
+
+var castlemountains = L.circle([35.3247, -115.0789], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 20000
+}).addTo(my_map);
+
+var channelislands = L.circle([34.0097, -119.8023], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 20000
+}).addTo(my_map);
+
+var deathvalley = L.circle([36.5323, -116.9325], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 30000
+}).addTo(my_map);
+
+var yosemite = L.circle([37.8651, -119.5383], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 40000
+}).addTo(my_map);
+
+
+
+// popups
+redwood.bindPopup("Redwood National Park");
+sequoia.bindPopup("Sequoia National Park");
+joshua.bindPopup("Joshua Tree National Park");
+alcatraz.bindPopup("Alcatraz Island");
+cabrillo.bindPopup("Cabrillo National Monument");
+castlemountains.bindPopup("Castle Mountains");
+channelislands.bindPopup("Channel Islands");
+deathvalley.bindPopup("Death Valley");
+yosemite.bindPopup("Yosemite National Park");
+
+
+
+
