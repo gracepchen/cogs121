@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
 body {
     padding: 0;
     margin: 0;
+
 }
 
 html, body{
@@ -14,4 +17,9 @@ html, body{
 .btn-toolbar .btn {
     margin-top: 5px;
     margin-right: 5px;
+}
+
+.container-fluid {
+
+	font-family:  'Source Sans Pro', sans-serif;
 }

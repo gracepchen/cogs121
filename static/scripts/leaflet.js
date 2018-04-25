@@ -8,8 +8,8 @@ var my_map = L.map('map').setView([37.641856, -120.605543], 6);
 	accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
 }).addTo(my_map);
 
-
-var redwood = L.polygon([
+// add polygons to map
+var Redwood = L.polygon([
 	[41.081257, -123.961847],
 	[41.088244, -123.940732],
 	[41.108036, -123.938844],
@@ -86,12 +86,10 @@ var yosemite = L.circle([37.8651, -119.5383], {
     radius: 40000
 }).addTo(my_map);
 
-
-
-// popups
-redwood.bindPopup("Redwood National Park");
-sequoia.bindPopup("Sequoia National Park");
-joshua.bindPopup("Joshua Tree National Park");
+// popups for each site
+Redwood.bindPopup("Redwood");
+sequoia.bindPopup("Sequoia");
+joshua.bindPopup("Joshua Tree");
 alcatraz.bindPopup("Alcatraz Island");
 cabrillo.bindPopup("Cabrillo National Monument");
 castlemountains.bindPopup("Castle Mountains");
@@ -99,6 +97,32 @@ channelislands.bindPopup("Channel Islands");
 deathvalley.bindPopup("Death Valley");
 yosemite.bindPopup("Yosemite National Park");
 
+// popup functions
+function dataCall(e) {
+
+	// changes park name
+	$j('#parkName').text(e.target.getPopup().getContent());
+
+	// get park info from map
+    var idText = $('#' + e.target.getPopup().getContent()).text();
+    const reqURL = 'parks/' + idText;
+  
+    $j.ajax({
+      url: reqURL,
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        console.log(data.pic);
+        console.log(data.trails);
+        $('#intro').html(data.intro);
+        $("#trails").html(data.trails);
+        $('#pics').html(data.pic);
+      }
+    });
+}
+
+Redwood.on('click', dataCall);
+sequoia.on('click', dataCall);
 
 
 

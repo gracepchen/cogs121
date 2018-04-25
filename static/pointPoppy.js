@@ -37,8 +37,6 @@ $j(document).ready(() => {
         $("#trails").html(data.trails);
         // $("#parkPic").attr("src", data.pic);
         $('#pics').html(data.pic);
-
-
       }
     });
 
