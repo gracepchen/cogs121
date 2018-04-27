@@ -28,63 +28,63 @@ var Redwood = L.polygon([
 	[41.261107, -124.088177],
 	[41.207405, -124.061055],
 	[41.188805, -124.073071]
-	]).addTo(my_map);
+	]).addTo(my_map).on("click", circleClick);
 
 var sequoia = L.circle([36.4864, -118.5658], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 40000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 var joshua = L.circle([33.8734, -115.9010], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 30000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 var alcatraz = L.circle([37.8270, -122.4230], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 20000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 var cabrillo = L.circle([32.6735, -117.2425], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 10000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 var castlemountains = L.circle([35.3247, -115.0789], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 20000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 var channelislands = L.circle([34.0097, -119.8023], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 20000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 var deathvalley = L.circle([36.5323, -116.9325], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 30000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 var yosemite = L.circle([37.8651, -119.5383], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: 40000
-}).addTo(my_map);
+}).addTo(my_map).on("click", circleClick);
 
 // popups for each site
 Redwood.bindPopup("Redwood");
@@ -106,7 +106,7 @@ function dataCall(e) {
 	// get park info from map
     var idText = $('#' + e.target.getPopup().getContent()).text();
     const reqURL = 'parks/' + idText;
-  
+
     $j.ajax({
       url: reqURL,
       type: 'GET',
@@ -121,8 +121,9 @@ function dataCall(e) {
     });
 }
 
+function circleClick(e) {
+    my_map.fitBounds(e.target.getBounds());
+}
+
 Redwood.on('click', dataCall);
 sequoia.on('click', dataCall);
-
-
-
