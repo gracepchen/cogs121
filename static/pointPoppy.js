@@ -34,7 +34,7 @@ $j(document).ready(() => {
         console.log(data.pic);
         console.log(data.trails);
         $('#intro').html(data.intro);
-        $("#trails").html(data.trails);
+        $("#trailSelect").html(data.trails);
         // $("#parkPic").attr("src", data.pic);
         $('#pics').html(data.pic);
       }
@@ -45,4 +45,18 @@ $j(document).ready(() => {
   $j(document).ajaxError(() => { //catch-all
     $j('#status').html('Error: unknown ajaxError!');
   });
+
+
+
 });
+
+function getParkData(trailgallery) {
+    var i;
+    var x = document.getElementsByClassName("parkinfo");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none"; 
+    }
+    document.getElementById(trailgallery).style.display = "block"; 
+
+};
+

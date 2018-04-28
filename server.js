@@ -14,41 +14,46 @@ const tempDatabase = {
     'Roosevelt elk frequent nearby Elk Prairie. Giant redwood clusters include ' + 
     'Redwood National Park’s Lady Bird Johnson Grove.',
     trails: [
-    'Damnation<br>', 
-    'Redwood Creek<br>',
-    'Stout Grove<br>'
+    '<option>Damnation</option>', 
+    '<option>Redwood Creek</option>',
+    '<option>Stout Grove</option>'
     ],
-    pic: '<img src="redwood.jpeg" width="60%">'
+    pic: '<img src="redwood.jpeg" width="50%">'
   },
   'Sequoia': {
-    trails: 'Hazelwood Nature Trail', 
-    pic: '<img src="sequoia.jpeg" width="60%">'
+    intro: '',
+    trails: '<option>Hazelwood Nature Trail</option>', 
+    pic: '<img src="sequoia.jpeg" width="50%">'
   },
   'Joshua Tree': {
-    trails: 'Arch Rock', 
+    intro: '',
+    trails: '<option>Arch Rock</option>', 
     pic: [
-    '<img src="jtree.jpeg" width="60%">',
-    '<img src="joshua1.jpg" width="60%">'
+    '<img src="jtree.jpeg" width="50%">',
+    '<img src="joshua1.jpg" width="50%">'
     ]
   },
   'Alcatraz Island': {
-    trails: 'Agave Trail',
-    pic: '<img src="alcatraz.jpg" width="60%">'
+    intro: '',
+    trails: '<option>Agave Trail</option>',
+    pic: '<img src="alcatraz.jpg" width="50%">'
   },
   'Yosemite': {
+    intro: '',
     trails: [
-    'Half Dome<br>',
-    'Panorama<br>'
+    '<option>Half Dome</option>',
+    '<option>Panorama</option>'
     ],
-    pic: '<img src="yosemite.jpg" width="60%">'
+    pic: '<img src="yosemite.jpg" width="50%">'
   },
   'Death Valley': {
+    intro: '',
     trails: [
-    'Badwater Basin<br>',
-    'Gower Gulch<br>',
-    'Golden Canyon'
+    '<option>Badwater Basin</option>',
+    '<option>Gower Gulch</option>',
+    '<option>Golden Canyon</option>'
     ],
-    pic: '<img src="deathvalley.jpg" width="60%">'
+    pic: '<img src="deathvalley.jpg" width="50%">'
   }
 };
 

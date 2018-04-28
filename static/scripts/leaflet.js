@@ -115,7 +115,7 @@ function dataCall(e) {
         console.log(data.pic);
         console.log(data.trails);
         $('#intro').html(data.intro);
-        $("#trails").html(data.trails);
+        $("#trailSelect").html(data.trails);
         $('#pics').html(data.pic);
       }
     });
