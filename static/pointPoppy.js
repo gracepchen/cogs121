@@ -4,9 +4,18 @@ $j(document).ready(() => {
   console.log('entered document ready');
   $j('.parkid').click(function(event) {
 
+// show trail select box
+if (document.getElementById("Gallery").style.display === "none") {
+  document.getElementById("Trails").style.display = "block";
+} else {
+  document.getElementById("Trails").style.display = "none";
+}
+
       // reset values for length and difficulty
       $("#trail_length").html('');
       $("#trail_diff").html('');
+
+
 // alert(event.target.id);
     // 
     // console.log('making ajax request to: ' + $('#parkid'));

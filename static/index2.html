@@ -19,14 +19,14 @@
 		<div id="page-holder">
 			<a href="/"><img src="pointpoppy.png" width="35%" class="mt-3"></a>
 			<!-- <h1 class="display-4">Point Poppy</h1> -->
-			<h5>Explore California! Select a national park from the map or choose from the buttons below.</h5>
-			<hr>
+			<h5 class="ml-5 mt-1"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trailblazing California since 2018.</i></h5>
+	
 
-			<div class="row">
+			<div class="row pt-3">
 				<div class="col-sm-6" id="map-holder">
 					
 					<!-- Leaflet holder -->
-					<h2>Map</h2>
+					<!-- <h2>Map</h2> -->
 					<div id="map" class="mb-3"></div>
 
 					<!-- Location Button bar -->
@@ -57,30 +57,31 @@
 
 				<!-- RIGHT HALF of the page -->
 				<div class="col-sm-6">
+					<div class="bg">
 					<h2 id="parkName">Choose a park!</h2>
 					<div id="intro"></div>
+					<hr>
 
 					<div class="row mt-3">
-						
 						<div class="col-sm-12">
 							<!-- tab buttons -->
-							<button type="button" class="btn btn-outline-info" onclick="getParkData('Trails')">Trails</button>
-							<button type="button" class="btn btn-outline-info" onclick="getParkData('Gallery')">Gallery</button>				
+							<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Trails')">Trails</button>
+							<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Gallery')">Gallery</button>				
 						</div>
 						
 						<div class="col-sm-12">
 							
-							<div id="Trails" class="parkinfo"> <!-- trail selector -->
+							<div id="Trails" class="parkinfo" style="display:none"> <!-- trail selector -->
 								<div class="row mt-3">
 									<div class="col-sm-5">
-										<div class="form-group mt-2">
-											<label for="trailSelect"><b>Select a trail:</b></label>
+										<div class="form-group mt-1">
+											<label for="trailSelect"><h5>Select a trail:</h5></label>
 											<select multiple class="form-control" id="trailSelect" onchange="showTrailInfo(value);">
 											</select>
 										</div>
 									</div>
 									<div class="col-sm-7">
-										<p class="mt-2"><b>Trail Information</b></p>
+										<h5 class="mt-1">Trail Information</h5>
 										<p><b>Length: </b><span id="trail_length"></span></p>
 										<p><b>Difficulty: </b><span id="trail_diff"></span></p>
 									</div>
@@ -88,12 +89,13 @@
 							</div>
 							
 							<div id="Gallery" class="parkinfo" style="display:none"> <!-- park pics -->
-								<div id="pics"></div>
+								<div id="pics" class="mt-2"></div>
 							</div>
 
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 

@@ -9,6 +9,10 @@ html, body{
     height: 100%;
 }
 
+.btn, select {
+	border-radius: 0 !important;
+}
+
 #map-holder{
     padding-bottom: 1em;
 }
@@ -20,4 +24,19 @@ html, body{
 
 .container-fluid {
 	font-family:  'Source Sans Pro', sans-serif;
+	color: #555450;
+}
+
+.bg {
+	/*background-color: #FFFDF2;*/
+	border-style: solid;
+    border-width: 1px;
+    border-color: #555450;
+    padding: 2%;
+}
+
+#map {
+	border-style: solid;
+    border-width: 1px;
+    border-color: #555450;
 }
