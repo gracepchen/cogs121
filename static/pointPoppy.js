@@ -58,8 +58,6 @@ if (document.getElementById("Gallery").style.display === "none") {
           $("#trailSelect").append(trail_option);
         }
       }
-
-
       trail_data = data.trails;
       $('#pics').html(data.pic);
     }

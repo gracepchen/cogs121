@@ -13,14 +13,14 @@ resize();
 
 function resize(){
     if($(window).width() >= resize_map.minHeight){
-        $('#map').css("height", ($(window).height() - resize_map.mapmargin + 90));
+        $('#map').css("height", ($(window).height() - resize_map.mapmargin + 220));
         //document.write($(window).height() + " " + resize_map.mapmargin);
     // Map size cannot be smaller than the width on mobile devices.
-    }else{
-        if($(window).height() <= resize_map.minHeight){
-            $('#map').css("height", resize_map.minHeight);
-        }else{
-            $('#map').css("height", ($(window).height() - resize_map.mapmargin));
-        }
+} else{
+    if($(window).height() <= resize_map.minHeight){
+        $('#map').css("height", resize_map.minHeight);
+    } else{
+        $('#map').css("height", ($(window).height() - resize_map.mapmargin));
     }
+}
 }

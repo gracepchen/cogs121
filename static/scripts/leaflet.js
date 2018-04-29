@@ -1,12 +1,13 @@
 var my_map = L.map('map').setView([37.641856, -120.605543], 6);
 
+
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 	L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
-	maxZoom: 18,
-	id: 'mapbox.streets',
-	detectRetina: true,
-	accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
-}).addTo(my_map);
+     maxZoom: 18,
+     id: 'mapbox.streets',
+     detectRetina: true,
+     accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
+ }).addTo(my_map);
 
 // add polygons to map
 var Redwood = L.polygon([
@@ -97,11 +98,21 @@ channelislands.bindPopup("Channel Islands");
 deathvalley.bindPopup("Death Valley");
 yosemite.bindPopup("Yosemite National Park");
 
+
+
+
 // popup functions
 function dataCall(e) {
 
 	// changes park name
 	$j('#parkName').text(e.target.getPopup().getContent());
+
+    // show trail select box
+    if (document.getElementById("Gallery").style.display === "none") {
+      document.getElementById("Trails").style.display = "block";
+  } else {
+      document.getElementById("Trails").style.display = "none";
+  }
 
 	// get park info from map
     var idText = $('#' + e.target.getPopup().getContent()).text();
@@ -115,10 +126,20 @@ function dataCall(e) {
         console.log(data.pic);
         console.log(data.trails);
         $('#intro').html(data.intro);
-        $("#trailSelect").html(data.trails);
-        $('#pics').html(data.pic);
+        
+      // load trail names into select box
+      if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
+         $("#trailSelect").html(''); // clear select box
+         for (var i = 0; i < data.trails.length; i++) {
+          // append correct trail names
+          let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
+          $("#trailSelect").append(trail_option);
       }
-    });
+      trail_data = data.trails;
+  }
+  $('#pics').html(data.pic);
+}
+});
 }
 
 function circleClick(e) {
