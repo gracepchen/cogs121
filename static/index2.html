@@ -61,15 +61,16 @@
 					<div id="intro"></div>
 
 					<div class="row mt-3">
+						
 						<div class="col-sm-12">
 							<!-- tab buttons -->
 							<button type="button" class="btn btn-outline-info" onclick="getParkData('Trails')">Trails</button>
 							<button type="button" class="btn btn-outline-info" onclick="getParkData('Gallery')">Gallery</button>				
 						</div>
+						
 						<div class="col-sm-12">
-							<div id="Trails" class="parkinfo">
-								<!-- <div id="trails"></div> -->
-								<!-- trail selector -->
+							
+							<div id="Trails" class="parkinfo"> <!-- trail selector -->
 								<div class="row mt-3">
 									<div class="col-sm-5">
 										<div class="form-group mt-2">
@@ -85,36 +86,27 @@
 									</div>
 								</div>
 							</div>
-
-							<div id="Gallery" class="parkinfo" style="display:none">
+							
+							<div id="Gallery" class="parkinfo" style="display:none"> <!-- park pics -->
 								<div id="pics"></div>
 							</div>
-						</div>
-						<!-- <div class="col-sm-6">
-							<h5>Trails</h5>
-						 <div id="trails"></div> -->
-							<!-- </div> -->
-							<!-- <div class="col-sm-6"> -->
 
-								<!-- <h5>Gallery</h5> -->
-								<!-- <div id="pics"></div> -->
-								<!-- <img src="#" id="parkPic" width="60%"> -->
-								<!-- </div> -->
-							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 
-				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-				<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-				<script type="text/javascript" src="pointPoppy.js"></script>
+		<script type="text/javascript" src="pointPoppy.js"></script>
 
-				<script type="text/javascript" src="scripts/resize_map.js"></script>
-				<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
-				<script type="text/javascript" src="scripts/leaflet.js"></script>
-				<script>
+		<script type="text/javascript" src="scripts/resize_map.js"></script>
+		<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+		<script type="text/javascript" src="scripts/leaflet.js"></script>
+		<script>
       //changes text on button click
       function changeName(name) {
       	console.log(name);
