@@ -25,7 +25,7 @@ $j(document).ready(() => {
     // get park info
     var idText = $('#' + event.target.id).text();
     const reqURL = 'parks/' + idText;
-  
+
     $j.ajax({
       url: reqURL,
       type: 'GET',
@@ -34,7 +34,18 @@ $j(document).ready(() => {
         console.log(data.pic);
         console.log(data.trails);
         $('#intro').html(data.intro);
-        $("#trailSelect").html(data.trails);
+        
+        // load trail names into select box
+        if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
+         $("#trailSelect").html(''); // clear select box
+         for (var i = 0; i < data.trails.length; i++) {
+          // append correct trail names
+          let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
+          $("#trailSelect").append(trail_option);
+        }
+      }
+
+
         // $("#parkPic").attr("src", data.pic);
         $('#pics').html(data.pic);
       }
@@ -50,13 +61,19 @@ $j(document).ready(() => {
 
 });
 
+// trail/gallery tab functions
 function getParkData(trailgallery) {
-    var i;
-    var x = document.getElementsByClassName("parkinfo");
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none"; 
-    }
-    document.getElementById(trailgallery).style.display = "block"; 
+  var i;
+  var x = document.getElementsByClassName("parkinfo");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none"; 
+  }
+  document.getElementById(trailgallery).style.display = "block"; 
+};
+
+// select trail box - insert length and difficulty into box
+function showTrailInfo(trail_name) {
+  alert(trail_name);
 
 };
 

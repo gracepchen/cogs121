@@ -73,13 +73,15 @@
 								<div class="row mt-3">
 									<div class="col-sm-5">
 										<div class="form-group mt-2">
-											<label for="trailSelect">Select a trail:</label>
-											<select multiple class="form-control" id="trailSelect">
+											<label for="trailSelect"><b>Select a trail:</b></label>
+											<select multiple class="form-control" id="trailSelect" onchange="showTrailInfo(value);">
 											</select>
 										</div>
 									</div>
 									<div class="col-sm-7">
-										<p class="mt-2">Choose a trail to view more information.</p>
+										<p class="mt-2"><b>Choose a trail to view more information.</b></p>
+										<p>Length: <span id="trail_length"></span></p>
+										<p>Difficulty: <span id="trail_diff"></span></p>
 									</div>
 								</div>
 							</div>
@@ -90,7 +92,7 @@
 						</div>
 						<!-- <div class="col-sm-6">
 							<h5>Trails</h5>
-							<!-- <div id="trails"></div> -->
+						 <div id="trails"></div> -->
 							<!-- </div> -->
 							<!-- <div class="col-sm-6"> -->
 
