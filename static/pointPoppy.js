@@ -1,7 +1,12 @@
+let trail_data;
+
 $j(document).ready(() => {
   console.log('entered document ready');
   $j('.parkid').click(function(event) {
 
+      // reset values for length and difficulty
+      $("#trail_length").html('');
+      $("#trail_diff").html('');
 // alert(event.target.id);
     // 
     // console.log('making ajax request to: ' + $('#parkid'));
@@ -46,10 +51,10 @@ $j(document).ready(() => {
       }
 
 
-        // $("#parkPic").attr("src", data.pic);
-        $('#pics').html(data.pic);
-      }
-    });
+      trail_data = data.trails;
+      $('#pics').html(data.pic);
+    }
+  });
 
   });
 
@@ -71,9 +76,14 @@ function getParkData(trailgallery) {
   document.getElementById(trailgallery).style.display = "block"; 
 };
 
-// select trail box - insert length and difficulty into box
-function showTrailInfo(trail_name) {
-  alert(trail_name);
+     // select trail box - insert length and difficulty into box
+     function showTrailInfo(trail_name) {
+      // reset values
+      $("#trail_length").html('');
+      $("#trail_diff").html('');
 
-};
+      // change the data
+      $("#trail_length").html(trail_data[trail_name].length);
+      $("#trail_diff").html(trail_data[trail_name].difficulty);
+    };
 
