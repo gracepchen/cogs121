@@ -45,14 +45,12 @@ html, body{
   z-index: -1;   
 }
 
-
+/* to keep gallery at an appropriate height */
 .fixed {
   height: 200px;
     overflow: hidden;
     overflow:scroll;
 }
-
-
 
 .bg {
 	/*background-color: #FFFDF2;*/

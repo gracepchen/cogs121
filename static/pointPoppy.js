@@ -3,30 +3,25 @@ let trail_data;
 $j(document).ready(() => {
   console.log('entered document ready');
 
-
-
-
-
-
-
   $j('.parkid').click(function(event) {
 
-    var url = "https://developer.nps.gov/api/v1/parks?stateCode=CA&fields=images&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
+    // NPS API stuff!!!
+    var NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&fields=images&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
     $j.ajax({
-      url: url,
+      url: NPSurl,
       method: 'GET',
     }).done(function(result) {
       // console.log(result.data[0].description);
-  // $('#intro').html(result.data[1].listingDescription);
-
   for (let i = 0; i < result.data.length; i++) {
+    
+    // find appropriate park data corresponding to park button
     if (result.data[i].parkCode === event.target.id) {
-      $('#pics').html('');
-
-      $('#intro').html(result.data[i].description);
-      $('#parkName').html(result.data[i].fullName);
+      
+      $('#intro').html(result.data[i].description); // change intro
+      $('#parkName').html(result.data[i].fullName); // change title
+      
+      $('#pics').html('');  // erase old gallery and reload pics
       for (let j = 0; j < result.data[i].images.length; j++) {
-
         $('#pics').append('<img src="' + result.data[i].images[j].url + 
           '" width="30%" altText="' + result.data[i].images[j].altText + 
           '" class="img-thumbnail">');
@@ -36,7 +31,8 @@ $j(document).ready(() => {
 
 }).fail(function(err) {
   throw err;
-});
+});  // End of NPS API stuff
+
 
 // show trail select box
 if (document.getElementById("Gallery").style.display === "none") {
