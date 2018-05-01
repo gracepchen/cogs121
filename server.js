@@ -39,7 +39,7 @@ const tempDatabase = {
 		// 	'<option>Stout Grove</option>'
 		// },
 		],
-		pic: '<img src="redwood.jpeg" width="50%">'
+		pic: '<img src="images/redwood.jpeg" width="50%">'
 	},
 	'Sequoia': {
 		intro: '',
@@ -50,20 +50,20 @@ const tempDatabase = {
 				difficulty: 'Medium'
 			}
 		],
-		pic: '<img src="sequoia.jpeg" width="50%">'
+		pic: '<img src="images/sequoia.jpeg" width="50%">'
 	},
 	'Joshua Tree': {
 		intro: '',
 		trails: '<option>Arch Rock</option>', 
 		pic: [
-		'<img src="jtree.jpeg" width="50%">',
-		'<img src="joshua1.jpg" width="50%">'
+		'<img src="images/jtree.jpeg" width="50%">',
+		'<img src="images/joshua1.jpg" width="50%">'
 		]
 	},
 	'Alcatraz Island': {
 		intro: '',
 		trails: '<option>Agave Trail</option>',
-		pic: '<img src="alcatraz.jpg" width="50%">'
+		pic: '<img src="images/alcatraz.jpg" width="50%">'
 	},
 	'Yosemite': {
 		intro: '',
@@ -71,7 +71,7 @@ const tempDatabase = {
 		'<option>Half Dome</option>',
 		'<option>Panorama</option>'
 		],
-		pic: '<img src="yosemite.jpg" width="50%">'
+		pic: '<img src="images/yosemite.jpg" width="50%">'
 	},
 	'Death Valley': {
 		intro: '',
@@ -80,7 +80,7 @@ const tempDatabase = {
 		'<option>Gower Gulch</option>',
 		'<option>Golden Canyon</option>'
 		],
-		pic: '<img src="deathvalley.jpg" width="50%">'
+		pic: '<img src="images/deathvalley.jpg" width="50%">'
 	}
 };
 
