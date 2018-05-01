@@ -34,7 +34,7 @@ html, body{
 
 .container-fluid::after {
   content: "";
-  background-image: url("../bg.jpg");
+  background-image: url("../images/bg.jpg");
   background-size: cover;
   opacity: 0.2;
   top: 0;
