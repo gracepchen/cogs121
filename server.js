@@ -105,6 +105,11 @@ app.get('/parks/:parkid', (req, res) => {
 	else {
 		res.send({});
 	}
+});
+
+app.get('/places', (req, res) => {
+	const parkToLookUp = req.params.parkid;
+	const val = tempDatabase[parkToLookUp];
 
 });
 

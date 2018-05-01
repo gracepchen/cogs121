@@ -29,6 +29,7 @@ html, body{
   height: 100%;
   display: block;
   position: relative;
+
 }
 
 .container-fluid::after {
@@ -43,6 +44,14 @@ html, body{
   position: absolute;
   z-index: -1;   
 }
+
+
+.fixed {
+  height: 200px;
+    overflow: hidden;
+    overflow:scroll;
+}
+
 
 
 .bg {

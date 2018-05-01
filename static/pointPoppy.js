@@ -2,7 +2,41 @@ let trail_data;
 
 $j(document).ready(() => {
   console.log('entered document ready');
+
+
+
+
+
+
+
   $j('.parkid').click(function(event) {
+
+    var url = "https://developer.nps.gov/api/v1/parks?stateCode=CA&fields=images&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
+    $j.ajax({
+      url: url,
+      method: 'GET',
+    }).done(function(result) {
+      // console.log(result.data[0].description);
+  // $('#intro').html(result.data[1].listingDescription);
+
+  for (let i = 0; i < result.data.length; i++) {
+    if (result.data[i].parkCode === event.target.id) {
+      $('#pics').html('');
+
+      $('#intro').html(result.data[i].description);
+      $('#parkName').html(result.data[i].fullName);
+      for (let j = 0; j < result.data[i].images.length; j++) {
+
+        $('#pics').append('<img src="' + result.data[i].images[j].url + 
+          '" width="30%" altText="' + result.data[i].images[j].altText + 
+          '" class="img-thumbnail">');
+      }
+    }
+  }
+
+}).fail(function(err) {
+  throw err;
+});
 
 // show trail select box
 if (document.getElementById("Gallery").style.display === "none") {
@@ -45,9 +79,9 @@ if (document.getElementById("Gallery").style.display === "none") {
       type: 'GET',
       dataType: 'json',
       success: (data) => {
-        console.log(data.pic);
-        console.log(data.trails);
-        $('#intro').html(data.intro);
+        // console.log(data.pic);
+        // console.log(data.trails);
+        // $('#intro').html(data.intro);
         
         // load trail names into select box
         if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
@@ -59,7 +93,7 @@ if (document.getElementById("Gallery").style.display === "none") {
         }
       }
       trail_data = data.trails;
-      $('#pics').html(data.pic);
+      // $('#pics').html(data.pic);
     }
   });
 
@@ -68,6 +102,11 @@ if (document.getElementById("Gallery").style.display === "none") {
   $j(document).ajaxError(() => { //catch-all
     $j('#status').html('Error: unknown ajaxError!');
   });
+
+
+
+
+
 
 
 
