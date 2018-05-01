@@ -1,7 +1,12 @@
+
+
 let trail_data;
 
 $j(document).ready(() => {
   console.log('entered document ready');
+
+
+
 
   $j('.parkid').click(function(event) {
 
@@ -11,12 +16,19 @@ $j(document).ready(() => {
       url: NPSurl,
       method: 'GET',
     }).done(function(result) {
+
+// var source = tinify.fromUrl(result.data[0].images[0].url);
+// console.log(source);
+// source.toFile("optimized.jpg");
+
+
+
       // console.log(result.data[0].description);
-  for (let i = 0; i < result.data.length; i++) {
-    
+      for (let i = 0; i < result.data.length; i++) {
+
     // find appropriate park data corresponding to park button
     if (result.data[i].parkCode === event.target.id) {
-      
+
       $('#intro').html(result.data[i].description); // change intro
       $('#parkName').html(result.data[i].fullName); // change title
       
@@ -45,9 +57,6 @@ if (document.getElementById("Gallery").style.display === "none") {
       $("#trail_length").html('');
       $("#trail_diff").html('');
 
-
-// alert(event.target.id);
-    // 
     // console.log('making ajax request to: ' + $('#parkid'));
     // console.log($('#parkid'));
 
