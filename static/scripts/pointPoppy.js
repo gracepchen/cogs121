@@ -29,6 +29,8 @@ $j(document).ready(() => {
       $('#parkName').html(result.data[i].fullName); // change title
 
       $('#pics').html('');  // erase old gallery and reload pics
+      $('#pics').html(''); // erase old gallery and reload pics
+
       for (let j = 0; j < result.data[i].images.length; j++) {
         $('#pics').append('<img src="' + result.data[i].images[j].url +
           '" width="30%" altText="' + result.data[i].images[j].altText +
@@ -38,6 +40,7 @@ $j(document).ready(() => {
     }).fail(function(err) {
       throw err;
     });  // End of NPS API stuff ----------------------
+    }); // End of NPS API stuff ----------------------
 
 
     // show trail select box
@@ -102,6 +105,30 @@ $j(document).ajaxError(() => { //catch-all
   $j('#status').html('Error: unknown ajaxError!');
 });
 
+        // console.log(data.pic);
+        // console.log(data.trails);
+        // $('#intro').html(data.intro);
+
+        // load trail names into select box
+        if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
+          $("#trailSelect").html(''); // clear select box
+          for (var i = 0; i < data.trails.length; i++) {
+            // append correct trail names
+            let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
+            $("#trailSelect").append(trail_option);
+          }
+        }
+        trail_data = data.trails;
+        // $('#pics').html(data.pic);
+      }
+    });
+
+  });
+
+  $j(document).ajaxError(() => { //catch-all
+    $j('#status').html('Error: unknown ajaxError!');
+  });
+
 });
 
 // trail/gallery tab functions
@@ -116,11 +143,11 @@ function getParkData(trailgallery) {
 
 // select trail box - insert length and difficulty into box
 function showTrailInfo(trail_name) {
-// reset values
-$("#trail_length").html('');
-$("#trail_diff").html('');
+  // reset values
+  $("#trail_length").html('');
+  $("#trail_diff").html('');
 
-// change the data
-$("#trail_length").html(trail_data[trail_name].length);
-$("#trail_diff").html(trail_data[trail_name].difficulty);
+  // change the data
+  $("#trail_length").html(trail_data[trail_name].length);
+  $("#trail_diff").html(trail_data[trail_name].difficulty);
 };

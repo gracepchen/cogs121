@@ -1,35 +1,52 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
-html, body{
-    height: 100%;
+html, body {
+  height: 100%;
 }
 
 .btn, select {
-	border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
-#map-holder{
-    padding-bottom: 1em;
+#map-holder {
+  padding-bottom: 1em;
+}
+
+.buttons{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 15px;
+  margin-left : 15px;
+  max-width: 855px;
+}
+
+.btn {
+  border: 3px solid #fff;
+  color: #fff;
+}
+
+.btn-toolbar .btn:hover, .btn-toolbar .btn.active {
+  color: #fff;
+  background: #30A64A;
 }
 
 .btn-toolbar .btn {
-    margin-top: 5px;
-    margin-right: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
 }
 
 .container-fluid {
-	font-family:  'Source Sans Pro', sans-serif;
-	color: #555450;
-		width:100%;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #555450;
+  width: 100%;
   height: 100%;
   display: block;
   position: relative;
-
 }
 
 .container-fluid::after {
@@ -42,27 +59,27 @@ html, body{
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;   
+  z-index: -1;
 }
 
 /* to keep gallery at an appropriate height */
+
 .fixed {
   height: 200px;
-    overflow: hidden;
-    overflow:scroll;
+  overflow: hidden;
+  overflow: scroll;
 }
 
 .bg {
-	/*background-color: #FFFDF2;*/
-	border-style: solid;
-    border-width: 1px;
-    border-color: #555450;
-    padding: 2%;
-
+  /*background-color: #FFFDF2;*/
+  border-style: solid;
+  border-width: 1px;
+  border-color: #555450;
+  padding: 2%;
 }
 
 #map {
-	border-style: solid;
-    border-width: 1px;
-    border-color: #555450;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #555450;
 }
