@@ -10,7 +10,7 @@ var my_map = L.map('map').setView([37.641856, -120.605543], 5);
  }).addTo(my_map);
 
 // add polygons to map
-var Redwood = L.polygon([
+var redwood = L.polygon([
 	[41.081257, -123.961847],
 	[41.088244, -123.940732],
 	[41.108036, -123.938844],
@@ -88,7 +88,7 @@ var yosemite = L.circle([37.8651, -119.5383], {
 }).addTo(my_map).on("click", circleClick);
 
 // popups for each site
-Redwood.bindPopup("Redwood");
+redwood.bindPopup("Redwood");
 sequoia.bindPopup("Sequoia");
 joshua.bindPopup("Joshua Tree");
 alcatraz.bindPopup("Alcatraz Island");
@@ -110,9 +110,11 @@ function dataCall(e) {
     // show trail select box
     if (document.getElementById("Gallery").style.display === "none") {
       document.getElementById("Trails").style.display = "block";
-  } else {
+    } 
+    
+    else {
       document.getElementById("Trails").style.display = "none";
-  }
+    }
 
 	// get park info from map
     var idText = $('#' + e.target.getPopup().getContent()).text();
@@ -146,5 +148,5 @@ function circleClick(e) {
     my_map.fitBounds(e.target.getBounds());
 }
 
-Redwood.on('click', dataCall);
+redwood.on('click', dataCall);
 sequoia.on('click', dataCall);
