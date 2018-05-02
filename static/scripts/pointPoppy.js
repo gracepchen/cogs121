@@ -75,7 +75,7 @@ $j(document).ready(() => {
                 // load trail names into select box
                 if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
                     $("#trailSelect").html(''); // clear select box
-                
+
                     for (var i = 0; i < data.trails.length; i++) {
                         // append correct trail names
                         let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
@@ -110,8 +110,8 @@ function displayParkInfo(parkId, parkInfo) {
 
     $('#pics').html(''); // erase old gallery and reload pics
     for (let j = 0; j < parkInfo.data[i].images.length; j++) {
-      $('#pics').append('<img src="' + parkInfo.data[i].images[j].url + 
-            '" width="33%" altText="' + parkInfo.data[i].images[j].altText + 
+      $('#pics').append('<img src="' + parkInfo.data[i].images[j].url +
+            '" width="33%" altText="' + parkInfo.data[i].images[j].altText +
             '" class="img-thumbnail">');
     }
 
@@ -131,8 +131,8 @@ function displayParkInfo(result) {
 
     $('#pics').html(''); // erase old gallery and reload pics
     for (let j = 0; j < result.data[i].images.length; j++) {
-        $('#pics').append('<img src="' + result.data[i].images[j].url + 
-            '" width="33%" altText="' + result.data[i].images[j].altText + 
+        $('#pics').append('<img src="' + result.data[i].images[j].url +
+            '" width="33%" altText="' + result.data[i].images[j].altText +
             '" class="img-thumbnail">');
     }
 
@@ -140,7 +140,7 @@ function displayParkInfo(result) {
 }*/
 
 // trail/gallery tab functions
-function getParkData(trailgallery) {
+function getParkData(trailgallery) { //shows tabs
   var i;
   var x = document.getElementsByClassName("parkinfo");
   for (i = 0; i < x.length; i++) {
