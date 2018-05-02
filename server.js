@@ -94,7 +94,7 @@ app.get('/map-page', (req, res) => {
 
 app.get('/parks', (req, res) => {
 	const allParks = Object.keys(tempDatabase);
-	console.log('allParks is: ', allParks);
+	// console.log('allParks is: ', allParks);
 	res.send(allParks);
 });
 
@@ -102,7 +102,7 @@ app.get('/parks/:parkid', (req, res) => {
 	const parkToLookUp = req.params.parkid;
 	const val = tempDatabase[parkToLookUp];
 
-	console.log(parkToLookUp, '->', val);
+	// console.log(parkToLookUp, '->', val);
 	if (val) {
 		res.send(val);
 	}

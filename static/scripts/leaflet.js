@@ -141,8 +141,7 @@ function dataCall(e) {
         type: 'GET',
         dataType: 'json',
         success: (data) => {
-            console.log(data.pic);
-            console.log(data.trails);
+
             $('#intro').html(data.intro);
 
             // load trail names into select box

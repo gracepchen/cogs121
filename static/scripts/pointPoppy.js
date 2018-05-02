@@ -11,13 +11,13 @@ const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&fields=image
 $j(document).ready(() => {
     console.log('entered document ready');
 
+    // change column size at beginning
     $('#map-holder').click(function(){
         $("#map-holder").addClass("col-sm-5");
         $("#map-holder").removeClass("col-sm-8");
         $("#info-holder").addClass("col-sm-7");
         $("#info-holder").removeClass("col-sm-4");
     });
-
 
     $j('.parkid').click(function(event) { // on park button click
         $j.ajax({
@@ -71,9 +71,6 @@ $j(document).ready(() => {
             dataType: 'json',
             success: (data) => {
                 console.log(data);
-                // console.log(data.pic);
-                // console.log(data.trails);
-                // $('#intro').html(data.intro);
 
                 // load trail names into select box
                 if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
@@ -86,7 +83,6 @@ $j(document).ready(() => {
                     }
                 }
                 trail_data = data.trails;
-                // $('#pics').html(data.pic);
             }
         });
 
