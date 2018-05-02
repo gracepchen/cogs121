@@ -4,9 +4,12 @@
 <head>
 	<title>Point Poppy</title>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
 	<script type="text/javascript">
 		var $j = $.noConflict(true);
 	</script>
+		<script type="text/javascript" src="scripts/pointPoppy.js"></script>
+
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
 	<link href="styles/styles.css" rel="stylesheet" type="text/css">
@@ -41,7 +44,7 @@
 						</div>
 
 						<h5>Lesser-Known Attractions</h5>
-						<div class="btn-toolbar">
+						<div class="btn-toolbar" id="lessknown">
 							<button type="button" class="btn btn-outline-success parkid" id="alca">Alcatraz Island</button>
 							<button type="button" class="btn btn-outline-success parkid" id="cabr">Cabrillo</button>
 							<button type="button" class="btn btn-outline-success parkid" id="camo">Castle Mountains</button>
@@ -112,7 +115,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-	<script type="text/javascript" src="scripts/pointPoppy.js"></script>
+
 
 	<script type="text/javascript" src="scripts/resize_map.js"></script>
 	<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
