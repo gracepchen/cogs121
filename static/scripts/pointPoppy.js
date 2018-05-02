@@ -8,11 +8,17 @@ let i = 0;
 $j(document).ready(() => {
   console.log('entered document ready');
 
+$('#map-holder').click(function(){
+   $("#map-holder").addClass("col-sm-5");
+   $("#map-holder").removeClass("col-sm-8");
+   $("#info-holder").addClass("col-sm-7");
+   $("#info-holder").removeClass("col-sm-4");
+});
 
   $j('.parkid').click(function(event) { // on park button click
 
     // NPS API stuff ----------------------
-    var NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&fields=images&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
+    var NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&fields=images%2C%20weatherInfo&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
     $j.ajax({
       url: NPSurl,
       method: 'GET',
@@ -28,26 +34,27 @@ $j(document).ready(() => {
       $('#intro').html(result.data[i].description); // change intro
       $('#parkName').html(result.data[i].fullName); // change title
 
-      $('#pics').html('');  // erase old gallery and reload pics
       $('#pics').html(''); // erase old gallery and reload pics
-
       for (let j = 0; j < result.data[i].images.length; j++) {
-        $('#pics').append('<img src="' + result.data[i].images[j].url +
-          '" width="30%" altText="' + result.data[i].images[j].altText +
+        $('#pics').append('<img src="' + result.data[i].images[j].url + 
+          '" width="33%" altText="' + result.data[i].images[j].altText + 
           '" class="img-thumbnail">');
       }
 
+      $('#weatherInfo').html(result.data[i].weatherInfo); // change weather
+
     }).fail(function(err) {
       throw err;
-    });  // End of NPS API stuff ----------------------
     }); // End of NPS API stuff ----------------------
 
 
     // show trail select box
     if (document.getElementById("Gallery").style.display === "none") {
       document.getElementById("Trails").style.display = "block";
+      document.getElementById("Weather").style.display = "none";
     } else {
       document.getElementById("Trails").style.display = "none";
+      document.getElementById("Weather").style.display = "none";
     }
 
     // reset values for length and difficulty
@@ -81,30 +88,6 @@ $j(document).ready(() => {
       type: 'GET',
       dataType: 'json',
       success: (data) => {
-    // console.log(data.pic);
-    // console.log(data.trails);
-    // $('#intro').html(data.intro);
-
-    // load trail names into select box
-    if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
-    $("#trailSelect").html(''); // clear select box
-    for (var i = 0; i < data.trails.length; i++) {
-    // append correct trail names
-    let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
-    $("#trailSelect").append(trail_option);
-    }
-    }
-    trail_data = data.trails;
-    // $('#pics').html(data.pic);
-    }
-    });
-
-});
-
-$j(document).ajaxError(() => { //catch-all
-  $j('#status').html('Error: unknown ajaxError!');
-});
-
         // console.log(data.pic);
         // console.log(data.trails);
         // $('#intro').html(data.intro);

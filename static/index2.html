@@ -23,7 +23,7 @@
 
 
 			<div class="row pt-3">
-				<div class="col-sm-6" id="map-holder">
+				<div class="col-sm-8" id="map-holder">
 
 					<!-- Leaflet holder -->
 					<!-- <h2>Map</h2> -->
@@ -57,7 +57,7 @@
 
 
 				<!-- RIGHT HALF of the page -->
-				<div class="col-sm-6">
+				<div class="col-sm-4" id="info-holder">
 					<div class="bg">
 						<h2 id="parkName">Choose a park!</h2>
 						<div id="intro"></div>
@@ -68,6 +68,7 @@
 								<!-- tab buttons -->
 								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Trails')">Trails</button>
 								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Gallery')">Gallery</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Weather')">Weather</button>
 							</div>
 
 							<div class="col-sm-12">
@@ -90,9 +91,13 @@
 									</div>
 								</div>
 
-								<div id="Gallery" class="parkinfo fixed" style="display:none">
+								<div id="Gallery" class="parkinfo fixed mt-2" style="display:none">
 									<!-- park pics -->
-									<div id="pics" class="mt-2"></div>
+									<div id="pics"></div>
+								</div>
+
+								<div id="Weather" class="parkinfo fixed mt-2" style="display:none">
+									<div id="weatherInfo"></div>
 								</div>
 
 							</div>

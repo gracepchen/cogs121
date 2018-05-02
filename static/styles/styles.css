@@ -65,7 +65,7 @@ html, body {
 /* to keep gallery at an appropriate height */
 
 .fixed {
-  height: 200px;
+  height: 180px;
   overflow: hidden;
   overflow: scroll;
 }
