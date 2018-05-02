@@ -110,9 +110,6 @@ yosemite.bindPopup("Yosemite National Park");
 function dataCall(e) {
 
 	// changes park name
-    console.log(e.target.getPopup().getContent());
-    console.log(e.target.id);
-
 	$j('#parkName').text(e.target.getPopup().getContent());
     
     $j.ajax({
@@ -134,15 +131,16 @@ function dataCall(e) {
     }
 
 	// get park info from map
-    var idText = $('#' + e.target.getPopup().getContent()).text();
+    var idText = $('#' + e.target.id).text();
     const reqURL = 'parks/' + idText;
+
+    console.log(reqURL);
 
     $j.ajax({
         url: reqURL,
         type: 'GET',
         dataType: 'json',
         success: (data) => {
-            console.log(data);
             console.log(data.pic);
             console.log(data.trails);
             $('#intro').html(data.intro);

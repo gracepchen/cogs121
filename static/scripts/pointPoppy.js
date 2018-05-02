@@ -70,6 +70,7 @@ $j(document).ready(() => {
             type: 'GET',
             dataType: 'json',
             success: (data) => {
+                console.log(data);
                 // console.log(data.pic);
                 // console.log(data.trails);
                 // $('#intro').html(data.intro);
