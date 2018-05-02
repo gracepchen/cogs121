@@ -1,6 +1,5 @@
 var my_map = L.map('map').setView([37.641856, -120.605543], 5);
 
-
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 	L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
      maxZoom: 18,
@@ -30,6 +29,7 @@ var redwood = L.polygon([
 	[41.207405, -124.061055],
 	[41.188805, -124.073071]
 	]).addTo(my_map).on("click", circleClick);
+redwood.id = "redw"
 
 var sequoia = L.circle([36.4864, -118.5658], {
     color: 'red',
@@ -37,6 +37,7 @@ var sequoia = L.circle([36.4864, -118.5658], {
     fillOpacity: 0.5,
     radius: 40000
 }).addTo(my_map).on("click", circleClick);
+sequoia.id = "seki";
 
 var joshua = L.circle([33.8734, -115.9010], {
     color: 'red',
@@ -44,6 +45,7 @@ var joshua = L.circle([33.8734, -115.9010], {
     fillOpacity: 0.5,
     radius: 30000
 }).addTo(my_map).on("click", circleClick);
+joshua.id = "jotr";
 
 var alcatraz = L.circle([37.8270, -122.4230], {
     color: 'red',
@@ -51,6 +53,7 @@ var alcatraz = L.circle([37.8270, -122.4230], {
     fillOpacity: 0.5,
     radius: 20000
 }).addTo(my_map).on("click", circleClick);
+alcatraz.id = "alca";
 
 var cabrillo = L.circle([32.6735, -117.2425], {
     color: 'red',
@@ -58,6 +61,7 @@ var cabrillo = L.circle([32.6735, -117.2425], {
     fillOpacity: 0.5,
     radius: 10000
 }).addTo(my_map).on("click", circleClick);
+cabrillo.id = "cabr"
 
 var castlemountains = L.circle([35.3247, -115.0789], {
     color: 'red',
@@ -65,6 +69,7 @@ var castlemountains = L.circle([35.3247, -115.0789], {
     fillOpacity: 0.5,
     radius: 20000
 }).addTo(my_map).on("click", circleClick);
+castlemountains.id = "camo";
 
 var channelislands = L.circle([34.0097, -119.8023], {
     color: 'red',
@@ -72,6 +77,7 @@ var channelislands = L.circle([34.0097, -119.8023], {
     fillOpacity: 0.5,
     radius: 20000
 }).addTo(my_map).on("click", circleClick);
+channelislands.id = "chis";
 
 var deathvalley = L.circle([36.5323, -116.9325], {
     color: 'red',
@@ -79,6 +85,7 @@ var deathvalley = L.circle([36.5323, -116.9325], {
     fillOpacity: 0.5,
     radius: 30000
 }).addTo(my_map).on("click", circleClick);
+deathvalley.id = "deva";
 
 var yosemite = L.circle([37.8651, -119.5383], {
     color: 'red',
@@ -86,6 +93,7 @@ var yosemite = L.circle([37.8651, -119.5383], {
     fillOpacity: 0.5,
     radius: 40000
 }).addTo(my_map).on("click", circleClick);
+yosemite.id = "yose";
 
 // popups for each site
 redwood.bindPopup("Redwood");
@@ -98,22 +106,31 @@ channelislands.bindPopup("Channel Islands");
 deathvalley.bindPopup("Death Valley");
 yosemite.bindPopup("Yosemite National Park");
 
-
-
-
 // popup functions
 function dataCall(e) {
 
 	// changes park name
+    console.log(e.target.getPopup().getContent());
+    console.log(e.target.id);
+
 	$j('#parkName').text(e.target.getPopup().getContent());
+    
+    $j.ajax({
+        url: NPSurl,
+        method: 'GET',
+    }).done((result) => {
+        displayParkInfo(e.target.id, result);
+    }).fail((err) => {
+        throw err;
+    });
 
     // show trail select box
     if (document.getElementById("Gallery").style.display === "none") {
-      document.getElementById("Trails").style.display = "block";
+        document.getElementById("Trails").style.display = "block";
     } 
     
     else {
-      document.getElementById("Trails").style.display = "none";
+        document.getElementById("Trails").style.display = "none";
     }
 
 	// get park info from map
@@ -121,27 +138,29 @@ function dataCall(e) {
     const reqURL = 'parks/' + idText;
 
     $j.ajax({
-      url: reqURL,
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        console.log(data.pic);
-        console.log(data.trails);
-        $('#intro').html(data.intro);
+        url: reqURL,
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+            console.log(data);
+            console.log(data.pic);
+            console.log(data.trails);
+            $('#intro').html(data.intro);
 
-      // load trail names into select box
-      if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
-         $("#trailSelect").html(''); // clear select box
-         for (var i = 0; i < data.trails.length; i++) {
-          // append correct trail names
-          let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
-          $("#trailSelect").append(trail_option);
-      }
-      trail_data = data.trails;
-  }
-  $('#pics').html(data.pic);
-}
-});
+            // load trail names into select box
+            if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
+                $("#trailSelect").html(''); // clear select box
+
+                for (var i = 0; i < data.trails.length; i++) {
+                    // append correct trail names
+                    let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
+                    $("#trailSelect").append(trail_option);
+                }
+                trail_data = data.trails;
+            }
+            $('#pics').html(data.pic);
+        }
+    });
 }
 
 function circleClick(e) {
@@ -150,3 +169,10 @@ function circleClick(e) {
 
 redwood.on('click', dataCall);
 sequoia.on('click', dataCall);
+joshua.on('click', dataCall);
+alcatraz.on('click', dataCall);
+cabrillo.on('click', dataCall);
+castlemountains.on('click', dataCall);
+channelislands.on('click', dataCall);
+deathvalley.on('click', dataCall);
+yosemite.on('click', dataCall);
