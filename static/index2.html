@@ -24,7 +24,7 @@
 
 			<div class="row pt-3">
 				<div class="col-sm-6" id="map-holder">
-					
+
 					<!-- Leaflet holder -->
 					<!-- <h2>Map</h2> -->
 					<div id="map" class="mb-3"></div>
@@ -32,24 +32,24 @@
 					<!-- Location Button bar -->
 					<h5>Most Popular</h5>
 					<div class="btn-toolbar mb-3">
-						<button type="button" class="btn btn-outline-success parkid" id="redw" onclick="changeName('Redwood')">Redwood</button>
-						<button type="button" class="btn btn-outline-success parkid" id="seki" onclick="changeName('Sequoia')">Sequoia</button>
-						<button type="button" class="btn btn-outline-success parkid" id="jotr" onclick="changeName('Joshuatree')">Joshua Tree</button>
-						<button type="button" class="btn btn-outline-success parkid" id="deva" onclick="changeName('DeathValley')">Death Valley</button>
-						<button type="button" class="btn btn-outline-success parkid" id="yose" onclick="changeName('Yosemite')">Yosemite</button>
+						<button type="button" class="btn btn-outline-success parkid" id="redw">Redwood</button>
+						<button type="button" class="btn btn-outline-success parkid" id="seki">Sequoia</button>
+						<button type="button" class="btn btn-outline-success parkid" id="jotr">Joshua Tree</button>
+						<button type="button" class="btn btn-outline-success parkid" id="deva">Death Valley</button>
+						<button type="button" class="btn btn-outline-success parkid" id="yose">Yosemite</button>
 					</div>
 
 					<h5>Lesser-Known Attractions</h5>
 					<div class="btn-toolbar">
-						<button type="button" class="btn btn-outline-success parkid" id="alca" onclick="changeName('Alcatraz')">Alcatraz Island</button>
-						<button type="button" class="btn btn-outline-success parkid" id="cabr" onclick="changeName('Cabrillo')">Cabrillo</button>
-						<button type="button" class="btn btn-outline-success parkid" id="camo" onclick="changeName('CastleMountains')">Castle Mountains</button>
-						<button type="button" class="btn btn-outline-success parkid" id="chis" onclick="changeName('ChannelIslands')">Channel Islands</button>
-						<button type="button" class="btn btn-outline-success parkid" id="lavo" onclick="changeName('LassenVolcanic')">Lassen Volcanic</button>
-						<button type="button" class="btn btn-outline-success parkid" id="moja" onclick="changeName('Mojave')">Mojave National Preserve</button>
-						<button type="button" class="btn btn-outline-success parkid" id="muwo" onclick="changeName('MuirWoods')">Muir Woods</button>
-						<button type="button" class="btn btn-outline-success parkid" id="pinn" onclick="changeName('Pinnacles')">Pinnacles</button>
-						<button type="button" class="btn btn-outline-success parkid" id="samo" onclick="changeName('SantaMonicaMountains')">Santa Monica Mountains</button>
+						<button type="button" class="btn btn-outline-success parkid" id="alca">Alcatraz Island</button>
+						<button type="button" class="btn btn-outline-success parkid" id="cabr">Cabrillo</button>
+						<button type="button" class="btn btn-outline-success parkid" id="camo">Castle Mountains</button>
+						<button type="button" class="btn btn-outline-success parkid" id="chis">Channel Islands</button>
+						<button type="button" class="btn btn-outline-success parkid" id="lavo">Lassen Volcanic</button>
+						<button type="button" class="btn btn-outline-success parkid" id="moja">Mojave National Preserve</button>
+						<button type="button" class="btn btn-outline-success parkid" id="muwo">Muir Woods</button>
+						<button type="button" class="btn btn-outline-success parkid" id="pinn">Pinnacles</button>
+						<button type="button" class="btn btn-outline-success parkid" id="samo">Santa Monica Mountains</button>
 
 					</div>
 				</div>
@@ -66,12 +66,13 @@
 							<div class="col-sm-12">
 								<!-- tab buttons -->
 								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Trails')">Trails</button>
-								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Gallery')">Gallery</button>				
+								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Gallery')">Gallery</button>
 							</div>
 
 							<div class="col-sm-12">
 
-								<div id="Trails" class="parkinfo" style="display:none"> <!-- trail selector -->
+								<div id="Trails" class="parkinfo" style="display:none">
+									<!-- trail selector -->
 									<div class="row mt-3">
 										<div class="col-sm-5">
 											<div class="form-group mt-1">
@@ -88,7 +89,8 @@
 									</div>
 								</div>
 
-								<div id="Gallery" class="parkinfo fixed" style="display:none"> <!-- park pics -->
+								<div id="Gallery" class="parkinfo fixed" style="display:none">
+									<!-- park pics -->
 									<div id="pics" class="mt-2"></div>
 								</div>
 
@@ -109,15 +111,14 @@
 	<script type="text/javascript" src="scripts/resize_map.js"></script>
 	<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
 	<script type="text/javascript" src="scripts/leaflet.js"></script>
+
 	<script>
-      //changes text on button click
-      function changeName(name) {
-      	console.log(name);
-      	var elem = document.getElementById(name);
-      	var txt = elem.textContent;
-      	document.getElementById("parkName").innerHTML = txt;
-      }
-  </script>
+		//active button toggler
+		$(".btn").click(function() {
+				$(this).toggleClass("active");
+				$(".btn").not(this).removeClass("active");
+		});
+	</script>
 </body>
 
 </html>

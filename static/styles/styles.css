@@ -17,6 +17,17 @@ html, body{
     padding-bottom: 1em;
 }
 
+.btn {
+	border: 3px solid #fff;
+	color: #fff;
+}
+
+.btn-toolbar .btn:hover,
+.btn-toolbar .btn.active {
+	color: #fff;
+	background: #30A64A;
+}
+
 .btn-toolbar .btn {
     margin-top: 5px;
     margin-right: 5px;
@@ -42,7 +53,7 @@ html, body{
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;   
+  z-index: -1;
 }
 
 /* to keep gallery at an appropriate height */
