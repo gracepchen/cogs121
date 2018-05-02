@@ -29,28 +29,29 @@
 					<!-- <h2>Map</h2> -->
 					<div id="map" class="mb-3"></div>
 
-					<!-- Location Button bar -->
-					<h5>Most Popular</h5>
-					<div class="btn-toolbar mb-3">
-						<button type="button" class="btn btn-outline-success parkid" id="redw">Redwood</button>
-						<button type="button" class="btn btn-outline-success parkid" id="seki">Sequoia</button>
-						<button type="button" class="btn btn-outline-success parkid" id="jotr">Joshua Tree</button>
-						<button type="button" class="btn btn-outline-success parkid" id="deva">Death Valley</button>
-						<button type="button" class="btn btn-outline-success parkid" id="yose">Yosemite</button>
-					</div>
+					<div class="buttons">
+						<!-- Location Button bar -->
+						<h5>Most Popular</h5>
+						<div class="btn-toolbar mb-3">
+							<button type="button" class="btn btn-outline-success parkid" id="redw">Redwood</button>
+							<button type="button" class="btn btn-outline-success parkid" id="seki">Sequoia</button>
+							<button type="button" class="btn btn-outline-success parkid" id="jotr">Joshua Tree</button>
+							<button type="button" class="btn btn-outline-success parkid" id="deva">Death Valley</button>
+							<button type="button" class="btn btn-outline-success parkid" id="yose">Yosemite</button>
+						</div>
 
-					<h5>Lesser-Known Attractions</h5>
-					<div class="btn-toolbar">
-						<button type="button" class="btn btn-outline-success parkid" id="alca">Alcatraz Island</button>
-						<button type="button" class="btn btn-outline-success parkid" id="cabr">Cabrillo</button>
-						<button type="button" class="btn btn-outline-success parkid" id="camo">Castle Mountains</button>
-						<button type="button" class="btn btn-outline-success parkid" id="chis">Channel Islands</button>
-						<button type="button" class="btn btn-outline-success parkid" id="lavo">Lassen Volcanic</button>
-						<button type="button" class="btn btn-outline-success parkid" id="moja">Mojave National Preserve</button>
-						<button type="button" class="btn btn-outline-success parkid" id="muwo">Muir Woods</button>
-						<button type="button" class="btn btn-outline-success parkid" id="pinn">Pinnacles</button>
-						<button type="button" class="btn btn-outline-success parkid" id="samo">Santa Monica Mountains</button>
-
+						<h5>Lesser-Known Attractions</h5>
+						<div class="btn-toolbar">
+							<button type="button" class="btn btn-outline-success parkid" id="alca">Alcatraz Island</button>
+							<button type="button" class="btn btn-outline-success parkid" id="cabr">Cabrillo</button>
+							<button type="button" class="btn btn-outline-success parkid" id="camo">Castle Mountains</button>
+							<button type="button" class="btn btn-outline-success parkid" id="chis">Channel Islands</button>
+							<button type="button" class="btn btn-outline-success parkid" id="lavo">Lassen Volcanic</button>
+							<button type="button" class="btn btn-outline-success parkid" id="moja">Mojave National Preserve</button>
+							<button type="button" class="btn btn-outline-success parkid" id="muwo">Muir Woods</button>
+							<button type="button" class="btn btn-outline-success parkid" id="pinn">Pinnacles</button>
+							<button type="button" class="btn btn-outline-success parkid" id="samo">Santa Monica Mountains</button>
+						</div>
 					</div>
 				</div>
 
@@ -115,8 +116,8 @@
 	<script>
 		//active button toggler
 		$(".btn").click(function() {
-				$(this).toggleClass("active");
-				$(".btn").not(this).removeClass("active");
+			$(this).toggleClass("active");
+			$(".btn").not(this).removeClass("active");
 		});
 	</script>
 </body>

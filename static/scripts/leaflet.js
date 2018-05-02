@@ -1,4 +1,4 @@
-var my_map = L.map('map').setView([37.641856, -120.605543], 6);
+var my_map = L.map('map').setView([37.641856, -120.605543], 5);
 
 
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -126,7 +126,7 @@ function dataCall(e) {
         console.log(data.pic);
         console.log(data.trails);
         $('#intro').html(data.intro);
-        
+
       // load trail names into select box
       if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
          $("#trailSelect").html(''); // clear select box

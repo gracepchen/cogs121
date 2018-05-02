@@ -8,13 +8,12 @@ resize_map.getHeight = function() {
 resize_map.getHeight();
 $(window).bind("resize", resize);
 resize();
-//document.write($('.container-fluid').height());
-
+//document.write($(window).height());
 
 function resize(){
     if($(window).width() >= resize_map.minHeight){
-        $('#map').css("height", ($(window).height() - resize_map.mapmargin + 220));
-        //document.write($(window).height() + " " + resize_map.mapmargin);
+        $('#map').css("height", ($(window).height() - 400));
+        //document.write($(window).height() - resize_map.mapmargin);
     // Map size cannot be smaller than the width on mobile devices.
 } else{
     if($(window).height() <= resize_map.minHeight){
