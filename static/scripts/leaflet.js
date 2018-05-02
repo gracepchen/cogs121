@@ -1,12 +1,15 @@
 var my_map = L.map('map').setView([37.641856, -120.605543], 5);
+let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo", 
+"chis", "lavo", "moja", "muwo", "pinn", "samo"];
+let park, popular;
 
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 	L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
-       maxZoom: 18,
-       id: 'mapbox.streets',
-       detectRetina: true,
-       accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
-   }).addTo(my_map);
+     maxZoom: 18,
+     id: 'mapbox.streets',
+     detectRetina: true,
+     accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
+ }).addTo(my_map);
 
 // // add polygons to map
 // var redwood = L.polygon([
@@ -113,7 +116,16 @@ $j.ajax({
     url: NPSurl,
     method: 'GET',
 }).done((result) => {
-      createCircle(result); // create circle
+
+    // check if park is included with our buttons
+// for result.length
+    // if parkCode is not in park array
+    // continue
+    // else
+    // getcoords
+
+      getCoords(result); // create circle
+
 
   }).fail((err) => {
     throw err;
@@ -173,8 +185,24 @@ function circleClick(e) {
     my_map.fitBounds(e.target.getBounds());
 }
 
-function createCircle(parkInfo) {
+function getCoords(parkInfo) {
     for (let j = 0; j < parkInfo.data.length; j++) {
+
+        // only put circle on map if it is one we want to have
+        if (parkInfo.data[j].parkCode === 'redw' ||
+            parkInfo.data[j].parkCode === 'seki' ||
+            parkInfo.data[j].parkCode === 'jotr' ||
+            parkInfo.data[j].parkCode === 'alca' ||
+            parkInfo.data[j].parkCode === 'deva' ||
+            parkInfo.data[j].parkCode === 'cabr' ||
+            parkInfo.data[j].parkCode === 'yose' ||
+            parkInfo.data[j].parkCode === 'samo' ||
+            parkInfo.data[j].parkCode === 'muwo' ||
+            parkInfo.data[j].parkCode === 'pinn' ||
+            parkInfo.data[j].parkCode === 'camo' ||
+            parkInfo.data[j].parkCode === 'lavo' ||
+            parkInfo.data[j].parkCode === 'moja') {
+
 // get lat and longitude coordinates
 let lat = '';
 let long = '';
@@ -201,18 +229,45 @@ for (i; i < parkInfo.data[j].latLong.length - 1; i++) {
     long = long + parkInfo.data[j].latLong[i + 1];
 }
 
+
+// check if park is popular
+if (parkInfo.data[j].parkCode === 'redw' || 
+    parkInfo.data[j].parkCode === 'seki' ||
+    parkInfo.data[j].parkCode === 'jotr' ||
+    parkInfo.data[j].parkCode === 'deva' ||
+    parkInfo.data[j].parkCode === 'yose') {
+    popular = 1;
+} else {
+  popular = 0;
+}
+
 // create clickable circle
-var park = L.circle([lat, long], { 
-    color: 'red',
-    fillColor: '#FFF',
-    fillOpacity: 0.5,
-    radius: 24000
-}).addTo(my_map).on("click", circleClick);
+createCircle(popular, lat, long);
 
 park.id = parkInfo.data[j].parkCode; // set ID
 park.bindPopup(parkInfo.data[j].fullName); // create popup
 park.on('click', dataCall); // get data when clicking circle
 }
+}
+}
+
+function createCircle(popular, lat, long) {
+    let rad, col;
+
+    if(popular) { // change size and color of popular park
+        rad = 40000;
+        col = 'blue';
+    } else {
+        rad = 25000;
+        col = 'red';
+    }
+
+    park = L.circle([lat, long], { 
+        color: col,
+        fillColor: '#FFF',
+        fillOpacity: 0.5,
+        radius: rad
+    }).addTo(my_map).on("click", circleClick);
 }
 
 // redwood.on('click', dataCall);
