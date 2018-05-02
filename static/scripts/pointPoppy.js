@@ -94,23 +94,23 @@ $j(document).ready(() => {
 });
 
 function displayParkInfo(parkId, parkInfo) {
-    
-    console.log(parkInfo);
-    console.log("This is a test");
-    console.log(event.target.id);
+
+
+  console.log("Button clicked: " + parkId);
+
     // find appropriate park data corresponding to park button
     for (i = 0; i < parkInfo.data.length; i++) {
-        if (parkInfo.data[i].parkCode === parkId) {
+      if (parkInfo.data[i].parkCode === parkId) {
             break; // get value of i
+          }
         }
-    }
 
     $('#intro').html(parkInfo.data[i].description); // change intro
     $('#parkName').html(parkInfo.data[i].fullName); // change title
 
     $('#pics').html(''); // erase old gallery and reload pics
     for (let j = 0; j < parkInfo.data[i].images.length; j++) {
-        $('#pics').append('<img src="' + parkInfo.data[i].images[j].url + 
+      $('#pics').append('<img src="' + parkInfo.data[i].images[j].url + 
             '" width="33%" altText="' + parkInfo.data[i].images[j].altText + 
             '" class="img-thumbnail">');
     }
