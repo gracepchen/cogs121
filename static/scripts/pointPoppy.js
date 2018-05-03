@@ -12,6 +12,16 @@ const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" +
 $j(document).ready(() => {
     console.log('entered document ready');
 
+    //active button toggler
+        $(".btn-outline-success").click(function() {
+            $(this).toggleClass("active");
+            $(".btn-outline-success").not(this).removeClass("active");
+        });
+        $(".btn-outline-secondary").click(function() {
+            $(this).toggleClass("active");
+            $(".btn-outline-secondary").not(this).removeClass("active");
+        });
+
     // // load buttons
     // $j.ajax({
     //     url: NPSurl,
@@ -93,7 +103,7 @@ $j(document).ready(() => {
 
 function displayParkInfo(parkId, parkInfo) {
   console.log("Button clicked: " + parkId);
-
+  
     // find appropriate park data corresponding to park button
     for (i = 0; i < parkInfo.data.length; i++) {
       if (parkInfo.data[i].parkCode === parkId) {

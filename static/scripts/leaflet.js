@@ -73,6 +73,10 @@ function dataCall(e) {
 
 function circleClick(e) {
     my_map.fitBounds(e.target.getBounds());
+     
+     // change selected green button based on map click
+     $('#' + e.target.id).toggleClass("active");
+     $(".btn-outline-success").not('#' + e.target.id).removeClass("active");
 }
 
 // get coordinates of park and draw a circle
