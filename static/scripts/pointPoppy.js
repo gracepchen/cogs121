@@ -37,13 +37,7 @@ $j(document).ready(() => {
     //     throw err;
     // }); 
 
-    // change column size at beginning
-    $('#map-holder').click(function(){
-        $("#map-holder").addClass("col-sm-6");
-        $("#map-holder").removeClass("col-sm-8");
-        $("#info-holder").addClass("col-sm-6");
-        $("#info-holder").removeClass("col-sm-4");
-    });
+
 
     $j('.parkid').click(function(event) { // on park button click
         $j.ajax({
@@ -54,6 +48,15 @@ $j(document).ready(() => {
         }).fail((err) => {
             throw err;
         }); // End of NPS API stuff ----------------------
+
+
+    // change column size at beginning
+    $('#map-holder').click(function(){
+        $("#map-holder").addClass("col-sm-6");
+        $("#map-holder").removeClass("col-sm-8");
+        $("#info-holder").addClass("col-sm-6");
+        $("#info-holder").removeClass("col-sm-4");
+    });
 
 
     // show trail select box
