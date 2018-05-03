@@ -4,7 +4,8 @@ let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 let park, popular;
 
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-	L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
+// L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
+ L.tileLayer('https://api.mapbox.com/styles/v1/gpc001/cjgq7ujnj00042sq8tff8s1i8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
      maxZoom: 18,
      id: 'mapbox.streets',
      detectRetina: true,
@@ -76,7 +77,7 @@ function circleClick(e) {
      // change selected green button based on map click
      $('#' + e.target.id).toggleClass("active");
      $(".btn-outline-success").not('#' + e.target.id).removeClass("active");
-}
+ }
 
 // get coordinates of park and draw a circle
 function getCoords(parkInfo) {
