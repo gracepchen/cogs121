@@ -159,6 +159,8 @@ function createCircle(popular, lat, long) {
     }).addTo(my_map).on("click", circleClick);
 }
 
+
+
 // // add polygons to map
 // var redwood = L.polygon([
 //  [41.081257, -123.961847],
