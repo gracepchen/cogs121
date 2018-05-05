@@ -1,16 +1,21 @@
 var my_map = L.map('map').setView([37.641856, -120.605543], 5);
 let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo", 
 "chis", "lavo", "moja", "muwo", "pinn", "samo"];
-let park, popular;
+let park, popular; // circle location variable, boolean for popular park
 
+// original map
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+
+// hiking, more green
 // L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
- L.tileLayer('https://api.mapbox.com/styles/v1/gpc001/cjgq7ujnj00042sq8tff8s1i8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
-     maxZoom: 18,
-     id: 'mapbox.streets',
-     detectRetina: true,
-     accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
- }).addTo(my_map);
+   
+// cali topography
+   L.tileLayer('https://api.mapbox.com/styles/v1/gpc001/cjgq7ujnj00042sq8tff8s1i8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
+       maxZoom: 18,
+       id: 'mapbox.streets',
+       detectRetina: true,
+       accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
+   }).addTo(my_map);
 
 // popup functions
 // populate map with circles
@@ -25,6 +30,16 @@ $j.ajax({
 
 // display park info on the right side
 function dataCall(e) {
+    
+ // change column size at beginning
+
+        $("#map-holder").addClass("col-sm-6");
+        $("#map-holder").removeClass("col-sm-8");
+        $("#info-holder").addClass("col-sm-6");
+        $("#info-holder").removeClass("col-sm-4");
+
+
+
     $j.ajax({
         url: NPSurl,
         method: 'GET',
@@ -89,30 +104,26 @@ function getCoords(parkInfo) {
             } else {
 
 // get lat and longitude coordinates
+// JSON format is "latLong: lat:33.33333333, long: -100.0000000"
 let lat = '';
 let long = '';
-let i = 0;
+let i = 4; // first digit of lat
 
 if (parkInfo.data[j].latLong === "") { // validity check
     continue;
 }
 
-// parse out lat and long coordinates
-while (parkInfo.data[j].latLong[i] != ':') {
-    i++;
+while (parkInfo.data[j].latLong[i] != ',') { 
+    lat = lat + parkInfo.data[j].latLong[i]; // get all digits of latitiude
+    i++;  
 }
 
-while (parkInfo.data[j].latLong[i + 1] != ',') {
-    lat = lat + parkInfo.data[j].latLong[i + 1];
-    i++;
+while (parkInfo.data[j].latLong[i] != ':') { 
+    i++; // skip extra text to get to long
 }
 
-while (parkInfo.data[j].latLong[i] != ':') {
-    i++;
-}
-
-for (i; i < parkInfo.data[j].latLong.length - 1; i++) {
-    long = long + parkInfo.data[j].latLong[i + 1];
+for (i = i + 1; i < parkInfo.data[j].latLong.length; i++) { 
+    long = long + parkInfo.data[j].latLong[i]; // get long digits
 }
 
 // check if park is popular
@@ -129,15 +140,15 @@ if (parkInfo.data[j].parkCode === 'redw' ||
 // create clickable circle
 createCircle(popular, lat, long);
 
-park.id = parkInfo.data[j].parkCode; // set ID
-park.bindPopup(parkInfo.data[j].fullName); // create popup
-park.on('mouseover', function (e) {
-    this.openPopup();
-});
-park.on('click', function (e) {
-    this.openPopup();
-});
-park.on('click', dataCall); // get data when clicking circle
+    park.id = parkInfo.data[j].parkCode; // set ID
+    park.bindPopup(parkInfo.data[j].fullName); // create popup
+    park.on('mouseover', function (e) {
+        this.openPopup();
+    });
+    park.on('click', function (e) {
+        this.openPopup();
+    });
+    park.on('click', dataCall); // get data when clicking circle
 }
 }
 }
