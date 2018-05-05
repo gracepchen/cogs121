@@ -3,6 +3,7 @@ let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 "chis", "lavo", "moja", "muwo", "pinn", "samo"];
 let park, popular; // circle location variable, boolean for popular park
 
+
 // original map
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 
@@ -37,8 +38,6 @@ function dataCall(e) {
         $("#map-holder").removeClass("col-sm-8");
         $("#info-holder").addClass("col-sm-6");
         $("#info-holder").removeClass("col-sm-4");
-
-
 
     $j.ajax({
         url: NPSurl,

@@ -1,5 +1,6 @@
 const express = require('express'); //import express library
 const path = require('path');
+const unirest = require('unirest');
 
 // var tinify = require("tinify"); // image compressor
 // tinify.key = "-ZwwutwwYVLWKCZQnmDcMlSuDpWs5FFP";
@@ -44,11 +45,11 @@ const tempDatabase = {
 	'Sequoia': {
 		intro: '',
 		trails: [
-			{
-				name: 'Hazelwood Nature Trail',
-				length: '2 miles',
-				difficulty: 'Medium'
-			}
+		{
+			name: 'Hazelwood Nature Trail',
+			length: '2 miles',
+			difficulty: 'Medium'
+		}
 		],
 		pic: '<img src="images/sequoia.jpeg" width="50%">'
 	},
@@ -114,13 +115,46 @@ app.get('/parks/:parkid', (req, res) => {
 app.get('/places', (req, res) => {
 	const parkToLookUp = req.params.parkid;
 	const val = tempDatabase[parkToLookUp];
-
 });
 
-// app.listen(3000, () => {
-// 	console.log('Listening on Port 3000');
-// });
 
+// get trails from API through some magic code
+// this is trails in sequoia
+function getTrails(callback) {
+	unirest.get("https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658&q" + 
+		"[activities_activity_type_name_eq]=hiking&radius=75")
+	.header("X-Mashape-Key", "df9p8FHPrfmsh9SYeNClLGjG6bOap1kgwbijsn5hQ5dJ9NGLAJ")
+	.header("Accept", "text/plain")
+	.end(function(res) {
+		if (res.error) {
+			console.log('GET error', res.error);
+			callback(res.error, null);
+		} else {
+			// console.log('GET response', res.body); // this is the full JSON object
+			callback(null, res.body);
+		}
+	})
+};
+
+var request = getTrails(function(error, res) {
+	console.log("test");
+	if (error === null) { // console log whatever you need to here 
+		for (let i = 0; i < res.places.length; i++) {
+			console.log(res.places[i].name);
+			console.log("Description: "  + res.places[i].description);
+		}
+	} else {
+		console.log("err");
+	}
+});
+
+// set this up somehow to grab the JSON data from request?
+app.get('/trails', (req, res) => {
+	const parkToLookUp = req.params.parkid;
+	const val = tempDatabase[parkToLookUp];
+});
+
+// start port
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+	console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });

@@ -5,6 +5,10 @@ let i = 0;
 const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" + 
 "fields=images%2C%20weatherInfo&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
+// const trailURL = 'https://trailapi-trailapi.p.mashape.com/?lat=36.4864&' + 
+// 'lon=-118.5658&q[activities_activity_type_name_eq]=hiking&radius=75&X-Mashape-Key=' +
+// 'df9p8FHPrfmsh9SYeNClLGjG6bOap1kgwbijsn5hQ5dJ9NGLAJ';
+
 // var source = tinify.fromUrl(result.data[0].images[0].url);
 // console.log(source);
 // source.toFile("optimized.jpg");
@@ -22,20 +26,19 @@ $j(document).ready(() => {
             $(".btn-outline-secondary").not(this).removeClass("active");
         });
 
-    // // load buttons
-    // $j.ajax({
-    //     url: NPSurl,
-    //     method: 'GET',
-    // }).done((result) => {
-    //     for (let i = 0; i < result.data.length; i++) {
-    //         console.log("test");
-    //         $('#lessknown').append('<button type="button" class="btn' + 
-    //             'btn-outline-success parkid" id="' + result.data[i].parkCode + 
-    //             '">' + result.data[i].name + '</button>');
-    //     }
-    // }).fail((err) => {
-    //     throw err;
-    // }); 
+
+
+
+        // $j.ajax({
+        //     url: trailURL,
+        //     method: 'GET',
+        // }).done((result) => {
+        //     console.log(result);
+        // }).fail((err) => {
+        //     throw err;
+        // });
+
+      
 
 
 
