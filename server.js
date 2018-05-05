@@ -118,11 +118,14 @@ app.get('/places', (req, res) => {
 });
 
 
+// FIND A WAY TO GENERALIZE THIS URL USING LAT AND LONG coordinates from other API
+let trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658" + 
+"&q[activities_activity_type_name_eq]=hiking&radius=75"
+
 // get trails from API through some magic code
 // this is trails in sequoia only for now
 function getTrails(callback) {
-	unirest.get("https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658&q" + 
-		"[activities_activity_type_name_eq]=hiking&radius=75")
+	unirest.get(trailURL)
 	.header("X-Mashape-Key", "df9p8FHPrfmsh9SYeNClLGjG6bOap1kgwbijsn5hQ5dJ9NGLAJ")
 	.header("Accept", "text/plain")
 	.end(function(res) {
