@@ -12,6 +12,11 @@ html, body {
   border-radius: 0 !important;
 }
 
+select {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 #map-holder {
   padding-bottom: 1em;
 }

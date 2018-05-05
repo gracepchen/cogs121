@@ -119,7 +119,7 @@ app.get('/places', (req, res) => {
 
 
 // get trails from API through some magic code
-// this is trails in sequoia
+// this is trails in sequoia only for now
 function getTrails(callback) {
 	unirest.get("https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658&q" + 
 		"[activities_activity_type_name_eq]=hiking&radius=75")
@@ -131,27 +131,43 @@ function getTrails(callback) {
 			callback(res.error, null);
 		} else {
 			// console.log('GET response', res.body); // this is the full JSON object
-			callback(null, res.body);
+			callback(null, res.body); // callback returns the JSON from unirest
 		}
 	})
 };
 
-var request = getTrails(function(error, res) {
-	console.log("test");
-	if (error === null) { // console log whatever you need to here 
-		for (let i = 0; i < res.places.length; i++) {
-			console.log(res.places[i].name);
-			console.log("Description: "  + res.places[i].description);
+// use the function above to get the actual JSON and send it to frontend
+var request = getTrails(function(error, result) {
+	let trail_names = []; // array of all trail names in park (sequoia only for now)
+
+	if (error === null) { 
+		console.log(result);
+
+		for (let i = 0; i < result.places.length; i++) {
+			console.log(result.places[i].name);
+			// console.log("Description: "  + result.places[i].description);
 		}
+
+		// set this up somehow to grab the JSON data from request? 
+		// Generalize this somehow with /:parkID to get trails per park? 
+
+		// The app.get() below returns a list of trail names to the frontend
+		app.get('/trails', (req, res) => {
+
+			console.log("result: " + result.places.length); // number of trails
+
+			for (let i = 0; i < result.places.length; i++) {
+				trail_names[i] = result.places[i].name; // add trail names to array
+			}
+
+			// useless line, but can be modified later to give better data
+			const allTrails = Object.keys(result.places[0]); 
+			res.send(trail_names); // send array of all trail names in park
+
+		});
 	} else {
 		console.log("err");
 	}
-});
-
-// set this up somehow to grab the JSON data from request?
-app.get('/trails', (req, res) => {
-	const parkToLookUp = req.params.parkid;
-	const val = tempDatabase[parkToLookUp];
 });
 
 // start port

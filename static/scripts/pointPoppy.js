@@ -5,10 +5,6 @@ let i = 0;
 const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" + 
 "fields=images%2C%20weatherInfo&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
-// const trailURL = 'https://trailapi-trailapi.p.mashape.com/?lat=36.4864&' + 
-// 'lon=-118.5658&q[activities_activity_type_name_eq]=hiking&radius=75&X-Mashape-Key=' +
-// 'df9p8FHPrfmsh9SYeNClLGjG6bOap1kgwbijsn5hQ5dJ9NGLAJ';
-
 // var source = tinify.fromUrl(result.data[0].images[0].url);
 // console.log(source);
 // source.toFile("optimized.jpg");
@@ -17,28 +13,35 @@ $j(document).ready(() => {
     console.log('entered document ready');
 
     //active button toggler
-        $(".btn-outline-success").click(function() {
-            $(this).toggleClass("active");
-            $(".btn-outline-success").not(this).removeClass("active");
-        });
-        $(".btn-outline-secondary").click(function() {
-            $(this).toggleClass("active");
-            $(".btn-outline-secondary").not(this).removeClass("active");
-        });
+    $(".btn-outline-success").click(function() {
+        $(this).toggleClass("active");
+        $(".btn-outline-success").not(this).removeClass("active");
+    });
+    $(".btn-outline-secondary").click(function() {
+        $(this).toggleClass("active");
+        $(".btn-outline-secondary").not(this).removeClass("active");
+    });
 
 
+    $j('#seki').click(function(event) { // when clicking Sequoia button
+    // NEW get trail names and put in box - trails API, generalize later for other parks
+    $j.ajax({
+        url: 'trails',
+        method: 'GET',
+    }).done((result) => {
+
+        console.log(result[0]);
+        for (let i = 0; i < result.length; i++) {
+            let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
+            $("#trailSelect").append(trail_option);
+        }
+
+    }).fail((err) => {
+        throw err;
+    });
+});
 
 
-        // $j.ajax({
-        //     url: trailURL,
-        //     method: 'GET',
-        // }).done((result) => {
-        //     console.log(result);
-        // }).fail((err) => {
-        //     throw err;
-        // });
-
-      
 
 
 
@@ -79,6 +82,7 @@ $j(document).ready(() => {
         var idText = $('#' + event.target.id).text();
         const reqURL = 'parks/' + idText;
 
+        // OLD load trails
         $j.ajax({
             url: reqURL,
             type: 'GET',
@@ -88,13 +92,13 @@ $j(document).ready(() => {
 
                 // load trail names into select box
                 if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
-                    $("#trailSelect").html(''); // clear select box
+                    // $("#trailSelect").html(''); // clear select box
 
-                    for (var i = 0; i < data.trails.length; i++) {
-                        // append correct trail names
-                        let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
-                        $("#trailSelect").append(trail_option);
-                    }
+                    // for (var i = 0; i < data.trails.length; i++) {
+                    //     // append correct trail names
+                    //     let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
+                    //     $("#trailSelect").append(trail_option);
+                    // }
                 }
                 trail_data = data.trails;
             }
