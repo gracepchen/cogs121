@@ -2,7 +2,7 @@ let trail_data;
 let i = 0;
 
 // NPS API stuff ----------------------
-const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" + 
+const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" +
 "fields=images%2C%20weatherInfo&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
 // var source = tinify.fromUrl(result.data[0].images[0].url);
@@ -113,7 +113,7 @@ $j(document).ready(() => {
 
 function displayParkInfo(parkId, parkInfo) {
   console.log("Button clicked: " + parkId);
-  
+
     // find appropriate park data corresponding to park button
     for (i = 0; i < parkInfo.data.length; i++) {
       if (parkInfo.data[i].parkCode === parkId) {

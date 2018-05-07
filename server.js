@@ -16,7 +16,7 @@ const tempDatabase = {
 		'beaches and grasslands along Northern California’s coast. Jedediah Smith ' +
 		'Redwoods State Park has trails through dense old-growth woods. Prairie Creek' +
 		' Redwoods State Park is home to Fern Canyon, with its high, plant-covered walls. ' +
-		'Roosevelt elk frequent nearby Elk Prairie. Giant redwood clusters include ' + 
+		'Roosevelt elk frequent nearby Elk Prairie. Giant redwood clusters include ' +
 		'Redwood National Park’s Lady Bird Johnson Grove.',
 		trails: [
 		{
@@ -35,7 +35,7 @@ const tempDatabase = {
 			difficulty: 'Hard'
 		}
 		// name: {
-		// 	'<option>Damnation</option>', 
+		// 	'<option>Damnation</option>',
 		// 	'<option>Redwood Creek</option>',
 		// 	'<option>Stout Grove</option>'
 		// },
@@ -55,7 +55,7 @@ const tempDatabase = {
 	},
 	'Joshua Tree': {
 		intro: '',
-		trails: '<option>Arch Rock</option>', 
+		trails: '<option>Arch Rock</option>',
 		pic: [
 		'<img src="images/jtree.jpeg" width="50%">',
 		'<img src="images/joshua1.jpg" width="50%">'
@@ -86,7 +86,7 @@ const tempDatabase = {
 };
 
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/static/home-page.html');
+	res.sendFile(__dirname + '/static/index2.html');
 });
 
 app.get('/map-page', (req, res) => {
@@ -119,7 +119,7 @@ app.get('/places', (req, res) => {
 
 
 // FIND A WAY TO GENERALIZE THIS URL USING LAT AND LONG coordinates from other API
-let trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658" + 
+let trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658" +
 "&q[activities_activity_type_name_eq]=hiking&radius=75"
 
 // get trails from API through some magic code
@@ -143,7 +143,7 @@ function getTrails(callback) {
 var request = getTrails(function(error, result) {
 	let trail_names = []; // array of all trail names in park (sequoia only for now)
 
-	if (error === null) { 
+	if (error === null) {
 		console.log(result);
 
 		for (let i = 0; i < result.places.length; i++) {
@@ -151,8 +151,8 @@ var request = getTrails(function(error, result) {
 			// console.log("Description: "  + result.places[i].description);
 		}
 
-		// set this up somehow to grab the JSON data from request? 
-		// Generalize this somehow with /:parkID to get trails per park? 
+		// set this up somehow to grab the JSON data from request?
+		// Generalize this somehow with /:parkID to get trails per park?
 
 		// The app.get() below returns a list of trail names to the frontend
 		app.get('/trails', (req, res) => {
@@ -164,7 +164,7 @@ var request = getTrails(function(error, result) {
 			}
 
 			// useless line, but can be modified later to give better data
-			const allTrails = Object.keys(result.places[0]); 
+			const allTrails = Object.keys(result.places[0]);
 			res.send(trail_names); // send array of all trail names in park
 
 		});
