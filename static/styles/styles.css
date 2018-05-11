@@ -21,11 +21,11 @@ select {
   padding-bottom: 1em;
 }
 
-.buttons{
+.buttons {
   position: fixed;
   bottom: 0;
   left: 0;
-  margin-bottom: 4%;
+  margin-bottom: 3%;
   margin-left : 15px;
   max-width: 50%;
 }
@@ -56,9 +56,9 @@ select {
 
 .container-fluid::after {
   content: "";
-  background-image: url("../images/bg.jpg");
-  background-size: cover;
-  opacity: 0.2;
+  background-image: url("../images/topography.png");
+  background-repeat: repeat;
+  opacity: 0.7;
   top: 0;
   left: 0;
   bottom: 0;
