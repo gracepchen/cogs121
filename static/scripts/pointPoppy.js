@@ -47,9 +47,16 @@ $j(document).ready(() => {
                 method: 'POST',
                 data: { parkLocation: trailURL }
             }).done((result) => {
+                
+                // load trail names into select box
+                if ($("#trailSelect").html() != result.trails) {
+                    $("#trailSelect").html(''); // clear select box
+                }
+
                 console.log(result[0]);
                 for (let i = 0; i < result.length; i++) {
                     let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
+                    console.log(trail_option);
                     $("#trailSelect").append(trail_option);
                 }
             }).fail((err) => {
@@ -104,36 +111,6 @@ $j(document).ready(() => {
         document.getElementById("Trails").style.display = "none";
         document.getElementById("Weather").style.display = "none";
     }
-
-        // reset values for length and difficulty
-        $("#trail_length").html('');
-        $("#trail_diff").html('');
-
-        // get park info
-        var idText = $('#' + event.target.id).text();
-        const reqURL = 'parks/' + idText;
-
-        // OLD load trails
-        $j.ajax({
-            url: reqURL,
-            type: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                //console.log(data);
-
-                // load trail names into select box
-                if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
-                    // $("#trailSelect").html(''); // clear select box
-
-                    // for (var i = 0; i < data.trails.length; i++) {
-                    //     // append correct trail names
-                    //     let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
-                    //     $("#trailSelect").append(trail_option);
-                    // }
-                }
-                trail_data = data.trails;
-            }
-        });
 
     });
 
@@ -230,7 +207,7 @@ function displayTestMethod(parkId, parkInfo) {
 }*/
 
 
-// trail/gallery tab functions
+// trail/gallery/weather tab functions
 function getParkData(trailgallery) { //shows tabs
   var i;
   var x = document.getElementsByClassName("parkinfo");
@@ -240,11 +217,14 @@ function getParkData(trailgallery) { //shows tabs
 document.getElementById(trailgallery).style.display = "block";
 };
 
-// select trail box - insert length and difficulty into box
+// select trail box - insert length and difficulty into box // Grace is fixing this rn
 function showTrailInfo(trail_name) {
   // reset values
   $("#trail_length").html('');
   $("#trail_diff").html('');
+
+  console.log("showTrailInfo() - trail name is: " + trail_name);
+console.log($('#trailSelect').val(trail_name).html());
 
   // change the data
   $("#trail_length").html(trail_data[trail_name].length);
