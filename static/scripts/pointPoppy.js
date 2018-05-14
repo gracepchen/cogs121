@@ -5,6 +5,9 @@ let i = 0;
 const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" +
 "fields=images%2C%20weatherInfo&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
+// For experimenting with the NPS API, do not use
+const NPSTestUrl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
+
 // var source = tinify.fromUrl(result.data[0].images[0].url);
 // console.log(source);
 // source.toFile("optimized.jpg");
@@ -22,28 +25,23 @@ $j(document).ready(() => {
         $(".btn-outline-secondary").not(this).removeClass("active");
     });
 
-
     $j('#seki').click(function(event) { // when clicking Sequoia button
-    // NEW get trail names and put in box - trails API, generalize later for other parks
-    $j.ajax({
-        url: 'trails',
-        method: 'GET',
-    }).done((result) => {
+        // NEW get trail names and put in box - trails API, generalize later for other parks
+        $j.ajax({
+            url: 'trails',
+            method: 'GET',
+        }).done((result) => {
 
-        console.log(result[0]);
-        for (let i = 0; i < result.length; i++) {
-            let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
-            $("#trailSelect").append(trail_option);
-        }
+            console.log(result[0]);
+            for (let i = 0; i < result.length; i++) {
+                let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
+                $("#trailSelect").append(trail_option);
+            }
 
-    }).fail((err) => {
-        throw err;
+        }).fail((err) => {
+            throw err;
+        });
     });
-});
-
-
-
-
 
     $j('.parkid').click(function(event) { // on park button click
         $j.ajax({
@@ -51,10 +49,12 @@ $j(document).ready(() => {
             method: 'GET',
         }).done((result) => {
             displayParkInfo(event.target.id, result);
+
+            //Test method call, do not use!
+            //displayTestMethod(event.target.id, result);
         }).fail((err) => {
             throw err;
         }); // End of NPS API stuff ----------------------
-
 
     // change column size at beginning
     $('#map-holder').click(function(){
@@ -162,27 +162,19 @@ function displayParkInfo(parkId, parkInfo) {
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
 }
 
-/* A backup
-function displayParkInfo(result) {
-    // find appropriate park data corresponding to park button
-    for (i = 0; i < result.data.length; i++) {
-        if (result.data[i].parkCode === event.target.id) {
-            break; // get value of i
-        }
+/*
+Test Method for working with NPS data, do not use!
+
+function displayTestMethod(parkId, parkInfo) {
+    for(const i of parkInfo.data) {
+        let comma = i.latLong.indexOf(",");
+        let lat = i.latLong.substring(0 + 4, comma);
+        let lng = i.latLong.substring(comma + 1 + 6, i.latLong.length);
+
+        console.log("Lat sub: " + lat + "\nLng sub: " + lng);
     }
-
-    $('#intro').html(result.data[i].description); // change intro
-    $('#parkName').html(result.data[i].fullName); // change title
-
-    $('#pics').html(''); // erase old gallery and reload pics
-    for (let j = 0; j < result.data[i].images.length; j++) {
-        $('#pics').append('<img src="' + result.data[i].images[j].url +
-            '" width="33%" altText="' + result.data[i].images[j].altText +
-            '" class="img-thumbnail">');
-    }
-
-    $('#weatherInfo').html(result.data[i].weatherInfo); // change weather
-}*/
+}
+*/
 
 // trail/gallery tab functions
 function getParkData(trailgallery) { //shows tabs

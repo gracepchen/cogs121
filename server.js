@@ -2,6 +2,7 @@ const express = require('express'); //import express library
 const path = require('path');
 const unirest = require('unirest');
 
+const parkCoords = require('./backendjs/parkCoords');
 // var tinify = require("tinify"); // image compressor
 // tinify.key = "-ZwwutwwYVLWKCZQnmDcMlSuDpWs5FFP";
 // tinify.proxy = "http://user:pass@192.168.0.1:8080";
@@ -120,7 +121,8 @@ app.get('/places', (req, res) => {
 
 // FIND A WAY TO GENERALIZE THIS URL USING LAT AND LONG coordinates from other API
 let trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658" +
-"&q[activities_activity_type_name_eq]=hiking&radius=75"
+"&q[activities_activity_type_name_eq]=hiking&radius=75";
+
 
 // get trails from API through some magic code
 // this is trails in sequoia only for now
@@ -136,18 +138,18 @@ function getTrails(callback) {
 			// console.log('GET response', res.body); // this is the full JSON object
 			callback(null, res.body); // callback returns the JSON from unirest
 		}
-	})
-};
+	});
+}
 
 // use the function above to get the actual JSON and send it to frontend
 var request = getTrails(function(error, result) {
 	let trail_names = []; // array of all trail names in park (sequoia only for now)
 
 	if (error === null) {
-		console.log(result);
+		//console.log(result);
 
 		for (let i = 0; i < result.places.length; i++) {
-			console.log(result.places[i].name);
+			//console.log(result.places[i].name);
 			// console.log("Description: "  + result.places[i].description);
 		}
 
@@ -157,7 +159,8 @@ var request = getTrails(function(error, result) {
 		// The app.get() below returns a list of trail names to the frontend
 		app.get('/trails', (req, res) => {
 
-			console.log("result: " + result.places.length); // number of trails
+            parkCoords.findCoords();
+			//console.log("result: " + result.places.length); // number of trails
 
 			for (let i = 0; i < result.places.length; i++) {
 				trail_names[i] = result.places[i].name; // add trail names to array
