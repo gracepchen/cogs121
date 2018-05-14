@@ -70,7 +70,7 @@ select {
 /* to keep gallery at an appropriate height */
 
 .fixed {
-  height: 180px;
+  height: 40vh;
   overflow: hidden;
   overflow: scroll;
 }
