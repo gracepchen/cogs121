@@ -48,15 +48,17 @@ $j(document).ready(() => {
                 data: { parkLocation: trailURL }
             }).done((result) => {
                 
-                // load trail names into select box
+                console.log(result[0]);
+
+                // clear trail select box
                 if ($("#trailSelect").html() != result.trails) {
-                    $("#trailSelect").html(''); // clear select box
+                    $("#trailSelect").html(''); 
                 }
 
-                console.log(result[0]);
+                // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
                     let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
-                    console.log(trail_option);
+                    // console.log(trail_option);
                     $("#trailSelect").append(trail_option);
                 }
             }).fail((err) => {
@@ -224,7 +226,7 @@ function showTrailInfo(trail_name) {
   $("#trail_diff").html('');
 
   console.log("showTrailInfo() - trail name is: " + trail_name);
-console.log($('#trailSelect').val(trail_name).html());
+    // console.log($('#trailSelect').val(trail_name).html());
 
   // change the data
   $("#trail_length").html(trail_data[trail_name].length);

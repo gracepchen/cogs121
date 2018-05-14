@@ -57,44 +57,93 @@ function dataCall(e) {
         document.getElementById("Weather").style.display = "none";
     }
 
-	// get park info from map
-    var idText = $('#' + e.target.id).text();
-    const reqURL = 'parks/' + idText;
+	// OLD ------- get park info from map
+    // var idText = $('#' + e.target.id).text();
+    // const reqURL = 'parks/' + idText;
 
-    console.log(reqURL);
+    // console.log(reqURL);
 
-    $j.ajax({
-        url: reqURL,
-        type: 'GET',
-        dataType: 'json',
-        success: (data) => {
+    // $j.ajax({
+    //     url: reqURL,
+    //     type: 'GET',
+    //     dataType: 'json',
+    //     success: (data) => {
 
-            $('#intro').html(data.intro);
+    //         $('#intro').html(data.intro);
 
-            // load trail names into select box
-            if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
-                $("#trailSelect").html(''); // clear select box
+    //         // load trail names into select box
+    //         if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
+    //             $("#trailSelect").html(''); // clear select box
 
-                for (var i = 0; i < data.trails.length; i++) {
-                    // append correct trail names
-                    let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
+    //             for (var i = 0; i < data.trails.length; i++) {
+    //                 // append correct trail names
+    //                 let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
+    //                 $("#trailSelect").append(trail_option);
+    //             }
+    //             trail_data = data.trails;
+    //         }
+    //     }
+    // });
+
+      // NEW get trail names and put in box - trails API, generalize later for other parks
+        const parkUrl = "trails/" + e.target.id;
+        console.log(parkUrl);
+        const latIndex = 0;
+        const lngIndex = 1;
+
+        $j.ajax({
+            url: NPSUrlAll,
+            method: 'GET',
+        }).done((result) => {
+            let parkCoords = getTrailCoords(e.target.id, result);
+
+            const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
+                parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
+                "&q[activities_activity_type_name_eq]=hiking&radius=75";
+            console.log(trailURL);
+
+            $j.ajax({
+                url: parkUrl, // trails/parkID
+                method: 'POST',
+                data: { parkLocation: trailURL }
+            }).done((result) => {
+                
+                console.log(result[0]);
+                
+                // clear trail select box
+                if ($("#trailSelect").html() != result.trails) {
+                    $("#trailSelect").html(''); 
+                }
+
+                // load trail names into select box
+                for (let i = 0; i < result.length; i++) {
+                    let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
+                    // console.log(trail_option);
                     $("#trailSelect").append(trail_option);
                 }
-                trail_data = data.trails;
-            }
-        }
-    });
-}
 
+            }).fail((err) => {
+            	console.log("Failure");
+                throw err;
+            });
+        }).fail((err) => {
+            console.log("Failure");
+            throw err;
+        });
+};
+
+// zoom in and highlight green button
 function circleClick(e) {
     my_map.fitBounds(e.target.getBounds());
      // change selected green button based on map click
      $('#' + e.target.id).toggleClass("active");
      $(".btn-outline-success").not('#' + e.target.id).removeClass("active");
- }
+ };
 
 // get coordinates of park and draw a circle
 function getCoords(parkInfo) {
+	console.log("Generating map circles...");
+
     for (let j = 0; j < parkInfo.data.length; j++) {
         for (let k = 0; k < parkCodes.length; k++) {
             // only put circle on map if it is one we want to have
