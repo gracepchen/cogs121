@@ -38,8 +38,8 @@ $j(document).ready(() => {
             let parkCoords = getTrailCoords(event.target.id, result);
 
             const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
-                parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
-                "&q[activities_activity_type_name_eq]=hiking&radius=75";
+            parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
+            "&q[activities_activity_type_name_eq]=hiking&radius=75";
 
             console.log(trailURL);
             $j.ajax({
@@ -50,7 +50,9 @@ $j(document).ready(() => {
                 
                 console.log(result[0]);
 
+
                 // clear trail select box
+                $j('#trailSelect').hide();
                 if ($("#trailSelect").html() != result.trails) {
                     $("#trailSelect").html(''); 
                 }
@@ -61,6 +63,7 @@ $j(document).ready(() => {
                     // console.log(trail_option);
                     $("#trailSelect").append(trail_option);
                 }
+                $j('#trailSelect').fadeIn(500);
             }).fail((err) => {
                 throw err;
             });
@@ -114,7 +117,7 @@ $j(document).ready(() => {
         document.getElementById("Weather").style.display = "none";
     }
 
-    });
+});
 
     $j(document).ajaxError(() => { //catch-all
         $j('#status').html('Error: unknown ajaxError!');
@@ -159,15 +162,24 @@ function displayParkInfo(parkId, parkInfo) {
         }
     }
 
-    $('#intro').html(parkInfo.data[i].description); // change intro
-    $('#parkName').html(parkInfo.data[i].fullName); // change title
+// change intro
+$j('#intro').hide();
+$('#intro').html(parkInfo.data[i].description); 
+$j('#intro').fadeIn(500);
 
+    // change title
+    $j('#parkName').hide();
+    $('#parkName').html(parkInfo.data[i].fullName); 
+    $j('#parkName').fadeIn(500);
+
+    $j('#pics').hide();
     $('#pics').html(''); // erase old gallery and reload pics
     for (let j = 0; j < parkInfo.data[i].images.length; j++) {
       $('#pics').append('<img src="' + parkInfo.data[i].images[j].url +
         '" width="33%" altText="' + parkInfo.data[i].images[j].altText +
         '" class="img-thumbnail">');
   }
+  $j('#pics').fadeIn(500);
 
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
 }

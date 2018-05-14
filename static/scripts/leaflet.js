@@ -9,52 +9,52 @@ let park, popular; // circle location variable, boolean for popular park
 
 // hiking, more green
 // L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
-   
+	
 // cali topography
-   L.tileLayer('https://api.mapbox.com/styles/v1/gpc001/cjgq7ujnj00042sq8tff8s1i8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
-       maxZoom: 18,
-       id: 'mapbox.streets',
-       detectRetina: true,
-       accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
-   }).addTo(my_map);
+L.tileLayer('https://api.mapbox.com/styles/v1/gpc001/cjgq7ujnj00042sq8tff8s1i8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
+	maxZoom: 18,
+	id: 'mapbox.streets',
+	detectRetina: true,
+	accessToken: 'pk.eyJ1IjoiY2xvdWRtYW4iLCJhIjoiY2o0amdnOGhkMDlnMDJ2bWh0eGRrazMxMiJ9.fAHOsFqx2ZK0t07TAy8ckA'
+}).addTo(my_map);
 
 // popup functions
 // populate map with circles
 $j.ajax({
-    url: NPSurl,
-    method: 'GET',
+	url: NPSurl,
+	method: 'GET',
 }).done((result) => {
       getCoords(result); // create map circles
   }).fail((err) => {
-    throw err;
-});
+  	throw err;
+  });
 
 // display park info on the right side
 function dataCall(e) {
-    
+	
  // change column size at beginning
 
-        $("#map-holder").addClass("col-sm-6");
-        $("#map-holder").removeClass("col-sm-8");
-        $("#info-holder").addClass("col-sm-6");
-        $("#info-holder").removeClass("col-sm-4");
+ $("#map-holder").addClass("col-sm-6");
+ $("#map-holder").removeClass("col-sm-8");
+ $("#info-holder").addClass("col-sm-6");
+ $("#info-holder").removeClass("col-sm-4");
 
-    $j.ajax({
-        url: NPSurl,
-        method: 'GET',
-    }).done((result) => {
-        displayParkInfo(e.target.id, result);
-    }).fail((err) => {
-        throw err;
-    });
+ $j.ajax({
+ 	url: NPSurl,
+ 	method: 'GET',
+ }).done((result) => {
+ 	displayParkInfo(e.target.id, result);
+ }).fail((err) => {
+ 	throw err;
+ });
 
     // show trail select box
     if (document.getElementById("Gallery").style.display === "none") {
-        document.getElementById("Trails").style.display = "block";
-        document.getElementById("Weather").style.display = "none";
+    	document.getElementById("Trails").style.display = "block";
+    	document.getElementById("Weather").style.display = "none";
     } else {
-        document.getElementById("Trails").style.display = "none";
-        document.getElementById("Weather").style.display = "none";
+    	document.getElementById("Trails").style.display = "none";
+    	document.getElementById("Weather").style.display = "none";
     }
 
 	// OLD ------- get park info from map
@@ -86,55 +86,57 @@ function dataCall(e) {
     // });
 
       // NEW get trail names and put in box - trails API, generalize later for other parks
-        const parkUrl = "trails/" + e.target.id;
-        console.log(parkUrl);
-        const latIndex = 0;
-        const lngIndex = 1;
+      const parkUrl = "trails/" + e.target.id;
+      console.log(parkUrl);
+      const latIndex = 0;
+      const lngIndex = 1;
 
-        $j.ajax({
-            url: NPSUrlAll,
-            method: 'GET',
-        }).done((result) => {
-            let parkCoords = getTrailCoords(e.target.id, result);
+      $j.ajax({
+      	url: NPSUrlAll,
+      	method: 'GET',
+      }).done((result) => {
+      	let parkCoords = getTrailCoords(e.target.id, result);
 
-            const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
-                parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
-                "&q[activities_activity_type_name_eq]=hiking&radius=75";
-            console.log(trailURL);
+      	const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
+      	parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
+      	"&q[activities_activity_type_name_eq]=hiking&radius=75";
+      	console.log(trailURL);
 
-            $j.ajax({
+      	$j.ajax({
                 url: parkUrl, // trails/parkID
                 method: 'POST',
                 data: { parkLocation: trailURL }
             }).done((result) => {
-                
-                console.log(result[0]);
-                
+            	
+            	console.log(result[0]);
+            	
                 // clear trail select box
+                $j('#trailSelect').hide();
                 if ($("#trailSelect").html() != result.trails) {
-                    $("#trailSelect").html(''); 
+                	$("#trailSelect").html(''); 
                 }
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
-                    let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
+                	let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
                     // console.log(trail_option);
                     $("#trailSelect").append(trail_option);
                 }
+                $j('#trailSelect').fadeIn(500);
 
             }).fail((err) => {
             	console.log("Failure");
-                throw err;
+            	throw err;
             });
         }).fail((err) => {
-            console.log("Failure");
-            throw err;
+        	console.log("Failure");
+        	throw err;
         });
-};
+    };
 
 // zoom in and highlight green button
 function circleClick(e) {
-    my_map.fitBounds(e.target.getBounds());
+	my_map.fitBounds(e.target.getBounds());
      // change selected green button based on map click
      $('#' + e.target.id).toggleClass("active");
      $(".btn-outline-success").not('#' + e.target.id).removeClass("active");
@@ -144,11 +146,11 @@ function circleClick(e) {
 function getCoords(parkInfo) {
 	console.log("Generating map circles...");
 
-    for (let j = 0; j < parkInfo.data.length; j++) {
-        for (let k = 0; k < parkCodes.length; k++) {
+	for (let j = 0; j < parkInfo.data.length; j++) {
+		for (let k = 0; k < parkCodes.length; k++) {
             // only put circle on map if it is one we want to have
             if (parkInfo.data[j].parkCode != parkCodes[k]) {
-                continue;
+            	continue;
             } else {
 
 // get lat and longitude coordinates
@@ -158,7 +160,7 @@ let long = '';
 let i = 4; // first digit of lat
 
 if (parkInfo.data[j].latLong === "") { // validity check
-    continue;
+	continue;
 }
 
 while (parkInfo.data[j].latLong[i] != ',') { 
@@ -176,13 +178,13 @@ for (i = i + 1; i < parkInfo.data[j].latLong.length; i++) {
 
 // check if park is popular
 if (parkInfo.data[j].parkCode === 'redw' || 
-    parkInfo.data[j].parkCode === 'seki' ||
-    parkInfo.data[j].parkCode === 'jotr' ||
-    parkInfo.data[j].parkCode === 'deva' ||
-    parkInfo.data[j].parkCode === 'yose') {
-    popular = 1;
+	parkInfo.data[j].parkCode === 'seki' ||
+	parkInfo.data[j].parkCode === 'jotr' ||
+	parkInfo.data[j].parkCode === 'deva' ||
+	parkInfo.data[j].parkCode === 'yose') {
+	popular = 1;
 } else {
-  popular = 0;
+	popular = 0;
 }
 
 // create clickable circle
@@ -191,10 +193,10 @@ createCircle(popular, lat, long);
     park.id = parkInfo.data[j].parkCode; // set ID
     park.bindPopup(parkInfo.data[j].fullName); // create popup
     park.on('mouseover', function (e) {
-        this.openPopup();
+    	this.openPopup();
     });
     park.on('click', function (e) {
-        this.openPopup();
+    	this.openPopup();
     });
     park.on('click', dataCall); // get data when clicking circle
 }
@@ -207,18 +209,18 @@ function createCircle(popular, lat, long) {
     let rad, col; // radius and color
 
     if(popular) { // change size and color of popular park
-        rad = 40000;
-        col = 'blue';
+    	rad = 40000;
+    	col = 'blue';
     } else {
-        rad = 25000;
-        col = 'red';
+    	rad = 25000;
+    	col = 'red';
     }
 
     park = L.circle([lat, long], { // draw the circle
-        color: col,
-        fillColor: '#FFF',
-        fillOpacity: 0.5,
-        radius: rad
+    	color: col,
+    	fillColor: '#FFF',
+    	fillOpacity: 0.5,
+    	radius: rad
     }).addTo(my_map).on("click", circleClick);
 }
 

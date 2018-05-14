@@ -51,10 +51,10 @@ app.post('/trails/:parkid', (request, response) => {
 
 	// get trail data
 	unirest.get(trailURL)
-		.header("X-Mashape-Key", "df9p8FHPrfmsh9SYeNClLGjG6bOap1kgwbijsn5hQ5dJ9NGLAJ")
-		.header("Accept", "text/plain")
-		.end(function(res) {
-			if (res.error) {
+	.header("X-Mashape-Key", "df9p8FHPrfmsh9SYeNClLGjG6bOap1kgwbijsn5hQ5dJ9NGLAJ")
+	.header("Accept", "text/plain")
+	.end(function(res) {
+		if (res.error) {
 				//console.log('GET error', res.error);
 				makeTrailList(res.error, null);
 			} else {
@@ -63,7 +63,7 @@ app.post('/trails/:parkid', (request, response) => {
 				response.send(trailList);
 			}
 		});
-	});
+});
 
 // FIND A WAY TO GENERALIZE THIS URL USING LAT AND LONG coordinates from other API
 // EXECUTE THIS LATER, WHEN THE BUTTON HAS BEEN CLICKED
