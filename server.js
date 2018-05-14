@@ -1,6 +1,7 @@
 const express = require('express'); //import express library
 const path = require('path');
 const unirest = require('unirest');
+const bodyParser = require('body-parser');
 
 const parkCoords = require('./backendjs/parkCoords');
 // var tinify = require("tinify"); // image compressor
@@ -10,6 +11,7 @@ const parkCoords = require('./backendjs/parkCoords');
 const app = express(); //instantiate express object
 
 app.use(express.static(path.join(__dirname, 'static')));
+app.use(bodyParser.urlencoded({extended: true}));
 
 const tempDatabase = {
 	'Redwood': {
@@ -118,8 +120,22 @@ app.get('/places', (req, res) => {
 	const val = tempDatabase[parkToLookUp];
 });
 
+app.post('/trails/:parkid', (req, res) => {
+    console.log(req.body);
+    const trailURLTrue = req.body.parkLocation;
+    /* 
+    for (let i = 0; i < result.places.length; i++) {
+        trail_names[i] = result.places[i].name; // add trail names to array
+    }
+
+    // useless line, but can be modified later to give better data
+    const allTrails = Object.keys(result.places[0]);
+    res.send(trail_names); // send array of all trail names in park
+    */
+});
 
 // FIND A WAY TO GENERALIZE THIS URL USING LAT AND LONG coordinates from other API
+// EXECUTE THIS LATER, WHEN THE BUTTON HAS BEEN CLICKED
 let trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=36.4864&lon=-118.5658" +
 "&q[activities_activity_type_name_eq]=hiking&radius=75";
 
@@ -132,7 +148,7 @@ function getTrails(callback) {
 	.header("Accept", "text/plain")
 	.end(function(res) {
 		if (res.error) {
-			console.log('GET error', res.error);
+			//console.log('GET error', res.error);
 			callback(res.error, null);
 		} else {
 			// console.log('GET response', res.body); // this is the full JSON object
@@ -159,7 +175,6 @@ var request = getTrails(function(error, result) {
 		// The app.get() below returns a list of trail names to the frontend
 		app.get('/trails', (req, res) => {
 
-            parkCoords.findCoords();
 			//console.log("result: " + result.places.length); // number of trails
 
 			for (let i = 0; i < result.places.length; i++) {

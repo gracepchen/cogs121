@@ -6,7 +6,7 @@ const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" +
 "fields=images%2C%20weatherInfo&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
 // For experimenting with the NPS API, do not use
-const NPSTestUrl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
+const NPSUrlAll = "https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
 // var source = tinify.fromUrl(result.data[0].images[0].url);
 // console.log(source);
@@ -25,12 +25,43 @@ $j(document).ready(() => {
         $(".btn-outline-secondary").not(this).removeClass("active");
     });
 
-    $j('#seki').click(function(event) { // when clicking Sequoia button
+    $j('.parkid').click(function(event) { // when clicking Sequoia button
         // NEW get trail names and put in box - trails API, generalize later for other parks
+        const parkUrl = "trails/" + event.target.id;
+        const latIndex = 0;
+        const lngIndex = 1;
+
         $j.ajax({
-            url: 'trails',
+            url: NPSUrlAll,
             method: 'GET',
         }).done((result) => {
+            let parkCoords = getTrailCoords(event.target.id, result);
+
+            const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
+                parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
+                "&q[activities_activity_type_name_eq]=hiking&radius=75";
+
+            console.log(trailURL);
+            $j.ajax({
+                url: parkUrl,
+                method: 'POST',
+                data: { parkLocation: trailURL }
+            }).done((result) => {
+                console.log(result[0]);
+                for (let i = 0; i < result.length; i++) {
+                    let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
+                    $("#trailSelect").append(trail_option);
+                }
+            }).fail((err) => {
+                throw err;
+            });
+        }).fail((err) => {
+            console.log("Failure");
+            throw err;
+        });
+        
+        /* 
+        (result) => {
 
             console.log(result[0]);
             for (let i = 0; i < result.length; i++) {
@@ -40,7 +71,7 @@ $j(document).ready(() => {
 
         }).fail((err) => {
             throw err;
-        });
+        });*/
     });
 
     $j('.parkid').click(function(event) { // on park button click
@@ -88,7 +119,7 @@ $j(document).ready(() => {
             type: 'GET',
             dataType: 'json',
             success: (data) => {
-                console.log(data);
+                //console.log(data);
 
                 // load trail names into select box
                 if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
@@ -140,7 +171,7 @@ function downscaleImage(dataUrl, newWidth, imageType, imageArguments) {
 }
 
 function displayParkInfo(parkId, parkInfo) {
-  console.log("Button clicked: " + parkId);
+    console.log("Button clicked: " + parkId);
 
     // find appropriate park data corresponding to park button
     for (i = 0; i < parkInfo.data.length; i++) {
@@ -162,19 +193,42 @@ function displayParkInfo(parkId, parkInfo) {
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
 }
 
+function getTrailCoords(parkIdToSearch, parkVals) {        
+    let coords = 0;
+    const latOffset = 4;
+    const lngOffset = 7;
+
+    //console.log(parkVals);
+    for(const i of parkVals.data) {
+        if(i.parkCode === parkIdToSearch) {
+            let comma = i.latLong.indexOf(",");
+            let lat = i.latLong.substring(latOffset, comma);
+            let lng = i.latLong.substring(comma + lngOffset, i.latLong.length);
+
+            if(lat === ''){
+                console.log("no lat/lng data available");
+            }
+
+            coords = [lat, lng];
+            break;
+        }
+    }
+
+    return coords;
+}
 /*
-Test Method for working with NPS data, do not use!
+//Test Method for working with NPS data, do not use!
 
 function displayTestMethod(parkId, parkInfo) {
+    console.log(parkInfo.data);
     for(const i of parkInfo.data) {
         let comma = i.latLong.indexOf(",");
         let lat = i.latLong.substring(0 + 4, comma);
         let lng = i.latLong.substring(comma + 1 + 6, i.latLong.length);
 
-        console.log("Lat sub: " + lat + "\nLng sub: " + lng);
     }
-}
-*/
+}*/
+
 
 // trail/gallery tab functions
 function getParkData(trailgallery) { //shows tabs
