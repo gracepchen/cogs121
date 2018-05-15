@@ -38,7 +38,7 @@ $j(document).ready(() => {
             let parkCoords = getTrailCoords(event.target.id, result);
 
             const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
-            parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
+            parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
             "&q[activities_activity_type_name_eq]=hiking&radius=75";
 
             console.log(trailURL);
@@ -47,14 +47,14 @@ $j(document).ready(() => {
                 method: 'POST',
                 data: { parkLocation: trailURL }
             }).done((result) => {
-                
+
                 console.log(result[0]);
 
 
                 // clear trail select box
                 $j('#trailSelect').hide();
                 if ($("#trailSelect").html() != result.trails) {
-                    $("#trailSelect").html(''); 
+                    $("#trailSelect").html('');
                 }
 
                 // load trail names into select box
@@ -71,8 +71,8 @@ $j(document).ready(() => {
             console.log("Failure");
             throw err;
         });
-        
-        /* 
+
+        /*
         (result) => {
 
             console.log(result[0]);
@@ -162,29 +162,45 @@ function displayParkInfo(parkId, parkInfo) {
         }
     }
 
-// change intro
-$j('#intro').hide();
-$('#intro').html(parkInfo.data[i].description); 
-$j('#intro').fadeIn(500);
+    // change intro
+    $j('#intro').hide();
+    $('#intro').html(parkInfo.data[i].description);
+    $j('#intro').fadeIn(500);
 
     // change title
     $j('#parkName').hide();
-    $('#parkName').html(parkInfo.data[i].fullName); 
+    $('#parkName').html(parkInfo.data[i].fullName);
     $j('#parkName').fadeIn(500);
 
     $j('#pics').hide();
     $('#pics').html(''); // erase old gallery and reload pics
+
+    //$("#carousel").carousel("pause").removeData();
     for (let j = 0; j < parkInfo.data[i].images.length; j++) {
+
       $('#pics').append('<img src="' + parkInfo.data[i].images[j].url +
         '" width="33%" altText="' + parkInfo.data[i].images[j].altText +
         '" class="img-thumbnail">');
-  }
-  $j('#pics').fadeIn(500);
+    }
 
+    /* Carousel work in progress
+    $(document).ready(function(){
+    for(let j = 0; j < parkInfo.data[i].images.length; j++) {
+      $('<div class="item"><img src="'+parkInfo.data[i].images[j].url+'" width="50%">   </div>').appendTo('.carousel-inner');
+      $('<li data-target="#carousel" data-slide-to="'+j+'"></li>').appendTo('.carousel-indicators')
+
+    }
+      $('.item').first().addClass('active');
+      $('.carousel-indicators > li').first().addClass('active');
+      $('#carousel').carousel();
+    });
+    */
+    
+    $j('#pics').fadeIn(500);
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
 }
 
-function getTrailCoords(parkIdToSearch, parkVals) {        
+function getTrailCoords(parkIdToSearch, parkVals) {
     let coords = 0;
     const latOffset = 4;
     const lngOffset = 7;

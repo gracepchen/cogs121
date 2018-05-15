@@ -71,7 +71,6 @@ select {
 
 .fixed {
   height: 40vh;
-  overflow: hidden;
   overflow: scroll;
 }
 

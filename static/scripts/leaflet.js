@@ -1,5 +1,5 @@
 var my_map = L.map('map').setView([37.641856, -120.605543], 5);
-let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo", 
+let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 "chis", "lavo", "moja", "muwo", "pinn", "samo"];
 let park, popular; // circle location variable, boolean for popular park
 
@@ -9,7 +9,7 @@ let park, popular; // circle location variable, boolean for popular park
 
 // hiking, more green
 // L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
-	
+
 // cali topography
 L.tileLayer('https://api.mapbox.com/styles/v1/gpc001/cjgq7ujnj00042sq8tff8s1i8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
 	maxZoom: 18,
@@ -31,7 +31,7 @@ $j.ajax({
 
 // display park info on the right side
 function dataCall(e) {
-	
+
  // change column size at beginning
 
  $("#map-holder").addClass("col-sm-6");
@@ -98,7 +98,7 @@ function dataCall(e) {
       	let parkCoords = getTrailCoords(e.target.id, result);
 
       	const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
-      	parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] + 
+      	parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
       	"&q[activities_activity_type_name_eq]=hiking&radius=75";
       	console.log(trailURL);
 
@@ -107,13 +107,13 @@ function dataCall(e) {
                 method: 'POST',
                 data: { parkLocation: trailURL }
             }).done((result) => {
-            	
+
             	console.log(result[0]);
-            	
+
                 // clear trail select box
                 $j('#trailSelect').hide();
                 if ($("#trailSelect").html() != result.trails) {
-                	$("#trailSelect").html(''); 
+                	$("#trailSelect").html('');
                 }
 
                 // load trail names into select box
@@ -163,21 +163,21 @@ if (parkInfo.data[j].latLong === "") { // validity check
 	continue;
 }
 
-while (parkInfo.data[j].latLong[i] != ',') { 
+while (parkInfo.data[j].latLong[i] != ',') {
     lat = lat + parkInfo.data[j].latLong[i]; // get all digits of latitiude
-    i++;  
+    i++;
 }
 
-while (parkInfo.data[j].latLong[i] != ':') { 
+while (parkInfo.data[j].latLong[i] != ':') {
     i++; // skip extra text to get to long
 }
 
-for (i = i + 1; i < parkInfo.data[j].latLong.length; i++) { 
+for (i = i + 1; i < parkInfo.data[j].latLong.length; i++) {
     long = long + parkInfo.data[j].latLong[i]; // get long digits
 }
 
 // check if park is popular
-if (parkInfo.data[j].parkCode === 'redw' || 
+if (parkInfo.data[j].parkCode === 'redw' ||
 	parkInfo.data[j].parkCode === 'seki' ||
 	parkInfo.data[j].parkCode === 'jotr' ||
 	parkInfo.data[j].parkCode === 'deva' ||
@@ -205,7 +205,7 @@ createCircle(popular, lat, long);
 }
 
 // draw the circle, change color and size if popular, where popular is a boolean
-function createCircle(popular, lat, long) { 
+function createCircle(popular, lat, long) {
     let rad, col; // radius and color
 
     if(popular) { // change size and color of popular park
@@ -224,7 +224,13 @@ function createCircle(popular, lat, long) {
     }).addTo(my_map).on("click", circleClick);
 }
 
+var maxBounds = L.latLngBounds(
+    L.latLng(32.635194, -116.822349), //Southwest
+    L.latLng(41.759657, -119.015356)  //Northeast
+);
 
+my_map.setMaxBounds(maxBounds);
+my_map.fitBounds(maxBounds);
 
 // // add polygons to map
 // var redwood = L.polygon([
