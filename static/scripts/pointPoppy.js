@@ -175,30 +175,39 @@ function displayParkInfo(parkId, parkInfo) {
     $j('#pics').hide();
     $('#pics').html(''); // erase old gallery and reload pics
 
-    //$("#carousel").carousel("pause").removeData();
+    /*
     for (let j = 0; j < parkInfo.data[i].images.length; j++) {
 
       $('#pics').append('<img src="' + parkInfo.data[i].images[j].url +
         '" width="33%" altText="' + parkInfo.data[i].images[j].altText +
         '" class="img-thumbnail">');
     }
-
-    /* Carousel work in progress
+    */
+    //carousel
+    $('.carousel-inner').html('');
     $(document).ready(function(){
     for(let j = 0; j < parkInfo.data[i].images.length; j++) {
-      $('<div class="item"><img src="'+parkInfo.data[i].images[j].url+'" width="50%">   </div>').appendTo('.carousel-inner');
-      $('<li data-target="#carousel" data-slide-to="'+j+'"></li>').appendTo('.carousel-indicators')
+      $('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
+      $('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 
     }
-      $('.item').first().addClass('active');
+      $('.carousel-item').first().addClass('active');
       $('.carousel-indicators > li').first().addClass('active');
       $('#carousel').carousel();
     });
-    */
-    
+
+
     $j('#pics').fadeIn(500);
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
 }
+
+$('.carousel-control-prev').click(function() {
+  $('#carousel').carousel('prev');
+});
+
+$('.carousel-control-next').click(function() {
+  $('#carousel').carousel('next');
+});
 
 function getTrailCoords(parkIdToSearch, parkVals) {
     let coords = 0;
