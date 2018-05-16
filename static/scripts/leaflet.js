@@ -216,10 +216,10 @@ function createCircle(popular, lat, long) {
 
     if(popular) { // change size and color of popular park
     	rad = 40000;
-    	col = 'blue';
+    	col = 'green';
     } else {
     	rad = 25000;
-    	col = 'red';
+    	col = 'brown';
     }
 
     park = L.circle([lat, long], { // draw the circle
