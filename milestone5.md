@@ -2,9 +2,9 @@
 ### Grace Chen, Aaron Liu, Katya Noble, Lam Pham
 
 ### UI Skeleton Screenshots
-![Landing](https://imgur.com/a/QDYyuh5.png)
-![Gallery](https://imgur.com/a/lDyFJqc.png)
-![Weather](https://imgur.com/a/14Ccwyd.png)
+![Landing](https://imgur.com/QDYyuh5.png)
+![Gallery](https://imgur.com/lDyFJqc.png)
+![Weather](https://imgur.com/14Ccwyd.png)
 
 ### UI Description
 
