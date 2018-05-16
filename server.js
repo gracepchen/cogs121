@@ -120,30 +120,13 @@ function makeTrailList(error, result) {
         // useless line, but can be modified later to give better data
         // const allTrails = Object.keys(result.places[0]);
 
-        console.log(trail_names);
+        // console.log(trail_names);
         return trail_names; // send array of all trail names in park
 
     } else {
     	console.log("err - makeTrailList()");
     }
 };
-
-// function makeTrailDescriptions(error, result) {
-// 	let trail_desc = []; // array of all trail names in park 
-
-// 	if (error === null) {
-
-// 		for (let i = 0; i < result.places.length; i++) {
-//             trail_desc[i] = result.places[i].description; // add trail descriptions to array
-//         }
-
-//         console.log(trail_desc);
-//         return trail_desc; // send array of all trail names in park
-
-//     } else {
-//     	console.log("err - getTrailDescriptions()");
-//     }
-// };
 
 /*
 var request = getTrails(function(error, result) {

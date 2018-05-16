@@ -70,9 +70,9 @@
 						<div class="row mt-3">
 							<div class="col-sm-12">
 								<!-- tab buttons -->
-								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Trails')">Trails</button>
-								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Gallery')">Gallery</button>
-								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Weather')">Weather</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Trails')" id="trailButton">Trails</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Gallery')" id="galleryButton">Gallery</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Weather')" id="weatherButton">Weather</button>
 							</div>
 
 							<div class="col-sm-12">
@@ -80,14 +80,14 @@
 								<div id="Trails" class="parkinfo" style="display:none">
 									<!-- trail selector -->
 									<div class="row mt-3">
-										<div class="col-sm-7">
+										<div class="col-sm-5">
 											<div class="form-group mt-1 mb-0">
 												<label for="trailSelect"><h5>Select a trail:</h5></label>
 												<select multiple class="form-control" id="trailSelect" onchange="showTrailInfo(value);" size="10">
 												</select>
 											</div>
 										</div>
-										<div class="col-sm-5  fixed">
+										<div class="col-sm-7  fixed">
 											<!-- <h5 class="mt-1">Trail Description</h5> -->
 											<p><span id="trail_desc"></span></p> 
 											<!-- <p><b>Length: </b><span id="trail_length"></span></p> -->

@@ -111,15 +111,13 @@ $j(document).ready(() => {
         $("#info-holder").removeClass("col-sm-4");
     });
 
+    // select Trails button, make active
+    $('#trailButton').addClass("active").siblings().removeClass("active");
 
-    // show trail select box
-    if (document.getElementById("Gallery").style.display === "none") {
-        document.getElementById("Trails").style.display = "block";
-        document.getElementById("Weather").style.display = "none";
-    } else {
-        document.getElementById("Trails").style.display = "none";
-        document.getElementById("Weather").style.display = "none";
-    }
+    // reset to Trails select
+    document.getElementById("Trails").style.display = "block";
+    document.getElementById("Weather").style.display = "none";
+    document.getElementById("Gallery").style.display = "none";
 
 });
 
