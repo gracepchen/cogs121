@@ -4,7 +4,7 @@
 ### UI Skeleton Screenshots
 ![Landing](https://imgur.com/QDYyuh5.png)
 ![Gallery](https://imgur.com/lDyFJqc.png)
-![Weather](https://imgur.com/a/k74YhPm)
+![Weather](https://imgur.com/a/k74YhPm.png)
 
 ### UI Description
 
