@@ -94,7 +94,9 @@ select {
   display:inline-block  !important;
 }
 .carousel-inner > .carousel-item > img {
-  width:50%;
+  height: 300px;
+  width: 300px;
+  object-fit: contain;
 }
 
 .carousel-control-prev-icon {
