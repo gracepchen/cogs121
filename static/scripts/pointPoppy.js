@@ -276,15 +276,17 @@ function showTrailInfo(trail_name) {
     console.log(trail_array[trail_name]);
     // console.log(trail_array[trail_name][1]); // description
 
-  // reset values
-  $("#trail_desc").hide();
-  $("#trail_desc").html('');
+    // reset values
+    $("#trail_desc").hide();
+    $("#trail_desc").html('');
+
+    $('#trail_desc').html("<h5>Description: </h5>");
 
     // if Trail Description == null, say "No description available"
     if (trail_array[trail_name][1] === null) {
-        $('#trail_desc').html("No description available. Try another trail!");
+        $('#trail_desc').append("No description available. Try another trail!");
     } else {   // else, display trail description
-        $('#trail_desc').html(trail_array[trail_name][1]);
+        $('#trail_desc').append(trail_array[trail_name][1]);
         $j("#trail_desc").fadeIn(500);
     }
 };
