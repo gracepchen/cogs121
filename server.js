@@ -58,11 +58,26 @@ app.post('/trails/:parkid', (request, response) => {
 				//console.log('GET error', res.error);
 				makeTrailList(res.error, null);
 			} else {
-				//console.log('GET response', res.body); // this is the full JSON object
+				// console.log('GET response', res.body.places[0].description); // this is the full JSON object
 				trailList = makeTrailList(null, res.body); // callback returns the JSON from unirest
 				response.send(trailList);
 			}
 		});
+
+	// // get trail data
+	// unirest.get(trailURL)
+	// .header("X-Mashape-Key", "df9p8FHPrfmsh9SYeNClLGjG6bOap1kgwbijsn5hQ5dJ9NGLAJ")
+	// .header("Accept", "text/plain")
+	// .end(function(res) {
+	// 	if (res.error) {
+	// 			//console.log('GET error', res.error);
+	// 			makeTrailDescriptions(res.error, null);
+	// 		} else {
+	// 			// console.log('GET response', res.body.places[0].description); // this is the full JSON object
+	// 			trailDescriptions = TrailDescriptions(null, res.body); // callback returns the JSON from unirest
+	// 			response.send(trailDescriptions);
+	// 		}
+	// 	});
 });
 
 // FIND A WAY TO GENERALIZE THIS URL USING LAT AND LONG coordinates from other API
@@ -82,7 +97,7 @@ function getTrails(callback) {
 
 function makeTrailList(error, result) {
 
-	let trail_names = [[]]; // array of all trail names in park 
+	let trail_names = []; // array of all trail names in park 
 
 	if (error === null) {
 		//console.log(result);
@@ -93,25 +108,42 @@ function makeTrailList(error, result) {
 		}
 
 		for (let i = 0; i < result.places.length; i++) {
-            trail_names[i] = result.places[i].name; // add trail names to array
+            
+			// add trail names and descriptions to array
+            trail_names[i] = [result.places[i].name, result.places[i].description]; 
 
            	// add descriptions to array
             // trail_names[i[i]] = result.places[i].description;
             // console.log(trail_names[i[i]]); // descriptions
-
         }
 
         // useless line, but can be modified later to give better data
-        const allTrails = Object.keys(result.places[0]);
+        // const allTrails = Object.keys(result.places[0]);
 
         console.log(trail_names);
-        console.log(trail_names[1[1]]); // descriptions
         return trail_names; // send array of all trail names in park
 
     } else {
-    	console.log("err");
+    	console.log("err - makeTrailList()");
     }
 };
+
+// function makeTrailDescriptions(error, result) {
+// 	let trail_desc = []; // array of all trail names in park 
+
+// 	if (error === null) {
+
+// 		for (let i = 0; i < result.places.length; i++) {
+//             trail_desc[i] = result.places[i].description; // add trail descriptions to array
+//         }
+
+//         console.log(trail_desc);
+//         return trail_desc; // send array of all trail names in park
+
+//     } else {
+//     	console.log("err - getTrailDescriptions()");
+//     }
+// };
 
 /*
 var request = getTrails(function(error, result) {

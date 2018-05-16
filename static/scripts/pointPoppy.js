@@ -1,5 +1,6 @@
 let trail_data;
 let i = 0;
+let trail_array = [];
 
 // NPS API stuff ----------------------
 const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" +
@@ -48,8 +49,8 @@ $j(document).ready(() => {
                 data: { parkLocation: trailURL }
             }).done((result) => {
 
-                console.log(result[0]);
-
+                console.log(result[0][0]); // name of first trail
+                trail_array = result; // save this value so that we can get the descriptions later
 
                 // clear trail select box
                 $j('#trailSelect').hide();
@@ -59,11 +60,12 @@ $j(document).ready(() => {
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
-                    let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
-                    // console.log(trail_option);
+                    let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
                     $("#trailSelect").append(trail_option);
                 }
+                
                 $j('#trailSelect').fadeIn(500);
+
             }).fail((err) => {
                 throw err;
             });
@@ -91,6 +93,8 @@ $j(document).ready(() => {
             url: NPSurl,
             method: 'GET',
         }).done((result) => {
+
+            // refreshes the title, intro, gallery, weather
             displayParkInfo(event.target.id, result);
 
             //Test method call, do not use!
@@ -152,6 +156,8 @@ function downscaleImage(dataUrl, newWidth, imageType, imageArguments) {
     return newDataUrl;
 }
 
+
+// this function changes the title, intro, gallery, and weather
 function displayParkInfo(parkId, parkInfo) {
     console.log("Button clicked: " + parkId);
 
@@ -186,26 +192,26 @@ function displayParkInfo(parkId, parkInfo) {
     //carousel
     $('.carousel-inner').html('');
     $(document).ready(function(){
-    for(let j = 0; j < parkInfo.data[i].images.length; j++) {
-      $('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
-      $('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+        for(let j = 0; j < parkInfo.data[i].images.length; j++) {
+          $('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
+          $('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 
-    }
+      }
       $('.carousel-item').first().addClass('active');
       $('.carousel-indicators > li').first().addClass('active');
       $('#carousel').carousel();
-    });
+  });
 
 
     $j('#pics').fadeIn(500);
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
 }
 
-$('.carousel-control-prev').click(function() {
+$j('.carousel-control-prev').click(function() {
   $('#carousel').carousel('prev');
 });
 
-$('.carousel-control-next').click(function() {
+$j('.carousel-control-next').click(function() {
   $('#carousel').carousel('next');
 });
 
@@ -258,14 +264,33 @@ document.getElementById(trailgallery).style.display = "block";
 
 // select trail box - insert length and difficulty into box // Grace is fixing this rn
 function showTrailInfo(trail_name) {
+
+    console.log("showTrailInfo() - trail number is: " + trail_name);
+    console.log(trail_array[trail_name]);
+    console.log(trail_array[trail_name][1]);
+
   // reset values
-  $("#trail_length").html('');
-  $("#trail_diff").html('');
+  $("#trail_desc").html('');
 
-  console.log("showTrailInfo() - trail name is: " + trail_name);
-    // console.log($('#trailSelect').val(trail_name).html());
-
-  // change the data
-  $("#trail_length").html(trail_data[trail_name].length);
-  $("#trail_diff").html(trail_data[trail_name].difficulty);
+    // if Trail Description == null, say "No description available"
+    if (trail_array[trail_name][1] === null) {
+        $('#trail_desc').html("No description available. Try another trail!");
+    } else {   // else, display trail description
+        $('#trail_desc').html(trail_array[trail_name][1]);
+    }
 };
+
+  // $("#trail_length").html('');
+  // $("#trail_diff").html('');
+
+
+    // console.log($('#trailSelect').val(trail_name).html());
+  // change the data
+  // $("#trail_length").html(trail_data[trail_name].length);
+  // $("#trail_diff").html(trail_data[trail_name].difficulty);
+
+
+
+
+
+

@@ -85,7 +85,7 @@ function dataCall(e) {
     //     }
     // });
 
-      // NEW get trail names and put in box - trails API, generalize later for other parks
+      // NEW get trail names and put in box - trails API
       const parkUrl = "trails/" + e.target.id;
       console.log(parkUrl);
       const latIndex = 0;
@@ -224,108 +224,12 @@ function createCircle(popular, lat, long) {
     }).addTo(my_map).on("click", circleClick);
 }
 
+// fix map on California
 var maxBounds = L.latLngBounds(
-    L.latLng(32.635194, -116.822349), //Southwest
-    L.latLng(41.759657, -119.015356)  //Northeast
+    L.latLng(32.089591, -124.965293), //Southwest
+    L.latLng(41.977283, -112.868058)  //Northeast
 );
 
 my_map.setMaxBounds(maxBounds);
 my_map.fitBounds(maxBounds);
 
-// // add polygons to map
-// var redwood = L.polygon([
-//  [41.081257, -123.961847],
-//  [41.088244, -123.940732],
-//  [41.108036, -123.938844],
-//  [41.152515, -123.877733],
-//  [41.227375, -123.962984],
-//  [41.272418, -123.984614],
-//  [41.328774, -123.946676],
-//  [41.464286, -124.036851],
-//  [41.473161, -124.058308],
-//  [41.508522, -124.068951],
-//  [41.522147, -124.044575],
-//  [41.535769, -124.075646],
-//  [41.533713, -124.082169],
-//  [41.312187, -124.087662],
-//  [41.307545, -124.043889],
-//  [41.261107, -124.088177],
-//  [41.207405, -124.061055],
-//  [41.188805, -124.073071]
-//  ]).addTo(my_map).on("click", circleClick);
-// redwood.id = "redw"
-
-// var sequoia = L.circle([36.4864, -118.5658], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 40000
-// }).addTo(my_map).on("click", circleClick);
-// sequoia.id = "seki";
-
-// var joshua = L.circle([33.8734, -115.9010], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 30000
-// }).addTo(my_map).on("click", circleClick);
-// joshua.id = "jotr";
-
-// var alcatraz = L.circle([37.8270, -122.4230], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 20000
-// }).addTo(my_map).on("click", circleClick);
-// alcatraz.id = "alca";
-
-// var cabrillo = L.circle([32.6735, -117.2425], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 10000
-// }).addTo(my_map).on("click", circleClick);
-// cabrillo.id = "cabr"
-
-// var castlemountains = L.circle([35.3247, -115.0789], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 20000
-// }).addTo(my_map).on("click", circleClick);
-// castlemountains.id = "camo";
-
-// var channelislands = L.circle([34.0097, -119.8023], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 20000
-// }).addTo(my_map).on("click", circleClick);
-// channelislands.id = "chis";
-
-// var deathvalley = L.circle([36.5323, -116.9325], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 30000
-// }).addTo(my_map).on("click", circleClick);
-// deathvalley.id = "deva";
-
-// var yosemite = L.circle([37.8651, -119.5383], {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5,
-//     radius: 40000
-// }).addTo(my_map).on("click", circleClick);
-// yosemite.id = "yose";
-
-// popups for each site
-// redwood.bindPopup("Redwood");
-// sequoia.bindPopup("Sequoia");
-// joshua.bindPopup("Joshua Tree");
-// alcatraz.bindPopup("Alcatraz Island");
-// cabrillo.bindPopup("Cabrillo National Monument");
-// castlemountains.bindPopup("Castle Mountains");
-// channelislands.bindPopup("Channel Islands");
-// deathvalley.bindPopup("Death Valley");
-// yosemite.bindPopup("Yosemite National Park");

@@ -20,18 +20,19 @@
 <body>
 	<div class="container-fluid">
 		<div id="page-holder">
-			<a href="/"><img src="images/pointpoppy.png" width="25%" class="mt-3"></a>
+			<a href="/"><img src="images/pointpoppy_tag.png" width="45%" class="mt-3"></a>
+			<!-- <i class="pt-5">Trailblazing California since 2018.</i> -->
 			<!-- <h1 class="display-4">Point Poppy</h1> -->
-			<h6 class="ml-5 mt-1"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trailblazing California since 2018.</i></h6>
+			<!-- <h6 class="ml-5 mt-1"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trailblazing California since 2018.</i></h6> -->
 
 
 			<div class="row pt-3">
 				<div class="col-sm-8" id="map-holder">
 
 					<!-- Leaflet holder -->
-					<div id="map" class="mb-2"></div>
+					<div id="map" ></div>
 
-					<div class="buttons">
+					<div class="buttons mt-0">
 
 						<!-- Location Button bar -->
 						<h5>Most Popular</h5>
@@ -62,7 +63,7 @@
 				<!-- RIGHT HALF of the page -->
 				<div class="col-sm-4" id="info-holder">
 					<div class="bg">
-						<h2 id="parkName">Choose a park!</h2>
+						<h2 id="parkName">Choose a park! </h2>
 						<div id="intro"></div>
 						<hr>
 
@@ -86,10 +87,11 @@
 												</select>
 											</div>
 										</div>
-										<div class="col-sm-5">
-											<h5 class="mt-1">Trail Information</h5>
-											<p><b>Length: </b><span id="trail_length"></span></p>
-											<p><b>Difficulty: </b><span id="trail_diff"></span></p>
+										<div class="col-sm-5  fixed">
+											<!-- <h5 class="mt-1">Trail Description</h5> -->
+											<p><span id="trail_desc"></span></p> 
+											<!-- <p><b>Length: </b><span id="trail_length"></span></p> -->
+											<!-- <p><b>Difficulty: </b><span id="trail_diff"></span></p> -->
 										</div>
 									</div>
 								</div>
