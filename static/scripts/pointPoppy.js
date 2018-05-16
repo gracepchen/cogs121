@@ -117,6 +117,7 @@ $j(document).ready(() => {
 
     // select Trails button, make active
     $('#trailButton').addClass("active").siblings().removeClass("active");
+    $('#trail_desc').html('');
 
     // reset to Trails select
     document.getElementById("Trails").style.display = "block";
@@ -276,6 +277,7 @@ function showTrailInfo(trail_name) {
     // console.log(trail_array[trail_name][1]); // description
 
   // reset values
+  $("#trail_desc").hide();
   $("#trail_desc").html('');
 
     // if Trail Description == null, say "No description available"
@@ -283,6 +285,7 @@ function showTrailInfo(trail_name) {
         $('#trail_desc').html("No description available. Try another trail!");
     } else {   // else, display trail description
         $('#trail_desc').html(trail_array[trail_name][1]);
+        $j("#trail_desc").fadeIn(500);
     }
 };
 

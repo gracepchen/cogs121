@@ -48,14 +48,14 @@ function dataCall(e) {
  	throw err;
  });
 
-    // show trail select box
-    if (document.getElementById("Gallery").style.display === "none") {
-    	document.getElementById("Trails").style.display = "block";
-    	document.getElementById("Weather").style.display = "none";
-    } else {
-    	document.getElementById("Trails").style.display = "none";
-    	document.getElementById("Weather").style.display = "none";
-    }
+  // select Trails button, make active
+    $('#trailButton').addClass("active").siblings().removeClass("active");
+      $("#trail_desc").hide();
+
+    // reset to Trails select
+    document.getElementById("Trails").style.display = "block";
+    document.getElementById("Weather").style.display = "none";
+    document.getElementById("Gallery").style.display = "none";
 
 	// OLD ------- get park info from map
     // var idText = $('#' + e.target.id).text();
@@ -118,9 +118,11 @@ function dataCall(e) {
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
-                	let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
-                    // console.log(trail_option);
+                	     if (result[i][1] === null) continue;  // skip the ones without descriptions
+
+                    let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
                     $("#trailSelect").append(trail_option);
+                    // console.log(trail_option);
                 }
                 $j('#trailSelect').fadeIn(500);
 
