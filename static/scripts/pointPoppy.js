@@ -1,6 +1,9 @@
 let trail_data;
 let i = 0;
 let trail_array = [];
+let parkCoords = [];
+const latIndex = 0;
+const lngIndex = 1;
 
 // NPS API stuff ----------------------
 const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" +
@@ -29,14 +32,13 @@ $j(document).ready(() => {
     $j('.parkid').click(function(event) { // when clicking Sequoia button
         // NEW get trail names and put in box - trails API, generalize later for other parks
         const parkUrl = "trails/" + event.target.id;
-        const latIndex = 0;
-        const lngIndex = 1;
+
 
         $j.ajax({
             url: NPSUrlAll,
             method: 'GET',
         }).done((result) => {
-            let parkCoords = getTrailCoords(event.target.id, result);
+            parkCoords = getTrailCoords(event.target.id, result);
 
             const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
             parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
@@ -60,6 +62,8 @@ $j(document).ready(() => {
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
+                    if (result[i][1] === null) continue;  // skip the ones without descriptions
+
                     let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
                     $("#trailSelect").append(trail_option);
                 }
@@ -168,7 +172,11 @@ function displayParkInfo(parkId, parkInfo) {
 
     // change intro
     $j('#intro').hide();
-    $('#intro').html(parkInfo.data[i].description);
+
+    // generate google maps link
+    $('#intro').html(parkInfo.data[i].description + " <a href='http://www.google.com/maps/place/" + 
+        parkCoordsArray[i][0] + "," + parkCoordsArray[i][1] + "' target='_blank'>Let's go! → </a>");
+    // console.log("PARK COORDS " + parkCoordsArray);
     $j('#intro').fadeIn(500);
 
     // change title
@@ -265,7 +273,7 @@ function showTrailInfo(trail_name) {
 
     console.log("showTrailInfo() - trail number is: " + trail_name);
     console.log(trail_array[trail_name]);
-    console.log(trail_array[trail_name][1]);
+    // console.log(trail_array[trail_name][1]); // description
 
   // reset values
   $("#trail_desc").html('');

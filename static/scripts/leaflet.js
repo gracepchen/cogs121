@@ -2,7 +2,7 @@ var my_map = L.map('map').setView([37.641856, -120.605543], 5);
 let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 "chis", "lavo", "moja", "muwo", "pinn", "samo"];
 let park, popular; // circle location variable, boolean for popular park
-
+let parkCoordsArray = [];
 
 // original map
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -187,21 +187,27 @@ if (parkInfo.data[j].parkCode === 'redw' ||
 	popular = 0;
 }
 
-// create clickable circle
-createCircle(popular, lat, long);
+		// create clickable circle
+		createCircle(popular, lat, long);
 
-    park.id = parkInfo.data[j].parkCode; // set ID
-    park.bindPopup(parkInfo.data[j].fullName); // create popup
-    park.on('mouseover', function (e) {
-    	this.openPopup();
-    });
-    park.on('click', function (e) {
-    	this.openPopup();
-    });
-    park.on('click', dataCall); // get data when clicking circle
+		// create popups
+    	park.id = parkInfo.data[j].parkCode; // set ID
+    	park.bindPopup(parkInfo.data[j].fullName); // create popup
+    	park.on('mouseover', function (e) {
+    		this.openPopup();
+    	});
+    	park.on('click', function (e) {
+    		this.openPopup();
+    	});
+    	park.on('click', dataCall); // get data when clicking circle
+
+parkCoordsArray[j] = [lat, long]; // save coords of every park in an array for generating google maps
+
+    }
 }
 }
-}
+
+// console.log(parkCoordsArray);
 }
 
 // draw the circle, change color and size if popular, where popular is a boolean
@@ -222,13 +228,14 @@ function createCircle(popular, lat, long) {
     	fillOpacity: 0.5,
     	radius: rad
     }).addTo(my_map).on("click", circleClick);
+
 }
 
 // fix map on California
 var maxBounds = L.latLngBounds(
     L.latLng(32.089591, -124.965293), //Southwest
     L.latLng(41.977283, -112.868058)  //Northeast
-);
+    );
 
 my_map.setMaxBounds(maxBounds);
 my_map.fitBounds(maxBounds);
