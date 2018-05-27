@@ -67,7 +67,7 @@ $j(document).ready(() => {
                     let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
                     $("#trailSelect").append(trail_option);
                 }
-                
+
                 $j('#trailSelect').fadeIn(500);
 
             }).fail((err) => {
@@ -175,7 +175,7 @@ function displayParkInfo(parkId, parkInfo) {
     $j('#intro').hide();
 
     // generate google maps link
-    $('#intro').html(parkInfo.data[i].description + " <a href='http://www.google.com/maps/place/" + 
+    $('#intro').html(parkInfo.data[i].description + " <a href='http://www.google.com/maps/place/" +
         parkCoordsArray[i][0] + "," + parkCoordsArray[i][1] + "' target='_blank'>Let's go! → </a>");
     // console.log("PARK COORDS " + parkCoordsArray);
     $j('#intro').fadeIn(500);
@@ -201,11 +201,11 @@ function displayParkInfo(parkId, parkInfo) {
     $(document).ready(function(){
         for(let j = 0; j < parkInfo.data[i].images.length; j++) {
           $('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
-          $('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+          //$('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 
       }
       $('.carousel-item').first().addClass('active');
-      $('.carousel-indicators > li').first().addClass('active');
+      //$('.carousel-indicators > li').first().addClass('active');
       $('#carousel').carousel();
   });
 
@@ -291,6 +291,7 @@ function showTrailInfo(trail_name) {
     }
 };
 
+
   // $("#trail_length").html('');
   // $("#trail_diff").html('');
 
@@ -299,9 +300,3 @@ function showTrailInfo(trail_name) {
   // change the data
   // $("#trail_length").html(trail_data[trail_name].length);
   // $("#trail_diff").html(trail_data[trail_name].difficulty);
-
-
-
-
-
-

@@ -241,4 +241,3 @@ var maxBounds = L.latLngBounds(
 
 my_map.setMaxBounds(maxBounds);
 my_map.fitBounds(maxBounds);
-
