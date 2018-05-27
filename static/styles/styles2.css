@@ -25,6 +25,10 @@ select {
   padding-bottom: 0;
 }
 
+input {
+  margin-bottom: 50px;
+}
+
 #map-holder {
   padding-bottom: 1em;
 }
@@ -125,3 +129,32 @@ select {
   width: 300px;
   object-fit: contain;
 }
+
+#visitor_form {
+  display: none;
+  position:fixed;
+z-index: 10000;
+overflow:auto;
+background-color: white;
+border-style: solid;
+  border-width: 1px;
+  border-color: #555450;
+margin-left: 50%;
+width:40vh;
+height:35vh;
+}
+
+#actual_popup {
+  padding: 5%;
+  position:absolute;
+}
+
+#send_suggestion {
+  background-color: green;
+  margin-top: 5%;
+}
+
+#close_suggestion {
+   margin-top: 5%;
+}
+

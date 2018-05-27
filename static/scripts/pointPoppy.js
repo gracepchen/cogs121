@@ -18,6 +18,37 @@ const NPSUrlAll = "https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=w
 
 $j(document).ready(() => {
     console.log('entered document ready');
+    
+    // FIREBASE STUFF
+    const database = firebase.database();
+
+    $('#send_suggestion').click(() => {
+    const name = $('#insertNameBox').val();
+    database.ref('name_of_place/' + name).set({
+      description: $('#insertDescBox').val(),
+      reason_to_add: $('#insertReasonBox').val()
+    });
+
+    // clear fields
+    $('#insertNameBox').val("");
+    $('#insertDescBox').val("");
+    $('#insertReasonBox').val("");
+  });
+
+    $("#suggest").click(function() {
+        $('#visitor_form').css("display", "block");
+    });
+
+$("#send_suggestion").click(function() {
+    alert("Recommendation received! Thank you for your input.");
+    $('#visitor_form').css("display", "none");
+});
+
+$("#close_suggestion").click(function() {
+$('#visitor_form').css("display", "none");
+    });
+
+
 
     //active button toggler
     $(".btn-outline-success").click(function() {
