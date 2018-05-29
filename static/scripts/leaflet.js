@@ -11,7 +11,7 @@ let parkCoordsArray = [];
 // L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
 
 // cali topography
-L.tileLayer('https://api.mapbox.com/styles/v1/gpc001/cjgq7ujnj00042sq8tff8s1i8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
+L.tileLayer('https://api.mapbox.com/styles/v1/lamqpham/cjhrdq97v5ou42rtmf9a9pzif/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGFtcXBoYW0iLCJhIjoiY2pocDlxcXVuMHJqMjM3cHZrOHZ2OTlzeCJ9.2uEA41JAztSmpyqfLq9EVQ', {
 	maxZoom: 18,
 	id: 'mapbox.streets',
 	detectRetina: true,
