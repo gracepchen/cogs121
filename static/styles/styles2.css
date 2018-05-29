@@ -82,7 +82,7 @@ input {
 /* to keep gallery at an appropriate height */
 
 .fixed {
-  height: 40vh;
+  height: 38vh;
   overflow: scroll;
 }
 
@@ -154,4 +154,8 @@ input {
 
 #close_suggestion {
   margin-top: 5%;
+}
+
+.parkinfo {
+  padding: 0;
 }

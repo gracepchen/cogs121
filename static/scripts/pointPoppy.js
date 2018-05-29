@@ -308,11 +308,11 @@ function getParkData(trailgallery) { //shows tabs
 	document.getElementById(trailgallery).style.display = "block";
 };
 
-// select trail box - insert length and difficulty into box // Grace is fixing this rn
+// select trail box - insert description into box 
 function showTrailInfo(trail_name) {
-
-	console.log("showTrailInfo() - trail number is: " + trail_name);
-	console.log(trail_array[trail_name]);
+	console.log("Showing trail information...");
+	// console.log("showTrailInfo() - trail number is: " + trail_name);
+	//console.log(trail_array[trail_name]);
     // console.log(trail_array[trail_name][1]); // description
 
     // reset values

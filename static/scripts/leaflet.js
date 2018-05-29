@@ -108,7 +108,8 @@ function dataCall(e) {
                 data: { parkLocation: trailURL }
             }).done((result) => {
 
-            	console.log(result[0]);
+            	console.log(result[0][0]); // name of first trail
+              trail_array = result; 
 
                 // clear trail select box
                 $j('#trailSelect').hide();
@@ -122,8 +123,10 @@ function dataCall(e) {
 
                     let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
                     $("#trailSelect").append(trail_option);
-                    // console.log(trail_option);
+                    
                 }
+                // console.log(result[2][1]);
+
                 $j('#trailSelect').fadeIn(500);
 
             }).fail((err) => {
