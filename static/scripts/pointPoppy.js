@@ -17,47 +17,55 @@ const NPSUrlAll = "https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=w
 // source.toFile("optimized.jpg");
 
 $j(document).ready(() => {
-    console.log('entered document ready');
-    
+	console.log('entered document ready');
+
     // FIREBASE STUFF
     const database = firebase.database();
 
     $('#send_suggestion').click(() => {
-    const name = $('#insertNameBox').val();
-    database.ref('name_of_place/' + name).set({
-      description: $('#insertDescBox').val(),
-      reason_to_add: $('#insertReasonBox').val()
-    });
+    	const name = $('#insertNameBox').val();
+    	database.ref('name_of_place/' + name).set({
+    		description: $('#insertDescBox').val(),
+    		reason_to_add: $('#insertReasonBox').val()
+    	});
 
     // clear fields
     $('#insertNameBox').val("");
     $('#insertDescBox').val("");
     $('#insertReasonBox').val("");
-  });
-
-    $("#suggest").click(function() {
-        $('#visitor_form').css("display", "block");
-    });
-
-$("#send_suggestion").click(function() {
-    alert("Recommendation received! Thank you for your input.");
-    $('#visitor_form').css("display", "none");
 });
 
-$("#close_suggestion").click(function() {
-$('#visitor_form').css("display", "none");
+    $("#suggest").click(function() {
+    	$('#visitor_form').css("display", "block");
     });
 
+    $("#send_suggestion").click(function() {
+    	alert("Recommendation received! Thank you for your suggestion.");
+    	$('#visitor_form').css("display", "none");
+    });
 
+    $("#close_suggestion").click(function() {
+    	$('#visitor_form').css("display", "none");
+    });
+
+// PAGE PREP FUNCTIONS
+$(".title").hide();
+$j(".title").fadeIn(1000);
+$("#map").hide();
+$j("#map").delay(500).fadeIn(1000);
+$(".btnbg").hide();
+$j(".btnbg").delay(1000).fadeIn(1000);
+$(".bg").hide();
+$j(".bg").delay(1500).fadeIn(1000);
 
     //active button toggler
     $(".btn-outline-success").click(function() {
-        $(this).toggleClass("active");
-        $(".btn-outline-success").not(this).removeClass("active");
+    	$(this).toggleClass("active");
+    	$(".btn-outline-success").not(this).removeClass("active");
     });
     $(".btn-outline-secondary").click(function() {
-        $(this).toggleClass("active");
-        $(".btn-outline-secondary").not(this).removeClass("active");
+    	$(this).toggleClass("active");
+    	$(".btn-outline-secondary").not(this).removeClass("active");
     });
 
     $j('.parkid').click(function(event) { // when clicking Sequoia button
@@ -66,21 +74,21 @@ $('#visitor_form').css("display", "none");
 
 
         $j.ajax({
-            url: NPSUrlAll,
-            method: 'GET',
+        	url: NPSUrlAll,
+        	method: 'GET',
         }).done((result) => {
-            parkCoords = getTrailCoords(event.target.id, result);
+        	parkCoords = getTrailCoords(event.target.id, result);
 
-            const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
-            parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
-            "&q[activities_activity_type_name_eq]=hiking&radius=75";
+        	const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
+        	parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
+        	"&q[activities_activity_type_name_eq]=hiking&radius=75";
 
-            console.log(trailURL);
-            $j.ajax({
-                url: parkUrl,
-                method: 'POST',
-                data: { parkLocation: trailURL }
-            }).done((result) => {
+        	console.log(trailURL);
+        	$j.ajax({
+        		url: parkUrl,
+        		method: 'POST',
+        		data: { parkLocation: trailURL }
+        	}).done((result) => {
 
                 console.log(result[0][0]); // name of first trail
                 trail_array = result; // save this value so that we can get the descriptions later
@@ -88,7 +96,7 @@ $('#visitor_form').css("display", "none");
                 // clear trail select box
                 $j('#trailSelect').hide();
                 if ($("#trailSelect").html() != result.trails) {
-                    $("#trailSelect").html('');
+                	$("#trailSelect").html('');
                 }
 
                 // load trail names into select box
@@ -102,11 +110,11 @@ $('#visitor_form').css("display", "none");
                 $j('#trailSelect').fadeIn(500);
 
             }).fail((err) => {
-                throw err;
+            	throw err;
             });
         }).fail((err) => {
-            console.log("Failure");
-            throw err;
+        	console.log("Failure");
+        	throw err;
         });
 
         /*
@@ -124,10 +132,10 @@ $('#visitor_form').css("display", "none");
     });
 
     $j('.parkid').click(function(event) { // on park button click
-        $j.ajax({
-            url: NPSurl,
-            method: 'GET',
-        }).done((result) => {
+    	$j.ajax({
+    		url: NPSurl,
+    		method: 'GET',
+    	}).done((result) => {
 
             // refreshes the title, intro, gallery, weather
             displayParkInfo(event.target.id, result);
@@ -135,15 +143,15 @@ $('#visitor_form').css("display", "none");
             //Test method call, do not use!
             //displayTestMethod(event.target.id, result);
         }).fail((err) => {
-            throw err;
+        	throw err;
         }); // End of NPS API stuff ----------------------
 
     // change column size at beginning
     $('#map-holder').click(function(){
-        $("#map-holder").addClass("col-sm-6");
-        $("#map-holder").removeClass("col-sm-8");
-        $("#info-holder").addClass("col-sm-6");
-        $("#info-holder").removeClass("col-sm-4");
+    	$("#map-holder").addClass("col-sm-6");
+    	$("#map-holder").removeClass("col-sm-8");
+    	$("#info-holder").addClass("col-sm-6");
+    	$("#info-holder").removeClass("col-sm-4");
     });
 
     // select Trails button, make active
@@ -158,14 +166,14 @@ $('#visitor_form').css("display", "none");
 });
 
     $j(document).ajaxError(() => { //catch-all
-        $j('#status').html('Error: unknown ajaxError!');
+    	$j('#status').html('Error: unknown ajaxError!');
     });
 });
 
 // Take an image URL, downscale it to the given width, and return a new image URL.
 function downscaleImage(dataUrl, newWidth, imageType, imageArguments) {
-    "use strict";
-    var image, oldWidth, oldHeight, newHeight, canvas, ctx, newDataUrl;
+	"use strict";
+	var image, oldWidth, oldHeight, newHeight, canvas, ctx, newDataUrl;
 
     // Provide default values
     imageType = imageType || "image/jpeg";
@@ -193,11 +201,11 @@ function downscaleImage(dataUrl, newWidth, imageType, imageArguments) {
 
 // this function changes the title, intro, gallery, and weather
 function displayParkInfo(parkId, parkInfo) {
-    console.log("Button clicked: " + parkId);
+	console.log("Button clicked: " + parkId);
 
     // find appropriate park data corresponding to park button
     for (i = 0; i < parkInfo.data.length; i++) {
-      if (parkInfo.data[i].parkCode === parkId) {
+    	if (parkInfo.data[i].parkCode === parkId) {
             break; // get value of i
         }
     }
@@ -207,7 +215,7 @@ function displayParkInfo(parkId, parkInfo) {
 
     // generate google maps link
     $('#intro').html(parkInfo.data[i].description + " <a href='http://www.google.com/maps/place/" +
-        parkCoordsArray[i][0] + "," + parkCoordsArray[i][1] + "' target='_blank'>Let's go! → </a>");
+    	parkCoordsArray[i][0] + "," + parkCoordsArray[i][1] + "' target='_blank'>Let's go! → </a>");
     // console.log("PARK COORDS " + parkCoordsArray);
     $j('#intro').fadeIn(500);
 
@@ -230,8 +238,8 @@ function displayParkInfo(parkId, parkInfo) {
     //carousel
     $('.carousel-inner').html('');
     $(document).ready(function(){
-        for(let j = 0; j < parkInfo.data[i].images.length; j++) {
-          $('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
+    	for(let j = 0; j < parkInfo.data[i].images.length; j++) {
+    		$('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
           //$('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 
       }
@@ -246,32 +254,32 @@ function displayParkInfo(parkId, parkInfo) {
 }
 
 $j('.carousel-control-prev').click(function() {
-  $('#carousel').carousel('prev');
+	$('#carousel').carousel('prev');
 });
 
 $j('.carousel-control-next').click(function() {
-  $('#carousel').carousel('next');
+	$('#carousel').carousel('next');
 });
 
 function getTrailCoords(parkIdToSearch, parkVals) {
-    let coords = 0;
-    const latOffset = 4;
-    const lngOffset = 7;
+	let coords = 0;
+	const latOffset = 4;
+	const lngOffset = 7;
 
     //console.log(parkVals);
     for(const i of parkVals.data) {
-        if(i.parkCode === parkIdToSearch) {
-            let comma = i.latLong.indexOf(",");
-            let lat = i.latLong.substring(latOffset, comma);
-            let lng = i.latLong.substring(comma + lngOffset, i.latLong.length);
+    	if(i.parkCode === parkIdToSearch) {
+    		let comma = i.latLong.indexOf(",");
+    		let lat = i.latLong.substring(latOffset, comma);
+    		let lng = i.latLong.substring(comma + lngOffset, i.latLong.length);
 
-            if(lat === ''){
-                console.log("no lat/lng data available");
-            }
+    		if(lat === ''){
+    			console.log("no lat/lng data available");
+    		}
 
-            coords = [lat, lng];
-            break;
-        }
+    		coords = [lat, lng];
+    		break;
+    	}
     }
 
     return coords;
@@ -292,19 +300,19 @@ function displayTestMethod(parkId, parkInfo) {
 
 // trail/gallery/weather tab functions
 function getParkData(trailgallery) { //shows tabs
-  var i;
-  var x = document.getElementsByClassName("parkinfo");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-}
-document.getElementById(trailgallery).style.display = "block";
+	var i;
+	var x = document.getElementsByClassName("parkinfo");
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";
+	}
+	document.getElementById(trailgallery).style.display = "block";
 };
 
 // select trail box - insert length and difficulty into box // Grace is fixing this rn
 function showTrailInfo(trail_name) {
 
-    console.log("showTrailInfo() - trail number is: " + trail_name);
-    console.log(trail_array[trail_name]);
+	console.log("showTrailInfo() - trail number is: " + trail_name);
+	console.log(trail_array[trail_name]);
     // console.log(trail_array[trail_name][1]); // description
 
     // reset values
@@ -315,10 +323,10 @@ function showTrailInfo(trail_name) {
 
     // if Trail Description == null, say "No description available"
     if (trail_array[trail_name][1] === null) {
-        $('#trail_desc').append("No description available. Try another trail!");
+    	$('#trail_desc').append("No description available. Try another trail!");
     } else {   // else, display trail description
-        $('#trail_desc').append(trail_array[trail_name][1]);
-        $j("#trail_desc").fadeIn(500);
+    	$('#trail_desc').append(trail_array[trail_name][1]);
+    	$j("#trail_desc").fadeIn(500);
     }
 };
 
