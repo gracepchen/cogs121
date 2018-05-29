@@ -36,27 +36,27 @@ $j(document).ready(() => {
 });
 
     $("#suggest").click(function() {
-    	$('#visitor_form').css("display", "block");
+    	$j('#visitor_form').fadeIn(500);
     });
 
     $("#send_suggestion").click(function() {
     	alert("Recommendation received! Thank you for your suggestion.");
-    	$('#visitor_form').css("display", "none");
+    	$j('#visitor_form').fadeOut(500);
     });
 
     $("#close_suggestion").click(function() {
-    	$('#visitor_form').css("display", "none");
+    	$j('#visitor_form').fadeOut(500);
     });
 
 // PAGE PREP FUNCTIONS
 $(".title").hide();
-$j(".title").fadeIn(1000);
+$j(".title").fadeIn(800);
 $("#map").hide();
-$j("#map").delay(500).fadeIn(1000);
+$j("#map").delay(400).fadeIn(800);
 $(".btnbg").hide();
-$j(".btnbg").delay(1000).fadeIn(1000);
+$j(".btnbg").delay(800).fadeIn(800);
 $(".bg").hide();
-$j(".bg").delay(1500).fadeIn(1000);
+$j(".bg").delay(1200).fadeIn(800);
 
     //active button toggler
     $(".btn-outline-success").click(function() {
