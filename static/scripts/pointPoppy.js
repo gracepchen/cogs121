@@ -29,11 +29,11 @@ $j(document).ready(() => {
     		reason_to_add: $('#insertReasonBox').val()
     	});
 
-    // clear fields
-    $('#insertNameBox').val("");
-    $('#insertDescBox').val("");
-    $('#insertReasonBox').val("");
-});
+        // clear fields
+        $('#insertNameBox').val("");
+        $('#insertDescBox').val("");
+        $('#insertReasonBox').val("");
+    });
 
     $("#suggest").click(function() {
     	$j('#visitor_form').fadeIn(500);
@@ -48,15 +48,15 @@ $j(document).ready(() => {
     	$j('#visitor_form').fadeOut(500);
     });
 
-// PAGE PREP FUNCTIONS
-$(".title").hide();
-$j(".title").fadeIn(800);
-$("#map").hide();
-$j("#map").delay(400).fadeIn(800);
-$(".btnbg").hide();
-$j(".btnbg").delay(800).fadeIn(800);
-$(".bg").hide();
-$j(".bg").delay(1200).fadeIn(800);
+    // PAGE PREP FUNCTIONS
+    $(".title").hide();
+    $j(".title").fadeIn(800);
+    $("#map").hide();
+    $j("#map").delay(400).fadeIn(800);
+    $(".btnbg").hide();
+    $j(".btnbg").delay(800).fadeIn(800);
+    $(".bg").hide();
+    $j(".bg").delay(1200).fadeIn(800);
 
     //active button toggler
     $(".btn-outline-success").click(function() {
