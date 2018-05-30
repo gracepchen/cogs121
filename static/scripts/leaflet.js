@@ -6,6 +6,8 @@ let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 let park, popular; // circle location variable, boolean for popular park
 let parkCoordsArray = [];
 
+let circleArray = [];
+
 // original map
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 
@@ -30,6 +32,8 @@ $j.ajax({
 }).fail((err) => {
   	throw err;
 });
+
+//$j('.parkid').click();
 
 // display park info on the right side
 function dataCall(e) {
@@ -217,9 +221,11 @@ function getCoords(parkInfo) {
                 park.on('click', dataCall); // get data when clicking circle
 
                 parkCoordsArray[j] = [lat, long]; // save coords of every park in an array for generating google maps
+                circleArray.push(park);
             }
         }
     }
+    console.log(circleArray);
     // console.log(parkCoordsArray);
 }
 
@@ -242,6 +248,19 @@ function createCircle(popular, lat, long) {
     	radius: rad
     }).addTo(my_map).on("click", circleClick);
 
+}
+
+function centerOnPark(e) {
+    let clickedParkId = e.target.id;
+    let clickedParkCircle = 0;
+    
+    for(i in circleArray) {
+        if(i.id === clickedParkId) {
+            i = clickedParkCircle;
+        }
+    }
+
+    my_map.fitBounds(clickedParkCircle.getBounds());
 }
 
 // fix map on California
