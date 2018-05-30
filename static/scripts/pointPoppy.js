@@ -162,6 +162,7 @@ $j(".bg").delay(1200).fadeIn(800);
     document.getElementById("Trails").style.display = "block";
     document.getElementById("Weather").style.display = "none";
     document.getElementById("Gallery").style.display = "none";
+		document.getElementById("Hours").style.display = "none";
 
 });
 
@@ -251,6 +252,7 @@ function displayParkInfo(parkId, parkInfo) {
 
     $j('#pics').fadeIn(500);
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
+		$('#hoursInfo').html(parkInfo.data[i].operatingHours);	// change hours info
 }
 
 $j('.carousel-control-prev').click(function() {
@@ -308,7 +310,7 @@ function getParkData(trailgallery) { //shows tabs
 	document.getElementById(trailgallery).style.display = "block";
 };
 
-// select trail box - insert description into box 
+// select trail box - insert description into box
 function showTrailInfo(trail_name) {
 	console.log("Showing trail information...");
 	// console.log("showTrailInfo() - trail number is: " + trail_name);
@@ -329,6 +331,8 @@ function showTrailInfo(trail_name) {
     	$j("#trail_desc").fadeIn(500);
     }
 };
+
+//select visitor center info
 
 
   // $("#trail_length").html('');
