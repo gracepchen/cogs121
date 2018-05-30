@@ -62,7 +62,7 @@ app.post('/trails/:parkid', (request, response) => {
 				trailList = makeTrailList(null, res.body); // callback returns the JSON from unirest
 				response.send(trailList);
 			}
-		});
+	    });
 });
 
 
@@ -72,10 +72,13 @@ function makeTrailList(error, result) {
 
 	if (error === null) {
 		//console.log(result);
+        console.log(result.places[0].lat);
 		for (let i = 0; i < result.places.length; i++) {
             
 			// add trail names and descriptions to array
-            trail_names[i] = [result.places[i].name, result.places[i].description]; 
+            trail_names[i] = [result.places[i].name,
+                result.places[i].description, result.places[i].lat,
+                result.places[i].lon]; 
 
         }
 

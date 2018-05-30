@@ -1,4 +1,7 @@
 const mapboxApiUrl = 'https://api.mapbox.com/styles/v1/lamqpham/cjhrdq97v5ou42rtmf9a9pzif/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGFtcXBoYW0iLCJhIjoiY2pocDlxcXVuMHJqMjM3cHZrOHZ2OTlzeCJ9.2uEA41JAztSmpyqfLq9EVQ'
+const trailLatIndex = 2;
+const trailLonIndex = 3;
+
 var my_map = L.map('map').setView([37.641856, -120.605543], 5);
 let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 "chis", "lavo", "moja", "muwo", "pinn", "samo", "yose"];
@@ -6,6 +9,7 @@ let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 let park, popular; // circle location variable, boolean for popular park
 let parkCoordsArray = [];
 
+let trailCircleArray = [];
 let circleArray = [];
 
 // original map
@@ -115,7 +119,7 @@ function dataCall(e) {
         }).done((result) => {
 
             console.log(result[0][0]); // name of first trail
-            trail_array = result;
+            trailCircleArray = result;
 
             // clear trail select box
             $j('#trailSelect').hide();
@@ -130,7 +134,7 @@ function dataCall(e) {
 
                 let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
                 $("#trailSelect").append(trail_option);
-
+                console.log("lat: " + result[i][2] + " lon: " + result[i][3]);
             }
             // console.log(result[2][1]);
 
@@ -225,7 +229,6 @@ function getCoords(parkInfo) {
             }
         }
     }
-    console.log(circleArray);
     // console.log(parkCoordsArray);
 }
 
@@ -255,13 +258,21 @@ function centerOnPark(e) {
     let clickedParkCircle = 0;
     
     for(i in circleArray) {
-        console.log(circleArray[i].id);
         if(circleArray[i].id === clickedParkId) {
             clickedParkCircle = circleArray[i];
         }
     }
 
     my_map.fitBounds(clickedParkCircle.getBounds());
+}
+
+function showTrailAndPin(trailName) {
+    showTrailInfo(trailName);
+    
+    let trailLat = trail_array[trailName][trailLatIndex];
+    let trailLon = trail_array[trailName][trailLonIndex];
+
+    L.marker([trailLat, trailLon]).addTo(my_map);
 }
 
 // fix map on California
