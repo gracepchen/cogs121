@@ -1,7 +1,7 @@
 const mapboxApiUrl = 'https://api.mapbox.com/styles/v1/lamqpham/cjhrdq97v5ou42rtmf9a9pzif/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGFtcXBoYW0iLCJhIjoiY2pocDlxcXVuMHJqMjM3cHZrOHZ2OTlzeCJ9.2uEA41JAztSmpyqfLq9EVQ'
 var my_map = L.map('map').setView([37.641856, -120.605543], 5);
 let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
-"chis", "lavo", "moja", "muwo", "pinn", "samo"];
+"chis", "lavo", "moja", "muwo", "pinn", "samo", "yose"];
 
 let park, popular; // circle location variable, boolean for popular park
 let parkCoordsArray = [];
@@ -33,7 +33,7 @@ $j.ajax({
   	throw err;
 });
 
-//$j('.parkid').click();
+$j('.parkid').click(centerOnPark);
 
 // display park info on the right side
 function dataCall(e) {
@@ -255,8 +255,9 @@ function centerOnPark(e) {
     let clickedParkCircle = 0;
     
     for(i in circleArray) {
-        if(i.id === clickedParkId) {
-            i = clickedParkCircle;
+        console.log(circleArray[i].id);
+        if(circleArray[i].id === clickedParkId) {
+            clickedParkCircle = circleArray[i];
         }
     }
 
