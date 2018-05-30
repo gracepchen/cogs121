@@ -11,6 +11,7 @@ Visually, we colored the containers and changed the font to fit with the theme o
 ## Data Visualization Screenshots
 ![Full-page with recommendation](https://i.imgur.com/QGSZ8Mj.png)
 ![Zoomed-in](https://i.imgur.com/E7Lkzg1.png)
+![Full](https://i.imgur.com/YAQxIEu.png)
 
 ### Data Visualization Description
 We used Leaflet as our main data visualization. Since our app centers around the state of California, we start with a zoomed in California state map on the landing page. The users have free rein to zoom in and out as they please, but are limited to the boundaries of the state. Each circle on the map represents a national park. When selected, the map zooms in on the  park and the corresponding park information displays on the right hand side of the screen. The map itself is a rugged terrain map, evoking the perception of tamed wilderness.
