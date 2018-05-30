@@ -32,12 +32,12 @@ input {
 }
 
 .buttons {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   margin-bottom: 3%;
-  margin-left: 15px;
-  max-width: 50%;
+  margin-left: 0px;
+  /*max-width: 50%;*/
 }
 
 .btn.btn-outline-success {
@@ -97,7 +97,7 @@ input {
 }
 
 .btnbg {
-  width: 87vh;
+  width: 100%;
   color: #FDF7F6;
   background-color: #DC3D4C;
   border-style: solid;
