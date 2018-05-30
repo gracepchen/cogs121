@@ -109,7 +109,7 @@ function dataCall(e) {
             }).done((result) => {
 
             	console.log(result[0][0]); // name of first trail
-              trail_array = result; 
+              trail_array = result;
 
                 // clear trail select box
                 $j('#trailSelect').hide();
@@ -123,7 +123,7 @@ function dataCall(e) {
 
                     let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
                     $("#trailSelect").append(trail_option);
-                    
+
                 }
                 // console.log(result[2][1]);
 
@@ -201,6 +201,9 @@ if (parkInfo.data[j].parkCode === 'redw' ||
     	park.on('mouseover', function (e) {
     		this.openPopup();
     	});
+			park.on('mouseout', function (e) {
+				this.closePopup();
+			});
     	park.on('click', function (e) {
     		this.openPopup();
     	});
