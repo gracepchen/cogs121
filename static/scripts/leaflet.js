@@ -34,17 +34,16 @@ $j.ajax({
 	method: 'GET',
 }).done((result) => {
       getCoords(result); // create map circles
-}).fail((err) => {
+  }).fail((err) => {
   	throw err;
-});
+  });
 
-$j('.parkid').click(centerOnPark);
+  $j('.parkid').click(centerOnPark);
 
 // display park info on the right side
 function dataCall(e) {
 
     // change column size at beginning
-
     $("#map-holder").addClass("col-sm-6");
     $("#map-holder").removeClass("col-sm-8");
     $("#info-holder").addClass("col-sm-6");
@@ -65,8 +64,10 @@ function dataCall(e) {
 
     // reset to Trails select
     document.getElementById("Trails").style.display = "block";
+    document.getElementById("Spots").style.display = "none";
     document.getElementById("Weather").style.display = "none";
     document.getElementById("Gallery").style.display = "none";
+    document.getElementById("Hours").style.display = "none";
 
 	// OLD ------- get park info from map
     // var idText = $('#' + e.target.id).text();
@@ -106,14 +107,14 @@ function dataCall(e) {
         url: NPSUrlAll,
         method: 'GET',
     }).done((result) => {
-      	let parkCoords = getTrailCoords(e.target.id, result);
+       let parkCoords = getTrailCoords(e.target.id, result);
 
-      	const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
-      	parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
-      	"&q[activities_activity_type_name_eq]=hiking&radius=75";
-      	console.log(trailURL);
+       const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
+       parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
+       "&q[activities_activity_type_name_eq]=hiking&radius=75";
+       console.log(trailURL);
 
-      	$j.ajax({
+       $j.ajax({
             url: parkUrl, // trails/parkID
             method: 'POST',
             data: { parkLocation: trailURL }
@@ -131,13 +132,22 @@ function dataCall(e) {
 
             // load trail names into select box
             for (let i = 0; i < result.length; i++) {
-                        if (result[i][1] === null) continue;  // skip the ones without descriptions
+                        // if (result[i][1] === null) continue;  // skip the ones without descriptions
 
-                let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                $("#trailSelect").append(trail_option);
-                console.log("lat: " + result[i][2] + " lon: " + result[i][3]);
-            }
+                        let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                        $("#trailSelect").append(trail_option);
+                        // console.log("lat: " + result[i][2] + " lon: " + result[i][3]);
+                    }
             // console.log(result[2][1]);
+
+            //load spot names
+            for (let i = 0; i < result.length; i++) {
+                    if (result[i][1] === null) continue;  // skip the ones without descriptions
+                    if (!result[i][0].includes("Trail")){
+                       let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                       $("#spotSelect").append(spot_option);
+                   }
+               }
 
             $j('#trailSelect').fadeIn(500);
 
@@ -153,12 +163,12 @@ function dataCall(e) {
 
 // zoom in and highlight green button
 function circleClick(e) {
-	 my_map.fitBounds(e.target.getBounds());
+  my_map.fitBounds(e.target.getBounds());
 
      // change selected green button based on map click
      $('#' + e.target.id).toggleClass("active");
      $(".btn-outline-success").not('#' + e.target.id).removeClass("active");
-};
+ };
 
 // get coordinates of park and draw a circle
 function getCoords(parkInfo) {
@@ -202,9 +212,9 @@ function getCoords(parkInfo) {
                     parkInfo.data[j].parkCode === 'deva' ||
                     parkInfo.data[j].parkCode === 'yose') {
                     popular = 1;
-                } else {
-                    popular = 0;
-                }
+            } else {
+                popular = 0;
+            }
 
                 // create clickable circle
                 createCircle(popular, lat, lng);

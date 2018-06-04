@@ -81,7 +81,7 @@ $j(document).ready(() => {
 
         	const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
         	parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
-        	"&q[activities_activity_type_name_eq]=hiking&radius=75";
+        	"&q[activities_activity_type_name_eq]=hiking&radius=40";
 
         	console.log(trailURL);
         	$j.ajax({
@@ -98,41 +98,41 @@ $j(document).ready(() => {
                 if ($("#trailSelect").html() != result.trails) {
                 	$("#trailSelect").html('');
                 }
-								// clear spot select box
+
+                // clear spot select box
                 $j('#spotSelect').hide();
                 if ($("#spotSelect").html() != result.trails) {
-                	$("#spotSelect").html('');
-                }
+                  $("#spotSelect").html('');
+              }
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
                     //if (result[i][1] === null) continue;  // skip the ones without descriptions
-										if (result[i][0].includes("Trail")){
-											let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-	                    $("#trailSelect").append(trail_option);
-										}
-
-                }
-								//load spot names
-								for (let i = 0; i < result.length; i++) {
+                    if (result[i][0].includes("Trail")){
+                       let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                       $("#trailSelect").append(trail_option);
+                   }
+               }
+			
+            //load spot names
+			for (let i = 0; i < result.length; i++) {
                     if (result[i][1] === null) continue;  // skip the ones without descriptions
-										if (!result[i][0].includes("Trail")){
-											let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-	                    $("#spotSelect").append(spot_option);
-										}
+                    if (!result[i][0].includes("Trail")){
+                       let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                       $("#spotSelect").append(spot_option);
+                   }
+               }
 
-                }
+               $j('#trailSelect').fadeIn(500);
+               $j('#spotSelect').fadeIn(500);
 
-                $j('#trailSelect').fadeIn(500);
-								$j('#spotSelect').fadeIn(500);
-
-            }).fail((err) => {
-            	throw err;
-            });
-        }).fail((err) => {
-        	console.log("Failure");
-        	throw err;
-        });
+           }).fail((err) => {
+             throw err;
+         });
+       }).fail((err) => {
+         console.log("Failure");
+         throw err;
+     });
 
         /*
         (result) => {
@@ -177,10 +177,10 @@ $j(document).ready(() => {
 
     // reset to Trails select
     document.getElementById("Trails").style.display = "block";
-		document.getElementById("Spots").style.display = "none";
+    document.getElementById("Spots").style.display = "none";
     document.getElementById("Weather").style.display = "none";
     document.getElementById("Gallery").style.display = "none";
-		document.getElementById("Hours").style.display = "none";
+    document.getElementById("Hours").style.display = "none";
 
 });
 
@@ -271,20 +271,20 @@ function displayParkInfo(parkId, parkInfo) {
     $j('#pics').fadeIn(500);
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
 		$('#hoursInfo').html(parkInfo.data[i].operatingHours);	// change hours info
-}
+    }
 
-$j('.carousel-control-prev').click(function() {
-	$('#carousel').carousel('prev');
-});
+    $j('.carousel-control-prev').click(function() {
+     $('#carousel').carousel('prev');
+ });
 
-$j('.carousel-control-next').click(function() {
-	$('#carousel').carousel('next');
-});
+    $j('.carousel-control-next').click(function() {
+     $('#carousel').carousel('next');
+ });
 
-function getTrailCoords(parkIdToSearch, parkVals) {
-	let coords = 0;
-	const latOffset = 4;
-	const lngOffset = 7;
+    function getTrailCoords(parkIdToSearch, parkVals) {
+     let coords = 0;
+     const latOffset = 4;
+     const lngOffset = 7;
 
     //console.log(parkVals);
     for(const i of parkVals.data) {
