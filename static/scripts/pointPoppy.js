@@ -77,15 +77,17 @@ $j(document).ready(() => {
     	$(".btn-outline-secondary").not(this).removeClass("active");
     });
 
-    $j('.parkid').click(function(event) { // when clicking Sequoia button
-        // NEW get trail names and put in box - trails API, generalize later for other parks
+    //Populate park information when clicking on buttons
+    $j('.parkid').click(function(event) { 
+        // Get trail names and put in box - trails API, generalize later for other parks
         const parkUrl = "trails/" + event.target.id;
 
-
+        // Grab lat and lng for park
         $j.ajax({
         	url: NPSUrlAll,
         	method: 'GET',
         }).done((result) => {
+            // Generate a new url for second api call based on lat and lng
         	parkCoords = getTrailCoords(event.target.id, result);
 
         	const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
@@ -93,6 +95,8 @@ $j(document).ready(() => {
         	"&q[activities_activity_type_name_eq]=hiking&radius=40";
 
         	console.log(trailURL);
+
+            // Generate park list for each trail
         	$j.ajax({
         		url: parkUrl,
         		method: 'POST',
@@ -146,6 +150,7 @@ $j(document).ready(() => {
 
     });
 
+    // Display park description, pictures and weather information
     $j('.parkid').click(function(event) { // on park button click
     	$j.ajax({
     		url: NPSurl,
@@ -267,17 +272,20 @@ function displayParkInfo(parkId, parkInfo) {
 
     $j('#pics').fadeIn(500);
     $('#weatherInfo').html(parkInfo.data[i].weatherInfo); // change weather
-		$('#hoursInfo').html(parkInfo.data[i].operatingHours);	// change hours info
-    }
+	$('#hoursInfo').html(parkInfo.data[i].operatingHours);	// change hours info
+}
 
-    $j('.carousel-control-prev').click(function() {
-     $('#carousel').carousel('prev');
- });
+// Set up click listeners on the carousel buttons
+$j('.carousel-control-prev').click(function() {
+    $('#carousel').carousel('prev');
+});
 
-    $j('.carousel-control-next').click(function() {
-     $('#carousel').carousel('next');
- });
+$j('.carousel-control-next').click(function() {
+    $('#carousel').carousel('next');
+});
 
+// This Function grabs the latitude and longitude data of a specific park from the list of all parks
+// provided by the NPS api
 function getTrailCoords(parkIdToSearch, parkVals) {
     let coords = 0;
     const latOffset = 4;
@@ -340,6 +348,7 @@ function showTrailInfo(trail_name, parkTrails) {
     }
 };
 
+//Separate function for displaying information about spots, rather than trails
 function showSpotInfo(spot_name, parkTrails) {
 	console.log("Showing spot information...");
 
