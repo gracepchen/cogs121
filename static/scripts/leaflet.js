@@ -12,6 +12,7 @@ let parkCoordsArray = [];
 let trailCircleArray = [];
 let circleArray = [];
 
+let prevMarker = 0;
 // original map
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 
@@ -266,13 +267,19 @@ function centerOnPark(e) {
     my_map.fitBounds(clickedParkCircle.getBounds());
 }
 
+//Function that places a pin at the selected trail location
 function showTrailAndPin(trailName) {
     showTrailInfo(trailName);
     
     let trailLat = trail_array[trailName][trailLatIndex];
     let trailLon = trail_array[trailName][trailLonIndex];
+    
+    if(prevMarker != 0) {
+        prevMarker.remove();
+    }
+    prevMarker = L.marker([trailLat, trailLon]).addTo(my_map);
 
-    L.marker([trailLat, trailLon]).addTo(my_map);
+    myMap.panTo(prevMarker.getLatLng());
 }
 
 // fix map on California
