@@ -53,8 +53,13 @@ $j.ajax({
 
   $j('.parkid').click(centerOnPark);
 
+
+
 // display park info on the right side
 function dataCall(e) {
+
+      trailCircleArray = 0;
+      trail_array = 0;
 
     // change column size at beginning
     $("#map-holder").addClass("col-sm-6");
@@ -296,6 +301,8 @@ function showTrailAndPin(trailName, clickedId) {
 
     // Center map on new pin
     my_map.panTo(prevMarker.getLatLng());
+
+    trailCircleArray = 0;
 }
 
 // fix map on California

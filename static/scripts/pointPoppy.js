@@ -7,12 +7,12 @@
  *
  */
 
-let trail_data;
-let i = 0;
-let trail_array = [];
-let parkCoords = [];
-const latIndex = 0;
-const lngIndex = 1;
+ let trail_data;
+ let i = 0;
+ let trail_array = [];
+ let parkCoords = [];
+ const latIndex = 0;
+ const lngIndex = 1;
 
 // NPS API stuff ----------------------
 // URL to specifically return pictures of the national parks
@@ -81,6 +81,8 @@ $j(document).ready(() => {
     $j('.parkid').click(function(event) { 
         // Get trail names and put in box - trails API, generalize later for other parks
         const parkUrl = "trails/" + event.target.id;
+        trailCircleArray = 0;
+        trail_array = 0;
 
         // Grab lat and lng for park
         $j.ajax({
@@ -88,20 +90,20 @@ $j(document).ready(() => {
         	method: 'GET',
         }).done((result) => {
             // Generate a new url for second api call based on lat and lng
-        	parkCoords = getTrailCoords(event.target.id, result);
+            parkCoords = getTrailCoords(event.target.id, result);
 
-        	const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
-        	parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
-        	"&q[activities_activity_type_name_eq]=hiking&radius=40";
+            const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
+            parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
+            "&q[activities_activity_type_name_eq]=hiking&radius=40";
 
-        	console.log(trailURL);
+            console.log(trailURL);
 
             // Generate park list for each trail
-        	$j.ajax({
-        		url: parkUrl,
-        		method: 'POST',
-        		data: { parkLocation: trailURL }
-        	}).done((result) => {
+            $j.ajax({
+            	url: parkUrl,
+            	method: 'POST',
+            	data: { parkLocation: trailURL }
+            }).done((result) => {
 
                 trail_array = result; // save this value so that we can get the descriptions later
 
@@ -114,26 +116,26 @@ $j(document).ready(() => {
                 // clear spot select box
                 $j('#spotSelect').hide();
                 if ($("#spotSelect").html() != result.trails) {
-                    $("#spotSelect").html('');
+                	$("#spotSelect").html('');
                 }
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
                     //if (result[i][1] === null) continue;  // skip the ones without descriptions
                     if (result[i][0].includes("Trail")){
-                        let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                        $("#trailSelect").append(trail_option);
+                    	let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                    	$("#trailSelect").append(trail_option);
                     }
                 }
-			
+                
                 //load spot names
-			    for (let i = 0; i < result.length; i++) {
-                    if (result[i][1] === null) {
+                for (let i = 0; i < result.length; i++) {
+                	if (result[i][1] === null) {
                         continue;  // skip the ones without descriptions
                     }
                     if (!result[i][0].includes("Trail")){
-                        let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                        $("#spotSelect").append(spot_option);
+                    	let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                    	$("#spotSelect").append(spot_option);
                     }
                 }
 
@@ -141,11 +143,11 @@ $j(document).ready(() => {
                 $j('#spotSelect').fadeIn(500);
 
             }).fail((err) => {
-                throw err;
+            	throw err;
             });
         }).fail((err) => {
-            console.log("Failure");
-            throw err;
+        	console.log("Failure");
+        	throw err;
         });
 
     });
@@ -168,10 +170,10 @@ $j(document).ready(() => {
 
         // change column size at beginning
         $('#map-holder').click(function(){
-            $("#map-holder").addClass("col-sm-6");
-            $("#map-holder").removeClass("col-sm-8");
-            $("#info-holder").addClass("col-sm-6");
-            $("#info-holder").removeClass("col-sm-4");
+        	$("#map-holder").addClass("col-sm-6");
+        	$("#map-holder").removeClass("col-sm-8");
+        	$("#info-holder").addClass("col-sm-6");
+        	$("#info-holder").removeClass("col-sm-4");
         });
 
         // select Trails button, make active
@@ -263,8 +265,8 @@ function displayParkInfo(parkId, parkInfo) {
     		$('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
           //$('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 
-        }
-        $('.carousel-item').first().addClass('active');
+      }
+      $('.carousel-item').first().addClass('active');
         //$('.carousel-indicators > li').first().addClass('active');
         $('#carousel').carousel();
     });
@@ -277,36 +279,36 @@ function displayParkInfo(parkId, parkInfo) {
 
 // Set up click listeners on the carousel buttons
 $j('.carousel-control-prev').click(function() {
-    $('#carousel').carousel('prev');
+	$('#carousel').carousel('prev');
 });
 
 $j('.carousel-control-next').click(function() {
-    $('#carousel').carousel('next');
+	$('#carousel').carousel('next');
 });
 
 // This Function grabs the latitude and longitude data of a specific park from the list of all parks
 // provided by the NPS api
 function getTrailCoords(parkIdToSearch, parkVals) {
-    let coords = 0;
-    const latOffset = 4;
-    const lngOffset = 7;
+	let coords = 0;
+	const latOffset = 4;
+	const lngOffset = 7;
 
-    for(const i of parkVals.data) {
-    	if(i.parkCode === parkIdToSearch) {
-    		let comma = i.latLong.indexOf(",");
-    		let lat = i.latLong.substring(latOffset, comma);
-    		let lng = i.latLong.substring(comma + lngOffset, i.latLong.length);
+	for(const i of parkVals.data) {
+		if(i.parkCode === parkIdToSearch) {
+			let comma = i.latLong.indexOf(",");
+			let lat = i.latLong.substring(latOffset, comma);
+			let lng = i.latLong.substring(comma + lngOffset, i.latLong.length);
 
-    		if(lat === ''){
-    			console.log("no lat/lng data available");
-    		}
+			if(lat === ''){
+				console.log("no lat/lng data available");
+			}
 
-    		coords = [lat, lng];
-    		break;
-    	}
-    }
+			coords = [lat, lng];
+			break;
+		}
+	}
 
-    return coords;
+	return coords;
 }
 
 // trail/gallery/weather tab functions
@@ -331,19 +333,19 @@ function showTrailInfo(trail_name, parkTrails) {
 
     // if Trail Description == null, say "No description available"
     if(parkTrails == 0) {
-        if (trail_array[trail_name][1] === null) {
-            $('#trail_desc').append("No description available. Try another trail!");
+    	if (trail_array[trail_name][1] === null) {
+    		$('#trail_desc').append("No description available. Try another trail!");
         } else {   // else, display trail description
-            $('#trail_desc').append(trail_array[trail_name][1]);
-            $j("#trail_desc").fadeIn(500);
+        	$('#trail_desc').append(trail_array[trail_name][1]);
+        	$j("#trail_desc").fadeIn(500);
         }
     }
     else {
-        if (parkTrails[trail_name][1] === null) {
-            $('#trail_desc').append("No description available. Try another trail!");
+    	if (parkTrails[trail_name][1] === null) {
+    		$('#trail_desc').append("No description available. Try another trail!");
         } else {   // else, display trail description
-            $('#trail_desc').append(parkTrails[trail_name][1]);
-            $j("#trail_desc").fadeIn(500);
+        	$('#trail_desc').append(parkTrails[trail_name][1]);
+        	$j("#trail_desc").fadeIn(500);
         }
     }
 };
@@ -360,19 +362,19 @@ function showSpotInfo(spot_name, parkTrails) {
 
     // if Trail Description == null, say "No description available"
     if(parkTrails == 0) {
-        if (trail_array[spot_name][1] === null) {
-            $('#trail_desc').append("No description available. Try another trail!");
+    	if (trail_array[spot_name][1] === null) {
+    		$('#trail_desc').append("No description available. Try another trail!");
         } else {   // else, display trail description
-            $('#trail_desc').append(trail_array[spot_name][1]);
-            $j("#trail_desc").fadeIn(500);
+        	$('#trail_desc').append(trail_array[spot_name][1]);
+        	$j("#trail_desc").fadeIn(500);
         }
     }
     else {
-        if (parkTrails[spot_name][1] === null) {
-            $('#spot_desc').append("No description available. Try another spot!");
+    	if (parkTrails[spot_name][1] === null) {
+    		$('#spot_desc').append("No description available. Try another spot!");
         } else {   // else, display trail description
-            $('#spot_desc').append(parkTrails[spot_name][1]);
-            $j("#spot_desc").fadeIn(500);
+        	$('#spot_desc').append(parkTrails[spot_name][1]);
+        	$j("#spot_desc").fadeIn(500);
         }
     }
 };
