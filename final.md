@@ -60,3 +60,5 @@ This is the Javascript file that controls all user interactions (excluding the m
 
 ### Demo Video
 [Point Poppy demo video](https://www.youtube.com/watch?v=d0YdVHq1THQ)
+
+**__ Go explore! **__
