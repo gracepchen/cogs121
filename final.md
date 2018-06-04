@@ -1,7 +1,5 @@
 ## Team Propel
 
-briefly describing all of their contributions to your team's project.
-
 ### Team Members & Contributions
 #### Grace Chen
 * Added place recommendations with Firebase
@@ -9,21 +7,25 @@ briefly describing all of their contributions to your team's project.
 * Set subtle animations and overall structure of page
 * Automated generating map circles
 * Dynamically generated Google Maps links based on park coordinates 
+* Created Trail, Weather, Gallery categories
 
 #### Aaron Liu
 * Generate trail markers when clicking a trail/spot
 * Display corresponding information when clicking a map circle
-* 
+* Code refactoring: cleaning up code and creating functions for multiple uses
+* General work on retrieving correct latitude and longitude data from api for both parks and trails
+* Set up extracting and organizing data from TrailApi based on coordinates previously retrieved from the NPS api. 
 
 #### Katya Noble
-* Added Spots category
 * Cleaned up files
-* 
+* Milestone writeups
+* Created demo video
 
 #### Lam Pham
 * Set up Leaflet map and its functionality
 * General styling
 * Added image carousel for more efficient loading
+* Added Spots category
 
 ---
 
@@ -52,4 +54,4 @@ This is the Javascript file that allows the map to dynamically resize according 
 ---
 
 ### Demo Video
-[Point Poppy demo video](www.youtube.com)
+[Point Poppy demo video](https://www.youtube.com/watch?v=d0YdVHq1THQ)
