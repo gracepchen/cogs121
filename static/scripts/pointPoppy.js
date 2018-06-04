@@ -324,7 +324,7 @@ function getParkData(trailgallery) { //shows tabs
 };
 
 // select trail box - insert description into box
-function showTrailInfo(trail_name) {
+function showTrailInfo(trail_name, parkTrails) {
 	console.log("Showing trail information...");
 	// console.log("showTrailInfo() - trail number is: " + trail_name);
 	//console.log(trail_array[trail_name]);
@@ -337,15 +337,25 @@ function showTrailInfo(trail_name) {
     $('#trail_desc').html("<h5>Description: </h5>");
 
     // if Trail Description == null, say "No description available"
-    if (trail_array[trail_name][1] === null) {
-    	$('#trail_desc').append("No description available. Try another trail!");
-    } else {   // else, display trail description
-    	$('#trail_desc').append(trail_array[trail_name][1]);
-    	$j("#trail_desc").fadeIn(500);
+    if(parkTrails == 0) {
+        if (trail_array[trail_name][1] === null) {
+            $('#trail_desc').append("No description available. Try another trail!");
+        } else {   // else, display trail description
+            $('#trail_desc').append(trail_array[trail_name][1]);
+            $j("#trail_desc").fadeIn(500);
+        }
+    }
+    else {
+        if (parkTrails[trail_name][1] === null) {
+            $('#trail_desc').append("No description available. Try another trail!");
+        } else {   // else, display trail description
+            $('#trail_desc').append(parkTrails[trail_name][1]);
+            $j("#trail_desc").fadeIn(500);
+        }
     }
 };
 
-function showSpotInfo(spot_name) {
+function showSpotInfo(spot_name, parkTrails) {
 	console.log("Showing spot information...");
 
     // reset values
@@ -355,11 +365,21 @@ function showSpotInfo(spot_name) {
     $('#spot_desc').html("<h5>Description: </h5>");
 
     // if Trail Description == null, say "No description available"
-    if (trail_array[spot_name][1] === null) {
-    	$('#spot_desc').append("No description available. Try another spot!");
-    } else {   // else, display trail description
-    	$('#spot_desc').append(trail_array[spot_name][1]);
-    	$j("#spot_desc").fadeIn(500);
+    if(parkTrails == 0) {
+        if (trail_array[spot_name][1] === null) {
+            $('#trail_desc').append("No description available. Try another trail!");
+        } else {   // else, display trail description
+            $('#trail_desc').append(trail_array[spot_name][1]);
+            $j("#trail_desc").fadeIn(500);
+        }
+    }
+    else {
+        if (parkTrails[spot_name][1] === null) {
+            $('#spot_desc').append("No description available. Try another spot!");
+        } else {   // else, display trail description
+            $('#spot_desc').append(parkTrails[spot_name][1]);
+            $j("#spot_desc").fadeIn(500);
+        }
     }
 };
 

@@ -9,7 +9,7 @@ let parkCodes = ["redw", "seki", "jotr", "cabr", "alca", "deva", "camo",
 let park, popular; // circle location variable, boolean for popular park
 let parkCoordsArray = [];
 
-let trailCircleArray = [];
+let trailCircleArray = 0;
 let circleArray = [];
 
 let prevMarker = 0;
@@ -175,7 +175,7 @@ function getCoords(parkInfo) {
                 // get lat and longitude coordinates
                 // JSON format is "latLong: lat:33.33333333, long: -100.0000000"
                 let lat = '';
-                let long = '';
+                let lng = '';
                 let i = 4; // first digit of lat
 
                 if (parkInfo.data[j].latLong === "") { // validity check
@@ -192,7 +192,7 @@ function getCoords(parkInfo) {
                 }
 
                 for (i = i + 1; i < parkInfo.data[j].latLong.length; i++) {
-                    long = long + parkInfo.data[j].latLong[i]; // get long digits
+                    lng = lng + parkInfo.data[j].latLong[i]; // get long digits
                 }
 
                 // check if park is popular
@@ -207,7 +207,7 @@ function getCoords(parkInfo) {
                 }
 
                 // create clickable circle
-                createCircle(popular, lat, long);
+                createCircle(popular, lat, lng);
 
                 // create popups
                 park.id = parkInfo.data[j].parkCode; // set ID
@@ -225,7 +225,7 @@ function getCoords(parkInfo) {
                 });
                 park.on('click', dataCall); // get data when clicking circle
 
-                parkCoordsArray[j] = [lat, long]; // save coords of every park in an array for generating google maps
+                parkCoordsArray[j] = [lat, lng]; // save coords of every park in an array for generating google maps
                 circleArray.push(park);
             }
         }
@@ -271,15 +271,24 @@ function centerOnPark(e) {
 function showTrailAndPin(trailName, clickedId) {
     console.log(clickedId);
 
+    let trailLat = 0;
+    let trailLng = 0;
+
     if(clickedId === "trailSelect") {
-        showTrailInfo(trailName);
+        showTrailInfo(trailName, trailCircleArray);
     }
     else if(clickedId === "spotSelect") {
-        showSpotInfo(trailName);
+        showSpotInfo(trailName, trailCircleArray);
     }
     
-    let trailLat = trail_array[trailName][trailLatIndex];
-    let trailLon = trail_array[trailName][trailLonIndex];
+    if(trailCircleArray == 0) {
+        trailLat = trail_array[trailName][trailLatIndex];
+        trailLon = trail_array[trailName][trailLonIndex];
+    }
+    else {
+        trailLat = trailCircleArray[trailName][trailLatIndex];
+        trailLon = trailCircleArray[trailName][trailLonIndex];
+    }
     
     if(prevMarker != 0) {
         prevMarker.remove();
