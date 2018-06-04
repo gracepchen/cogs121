@@ -3,10 +3,6 @@ const path = require('path');
 const unirest = require('unirest');
 const bodyParser = require('body-parser');
 
-// var tinify = require("tinify"); // image compressor
-// tinify.key = "-ZwwutwwYVLWKCZQnmDcMlSuDpWs5FFP";
-// tinify.proxy = "http://user:pass@192.168.0.1:8080";
-
 const app = express(); //instantiate express object
 
 app.use(express.static(path.join(__dirname, 'static')));
