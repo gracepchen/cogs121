@@ -20,6 +20,10 @@
 * Cleaned up files
 * Milestone writeups
 * Created demo video
+* Concept idea
+* Made paper prototypes
+* Found APIs and what information to include 
+* Set up initial code structure (skeleton) 
 
 #### Lam Pham
 * Set up Leaflet map and its functionality
