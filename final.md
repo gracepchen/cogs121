@@ -48,9 +48,6 @@ This is the Javascript file that controls user interactions with the map. It gen
 #### static/scripts/pointPoppy.js
 This is the Javascript file that controls all user interactions (excluding the map). It generates corresponding information for each location (e.g. trails, weather, image gallery, etc.) when necessary.
 
-#### static/scripts/resize_map.js
-This is the Javascript file that allows the map to dynamically resize according to the window size.
-
 ---
 
 ### Demo Video
