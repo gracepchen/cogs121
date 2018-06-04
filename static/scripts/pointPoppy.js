@@ -101,13 +101,25 @@ $j(document).ready(() => {
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
-                    if (result[i][1] === null) continue;  // skip the ones without descriptions
+                    //if (result[i][1] === null) continue;  // skip the ones without descriptions
+										if (result[i][0].includes("Trail")){
+											let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+	                    $("#trailSelect").append(trail_option);
+										}
 
-                    let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                    $("#trailSelect").append(trail_option);
+                }
+								//load spot names
+								for (let i = 0; i < result.length; i++) {
+                    if (result[i][1] === null) continue;  // skip the ones without descriptions
+										if (!result[i][0].includes("Trail")){
+											let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+	                    $("#spotSelect").append(spot_option);
+										}
+
                 }
 
                 $j('#trailSelect').fadeIn(500);
+								$j('#spotSelect').fadeIn(500);
 
             }).fail((err) => {
             	throw err;
@@ -160,6 +172,7 @@ $j(document).ready(() => {
 
     // reset to Trails select
     document.getElementById("Trails").style.display = "block";
+		document.getElementById("Spots").style.display = "none";
     document.getElementById("Weather").style.display = "none";
     document.getElementById("Gallery").style.display = "none";
 		document.getElementById("Hours").style.display = "none";
@@ -329,6 +342,24 @@ function showTrailInfo(trail_name) {
     } else {   // else, display trail description
     	$('#trail_desc').append(trail_array[trail_name][1]);
     	$j("#trail_desc").fadeIn(500);
+    }
+};
+
+function showSpotInfo(spot_name) {
+	console.log("Showing spot information...");
+
+    // reset values
+    $("#spot_desc").hide();
+    $("#spot_desc").html('');
+
+    $('#spot_desc').html("<h5>Description: </h5>");
+
+    // if Trail Description == null, say "No description available"
+    if (trail_array[spot_name][1] === null) {
+    	$('#spot_desc').append("No description available. Try another spot!");
+    } else {   // else, display trail description
+    	$('#spot_desc').append(trail_array[spot_name][1]);
+    	$j("#spot_desc").fadeIn(500);
     }
 };
 

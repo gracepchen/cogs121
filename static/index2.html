@@ -23,7 +23,7 @@
 <script type="text/javascript" src="scripts/pointPoppy.js"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-<link href="styles/styles2.css" rel="stylesheet" type="text/css">
+<link href="styles/styles.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
 </head>
@@ -92,6 +92,7 @@
 							<div class="col-sm-12">
 								<!-- tab buttons -->
 								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Trails')" id="trailButton">Trails</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Spots')" id="spotButton">Spots</button>
 								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Gallery')" id="galleryButton">Gallery</button>
 								<button type="button" class="btn btn-outline-secondary" onclick="getParkData('Weather')" id="weatherButton">Weather</button>
 								<!-- <button type="button" class="btn btn-outline-secondary" onclick="getParkData('Hours')" id="hoursButton">Entrance Hours</button> -->
@@ -99,12 +100,31 @@
 
 							<div class="col-sm-12">
 
+								<div id="Spots" class="parkinfo" style="display:none">
+									<!-- trail selector -->
+									<div class="row mt-3">
+										<div class="col-sm-5">
+											<div class="form-group mt-1 mb-0">
+												<label for="spotSelect"><h5>Select a spot:</h5></label>
+												<select multiple class="form-control" id="spotSelect" onchange="showSpotInfo(value);" size="12">
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-7 fixed">
+											<!-- <h5 class="mt-1">Trail Description</h5> -->
+											<p><span id="spot_desc"></span></p>
+											<!-- <p><b>Length: </b><span id="trail_length"></span></p> -->
+											<!-- <p><b>Difficulty: </b><span id="trail_diff"></span></p> -->
+										</div>
+									</div>
+								</div>
+
 								<div id="Trails" class="parkinfo" style="display:none">
 									<!-- trail selector -->
 									<div class="row mt-3">
 										<div class="col-sm-5">
 											<div class="form-group mt-1 mb-0">
-												<label for="trailSelect"><h5>Select a spot:</h5></label>
+												<label for="trailSelect"><h5>Select a trail:</h5></label>
 												<select multiple class="form-control" id="trailSelect" onchange="showTrailInfo(value);" size="12">
 												</select>
 											</div>
