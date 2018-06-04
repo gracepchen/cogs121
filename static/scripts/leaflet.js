@@ -1,3 +1,14 @@
+/*
+ * This file handles the map functionality of the website. It creates a map object using the Leaflet API, and then displays
+ * national parks of interest to the user. The map displays national parks as circles, with more popular parks being outlined
+ * with green, while less popular parks are outlined in red. This file also sets up click listeners on the individual circles
+ * to allow the user to zoom into the area when they've decided the park they want to know more about. This allows the user 
+ * to see the area in more detail. Furthermore, upon clicking on a specific trail from the trail list, the map draws a marker
+ * at the location of the trailhead, using latitude and longitude data provided by an API called TrailAPI. Since our app
+ * is focused on national parks in California, the map's position is locked on the state.
+ *
+ */
+
 const mapboxApiUrl = 'https://api.mapbox.com/styles/v1/lamqpham/cjhrdq97v5ou42rtmf9a9pzif/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGFtcXBoYW0iLCJhIjoiY2pocDlxcXVuMHJqMjM3cHZrOHZ2OTlzeCJ9.2uEA41JAztSmpyqfLq9EVQ'
 const trailLatIndex = 2;
 const trailLonIndex = 3;
@@ -13,11 +24,6 @@ let trailCircleArray = 0;
 let circleArray = [];
 
 let prevMarker = 0;
-// original map
-// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-
-// hiking, more green
-// L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3BjMDAxIiwiYSI6ImNqZ2JtYWphNzBnNnczMmx6bXNkeGFhYzkifQ.6dwOvoXOP5Oln1ltOiI6Bw', {
 
 // cali topography
 L.tileLayer(mapboxApiUrl, {
@@ -69,37 +75,8 @@ function dataCall(e) {
     document.getElementById("Gallery").style.display = "none";
     document.getElementById("Hours").style.display = "none";
 
-	// OLD ------- get park info from map
-    // var idText = $('#' + e.target.id).text();
-    // const reqURL = 'parks/' + idText;
-
-    // console.log(reqURL);
-
-    // $j.ajax({
-    //     url: reqURL,
-    //     type: 'GET',
-    //     dataType: 'json',
-    //     success: (data) => {
-
-    //         $('#intro').html(data.intro);
-
-    //         // load trail names into select box
-    //         if ($("#trailSelect").html() == 0 || $("#trailSelect").html() != data.trails) {
-    //             $("#trailSelect").html(''); // clear select box
-
-    //             for (var i = 0; i < data.trails.length; i++) {
-    //                 // append correct trail names
-    //                 let trail_option = '<option value="' + i + '">' + data.trails[i].name + '</option>';
-    //                 $("#trailSelect").append(trail_option);
-    //             }
-    //             trail_data = data.trails;
-    //         }
-    //     }
-    // });
-
-    // NEW get trail names and put in box - trails API
+    // get trail names and put in box - trails API
     const parkUrl = "trails/" + e.target.id;
-    console.log(parkUrl);
     const latIndex = 0;
     const lngIndex = 1;
 
@@ -112,7 +89,6 @@ function dataCall(e) {
        const trailURL = "https://trailapi-trailapi.p.mashape.com/?lat=" +
        parkCoords[latIndex] + "&lon=" + parkCoords[lngIndex] +
        "&q[activities_activity_type_name_eq]=hiking&radius=75";
-       console.log(trailURL);
 
        $j.ajax({
             url: parkUrl, // trails/parkID
@@ -120,7 +96,6 @@ function dataCall(e) {
             data: { parkLocation: trailURL }
         }).done((result) => {
 
-            console.log(result[0][0]); // name of first trail
             trailCircleArray = result;
 
             // clear trail select box
@@ -132,22 +107,23 @@ function dataCall(e) {
 
             // load trail names into select box
             for (let i = 0; i < result.length; i++) {
-                        // if (result[i][1] === null) continue;  // skip the ones without descriptions
+                // if (result[i][1] === null) continue;  // skip the ones without descriptions
 
-                        let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                        $("#trailSelect").append(trail_option);
-                        // console.log("lat: " + result[i][2] + " lon: " + result[i][3]);
-                    }
-            // console.log(result[2][1]);
+                let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                $("#trailSelect").append(trail_option);
+            }
 
             //load spot names
             for (let i = 0; i < result.length; i++) {
-                    if (result[i][1] === null) continue;  // skip the ones without descriptions
-                    if (!result[i][0].includes("Trail")){
-                       let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                       $("#spotSelect").append(spot_option);
-                   }
-               }
+                if (result[i][1] === null) {
+                    continue;  // skip the ones without descriptions
+                }
+
+                if (!result[i][0].includes("Trail")){
+                    let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                    $("#spotSelect").append(spot_option);
+                }
+            }
 
             $j('#trailSelect').fadeIn(500);
 
@@ -240,7 +216,6 @@ function getCoords(parkInfo) {
             }
         }
     }
-    // console.log(parkCoordsArray);
 }
 
 // draw the circle, change color and size if popular, where popular is a boolean
@@ -279,7 +254,6 @@ function centerOnPark(e) {
 
 //Function that places a pin at the selected trail location
 function showTrailAndPin(trailName, clickedId) {
-    console.log(clickedId);
 
     let trailLat = 0;
     let trailLng = 0;
@@ -312,7 +286,7 @@ function showTrailAndPin(trailName, clickedId) {
 var maxBounds = L.latLngBounds(
     L.latLng(32.089591, -124.965293), //Southwest
     L.latLng(41.977283, -112.868058)  //Northeast
-    );
+);
 
 my_map.setMaxBounds(maxBounds);
 my_map.fitBounds(maxBounds);

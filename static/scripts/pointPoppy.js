@@ -1,3 +1,12 @@
+/*
+ * This file handles most of the data calls and organization for the app. It also handles most of the
+ * button functionality for the app. The app makes requests for information from the NPS (national parks
+ * service) and TrailApi APIs to find and display park and trail locations, descriptions and weather
+ * conditions. Furthermore, this file defines functions to organize the relevant information into 
+ * lists after retrieval to allow the app to quickly display information. 
+ *
+ */
+
 let trail_data;
 let i = 0;
 let trail_array = [];
@@ -6,14 +15,14 @@ const latIndex = 0;
 const lngIndex = 1;
 
 // NPS API stuff ----------------------
+// URL to specifically return pictures of the national parks
 const NPSurl = "https://developer.nps.gov/api/v1/parks?stateCode=CA&" +
 "fields=images%2C%20weatherInfo&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
-// For experimenting with the NPS API, do not use
+// URL for more general NPS api calls, to grab latitude and longitude information
 const NPSUrlAll = "https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=w3MK8VP4xrCkCN83HG80Efj5vrg8o5VsIxQDsI5l";
 
 // var source = tinify.fromUrl(result.data[0].images[0].url);
-// console.log(source);
 // source.toFile("optimized.jpg");
 
 $j(document).ready(() => {
@@ -90,7 +99,6 @@ $j(document).ready(() => {
         		data: { parkLocation: trailURL }
         	}).done((result) => {
 
-                console.log(result[0][0]); // name of first trail
                 trail_array = result; // save this value so that we can get the descriptions later
 
                 // clear trail select box
@@ -102,50 +110,40 @@ $j(document).ready(() => {
                 // clear spot select box
                 $j('#spotSelect').hide();
                 if ($("#spotSelect").html() != result.trails) {
-                  $("#spotSelect").html('');
-              }
+                    $("#spotSelect").html('');
+                }
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
                     //if (result[i][1] === null) continue;  // skip the ones without descriptions
                     if (result[i][0].includes("Trail")){
-                       let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                       $("#trailSelect").append(trail_option);
-                   }
-               }
+                        let trail_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                        $("#trailSelect").append(trail_option);
+                    }
+                }
 			
-            //load spot names
-			for (let i = 0; i < result.length; i++) {
-                    if (result[i][1] === null) continue;  // skip the ones without descriptions
+                //load spot names
+			    for (let i = 0; i < result.length; i++) {
+                    if (result[i][1] === null) {
+                        continue;  // skip the ones without descriptions
+                    }
                     if (!result[i][0].includes("Trail")){
-                       let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
-                       $("#spotSelect").append(spot_option);
-                   }
-               }
+                        let spot_option = '<option value="' + i + '">' + result[i][0] + '</option>';
+                        $("#spotSelect").append(spot_option);
+                    }
+                }
 
-               $j('#trailSelect').fadeIn(500);
-               $j('#spotSelect').fadeIn(500);
+                $j('#trailSelect').fadeIn(500);
+                $j('#spotSelect').fadeIn(500);
 
-           }).fail((err) => {
-             throw err;
-         });
-       }).fail((err) => {
-         console.log("Failure");
-         throw err;
-     });
-
-        /*
-        (result) => {
-
-            console.log(result[0]);
-            for (let i = 0; i < result.length; i++) {
-                let trail_option = '<option value="' + i + '">' + result[i] + '</option>';
-                $("#trailSelect").append(trail_option);
-            }
-
+            }).fail((err) => {
+                throw err;
+            });
         }).fail((err) => {
+            console.log("Failure");
             throw err;
-        });*/
+        });
+
     });
 
     $j('.parkid').click(function(event) { // on park button click
@@ -163,26 +161,26 @@ $j(document).ready(() => {
         	throw err;
         }); // End of NPS API stuff ----------------------
 
-    // change column size at beginning
-    $('#map-holder').click(function(){
-    	$("#map-holder").addClass("col-sm-6");
-    	$("#map-holder").removeClass("col-sm-8");
-    	$("#info-holder").addClass("col-sm-6");
-    	$("#info-holder").removeClass("col-sm-4");
+        // change column size at beginning
+        $('#map-holder').click(function(){
+            $("#map-holder").addClass("col-sm-6");
+            $("#map-holder").removeClass("col-sm-8");
+            $("#info-holder").addClass("col-sm-6");
+            $("#info-holder").removeClass("col-sm-4");
+        });
+
+        // select Trails button, make active
+        $('#trailButton').addClass("active").siblings().removeClass("active");
+        $('#trail_desc').html('');
+
+        // reset to Trails select
+        document.getElementById("Trails").style.display = "block";
+        document.getElementById("Spots").style.display = "none";
+        document.getElementById("Weather").style.display = "none";
+        document.getElementById("Gallery").style.display = "none";
+        document.getElementById("Hours").style.display = "none";
+
     });
-
-    // select Trails button, make active
-    $('#trailButton').addClass("active").siblings().removeClass("active");
-    $('#trail_desc').html('');
-
-    // reset to Trails select
-    document.getElementById("Trails").style.display = "block";
-    document.getElementById("Spots").style.display = "none";
-    document.getElementById("Weather").style.display = "none";
-    document.getElementById("Gallery").style.display = "none";
-    document.getElementById("Hours").style.display = "none";
-
-});
 
     $j(document).ajaxError(() => { //catch-all
     	$j('#status').html('Error: unknown ajaxError!');
@@ -235,7 +233,6 @@ function displayParkInfo(parkId, parkInfo) {
     // generate google maps link
     $('#intro').html(parkInfo.data[i].description + " <a href='http://www.google.com/maps/place/" +
     	parkCoordsArray[i][0] + "," + parkCoordsArray[i][1] + "' target='_blank'>Let's go! → </a>");
-    // console.log("PARK COORDS " + parkCoordsArray);
     $j('#intro').fadeIn(500);
 
     // change title
@@ -261,11 +258,11 @@ function displayParkInfo(parkId, parkInfo) {
     		$('<div class="carousel-item"><img src="'+parkInfo.data[i].images[j].url+'" width="100%">   </div>').appendTo('.carousel-inner');
           //$('<li data-target="#carousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 
-      }
-      $('.carousel-item').first().addClass('active');
-      //$('.carousel-indicators > li').first().addClass('active');
-      $('#carousel').carousel();
-  });
+        }
+        $('.carousel-item').first().addClass('active');
+        //$('.carousel-indicators > li').first().addClass('active');
+        $('#carousel').carousel();
+    });
 
 
     $j('#pics').fadeIn(500);
@@ -281,12 +278,11 @@ function displayParkInfo(parkId, parkInfo) {
      $('#carousel').carousel('next');
  });
 
-    function getTrailCoords(parkIdToSearch, parkVals) {
-     let coords = 0;
-     const latOffset = 4;
-     const lngOffset = 7;
+function getTrailCoords(parkIdToSearch, parkVals) {
+    let coords = 0;
+    const latOffset = 4;
+    const lngOffset = 7;
 
-    //console.log(parkVals);
     for(const i of parkVals.data) {
     	if(i.parkCode === parkIdToSearch) {
     		let comma = i.latLong.indexOf(",");
@@ -304,19 +300,6 @@ function displayParkInfo(parkId, parkInfo) {
 
     return coords;
 }
-/*
-//Test Method for working with NPS data, do not use!
-
-function displayTestMethod(parkId, parkInfo) {
-    console.log(parkInfo.data);
-    for(const i of parkInfo.data) {
-        let comma = i.latLong.indexOf(",");
-        let lat = i.latLong.substring(0 + 4, comma);
-        let lng = i.latLong.substring(comma + 1 + 6, i.latLong.length);
-
-    }
-}*/
-
 
 // trail/gallery/weather tab functions
 function getParkData(trailgallery) { //shows tabs
@@ -331,9 +314,6 @@ function getParkData(trailgallery) { //shows tabs
 // select trail box - insert description into box
 function showTrailInfo(trail_name, parkTrails) {
 	console.log("Showing trail information...");
-	// console.log("showTrailInfo() - trail number is: " + trail_name);
-	//console.log(trail_array[trail_name]);
-    // console.log(trail_array[trail_name][1]); // description
 
     // reset values
     $("#trail_desc").hide();
@@ -387,15 +367,3 @@ function showSpotInfo(spot_name, parkTrails) {
         }
     }
 };
-
-//select visitor center info
-
-
-  // $("#trail_length").html('');
-  // $("#trail_diff").html('');
-
-
-    // console.log($('#trailSelect').val(trail_name).html());
-  // change the data
-  // $("#trail_length").html(trail_data[trail_name].length);
-  // $("#trail_diff").html(trail_data[trail_name].difficulty);
