@@ -106,7 +106,7 @@
 										<div class="col-sm-5">
 											<div class="form-group mt-1 mb-0">
 												<label for="spotSelect"><h5>Select a spot:</h5></label>
-												<select multiple class="form-control" id="spotSelect" onchange="showSpotInfo(value);" size="12">
+												<select multiple class="form-control" id="spotSelect" onchange="showTrailAndPin(value, this.id);" size="12">
 												</select>
 											</div>
 										</div>
@@ -127,7 +127,7 @@
 												<label for="trailSelect"><h5>Select a trail:</h5></label>
 												<select multiple
                                                 class="form-control"
-                                                id="trailSelect" onchange="showTrailAndPin(value);" size="12">
+                                                id="trailSelect" onchange="showTrailAndPin(value, this.id);" size="12">
 												</select>
 											</div>
 										</div>

@@ -268,8 +268,15 @@ function centerOnPark(e) {
 }
 
 //Function that places a pin at the selected trail location
-function showTrailAndPin(trailName) {
-    showTrailInfo(trailName);
+function showTrailAndPin(trailName, clickedId) {
+    console.log(clickedId);
+
+    if(clickedId === "trailSelect") {
+        showTrailInfo(trailName);
+    }
+    else if(clickedId === "spotSelect") {
+        showSpotInfo(trailName);
+    }
     
     let trailLat = trail_array[trailName][trailLatIndex];
     let trailLon = trail_array[trailName][trailLonIndex];
@@ -279,7 +286,7 @@ function showTrailAndPin(trailName) {
     }
     prevMarker = L.marker([trailLat, trailLon]).addTo(my_map);
 
-    myMap.panTo(prevMarker.getLatLng());
+    my_map.panTo(prevMarker.getLatLng());
 }
 
 // fix map on California
