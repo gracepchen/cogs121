@@ -216,9 +216,9 @@ function getCoords(parkInfo) {
                     this.openPopup();
                 });
 
-                park.on('mouseout', function (e) {
-                    this.closePopup();
-                });
+                // park.on('mouseout', function (e) {
+                //     this.closePopup();
+                // });
 
                 park.on('click', function (e) {
                     this.openPopup();

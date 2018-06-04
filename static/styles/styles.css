@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 body {
   padding: 0;
   margin: 0;
@@ -6,6 +8,10 @@ body {
 
 html, body {
   height: 100%;
+}
+
+h2, h5 {
+  font-weight: bold;
 }
 
 .btn, select {
@@ -17,27 +23,33 @@ select {
   padding-bottom: 0;
 }
 
+input {
+  margin-bottom: 50px;
+}
+
 #map-holder {
   padding-bottom: 1em;
 }
 
 .buttons {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   margin-bottom: 3%;
-  margin-left : 15px;
-  max-width: 50%;
+  margin-left: 0px;
+  /*max-width: 50%;*/
 }
 
-.btn {
-  border: 3px solid #fff;
+.btn.btn-outline-success {
+  border: 1px solid #fff;
   color: #fff;
+  background: #DC3D4C;
 }
 
-.btn-toolbar .btn:hover, .btn-toolbar .btn.active {
-  color: #fff;
-  background: #30A64A;
+.btn.btn-outline-success:hover, .btn.btn-outline-success:focus, .btn.btn-outline-success:active, .btn.btn-outline-success.active {
+  border: 1px solid #fff !important;
+  color: #DC3D4C !important;
+  background: #fff !important;
 }
 
 .btn-toolbar .btn {
@@ -46,8 +58,8 @@ select {
 }
 
 .container-fluid {
-  font-family: 'Source Sans Pro', sans-serif;
-  color: #555450;
+  font-family: 'Inconsolata';
+  color: #555853;
   width: 100%;
   height: 100%;
   display: block;
@@ -68,17 +80,32 @@ select {
 }
 
 /* to keep gallery at an appropriate height */
+
 .fixed {
-  height: 40vh;
+  height: 38vh;
   overflow: scroll;
 }
 
 .bg {
-  /*background-color: #FFFDF2;*/
+  background-color: #CDDBC3;
   border-style: solid;
   border-width: 1px;
-  border-color: #555450;
+  border-radius: 5px;
+  border-color: #CDDBC3;
   padding: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btnbg {
+  width: 100%;
+  color: #FDF7F6;
+  background-color: #DC3D4C;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #DC3D4C;
+  padding: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #map {
@@ -87,22 +114,48 @@ select {
   border-color: #555450;
 }
 
-.carousel-item{
-  text-align:center;
+.carousel-item {
+  text-align: center;
 }
-.carousel-inner img{
-  display:inline-block  !important;
+
+.carousel-inner img {
+  display: inline-block !important;
 }
-.carousel-inner > .carousel-item > img {
+
+.carousel-inner>.carousel-item>img {
   height: 300px;
   width: 300px;
   object-fit: contain;
 }
 
-.carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2330A64A' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+#visitor_form {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  overflow: auto;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #555450;
+  margin-left: 50%;
+  width: 40vh;
+  height: 35vh;
 }
 
-.carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2330A64A' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+#actual_popup {
+  padding: 5%;
+  position: absolute;
+}
+
+#send_suggestion {
+  background-color: green;
+  margin-top: 5%;
+}
+
+#close_suggestion {
+  margin-top: 5%;
+}
+
+.parkinfo {
+  padding: 0;
 }
