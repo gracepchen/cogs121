@@ -98,6 +98,11 @@ $j(document).ready(() => {
                 if ($("#trailSelect").html() != result.trails) {
                 	$("#trailSelect").html('');
                 }
+								// clear spot select box
+                $j('#spotSelect').hide();
+                if ($("#spotSelect").html() != result.trails) {
+                	$("#spotSelect").html('');
+                }
 
                 // load trail names into select box
                 for (let i = 0; i < result.length; i++) {
