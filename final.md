@@ -1,5 +1,9 @@
 ## Team Propel
 
+### App Description
+Point Poppy is a web-based application that gives information about the national parks in California. Currently, people need to create separate Google searches for finding a park to visit, as well as separate searches for information about that park. Our app aggregates searching, exploring, and learning features when people want to visit a California national park. We provide an interactive map with locations of parks and respective park and trail descriptions, trailhead locations, images, weather information, and link for directions in a way that is intuitive to the user and encourages exploring California's beautiful national parks! 
+
+
 ### Team Members & Contributions
 #### Grace Chen
 * Added place recommendations with Firebase
@@ -17,13 +21,13 @@
 * Set up extracting and organizing data from TrailApi based on coordinates previously retrieved from the NPS api. 
 
 #### Katya Noble
-* Cleaned up files
-* Milestone writeups
+* Set up initial code structure (skeleton) 
 * Created demo video
-* Concept idea
+* Milestone writeups
+* Created concept idea and researched its feasibility
 * Made paper prototypes
 * Found APIs and what information to include 
-* Set up initial code structure (skeleton) 
+* Cleaned up files
 
 #### Lam Pham
 * Set up Leaflet map and its functionality
